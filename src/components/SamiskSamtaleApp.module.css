@@ -1,40 +1,22 @@
 .appContainer {
-    padding: 2rem 1rem 6rem 1rem;
+    padding: 2rem 1rem 5rem 1rem;
 }
-
-@media (min-width: var(--tablet-min-width)) {
-    .appContainer {
-        padding: 2rem 1rem 6rem 1rem;
-    }
-}
-
-@media (max-width: var(--desktop-min-width)) {
-    .appContainer {
-        padding: 3rem 3rem 6rem 3rem;
-    }
-}
-
 
 .appContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 1440px;
+    max-width: 768px;
     margin: 0 auto;
 }
 
 .title {
+    text-align: center;
     margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px var(--navds-color-gray-40) solid;
 }
 
 .ingressPanel {
-    width: var(--tablet-min-width);
+    width: 100%;
     max-width: 100%;
-}
-
-.ingress {
-    text-align: center;
     margin-bottom: 2rem;
 }

@@ -1,3 +1,13 @@
-.form {
+.panel {
+    width: 100%;
+    padding: 2rem;
+    background-color: var(--navds-color-gray-10);
+}
 
+.boxgroup {
+    margin-top: 1.5rem;
+}
+
+.button {
+    margin-top: 1rem;
 }
