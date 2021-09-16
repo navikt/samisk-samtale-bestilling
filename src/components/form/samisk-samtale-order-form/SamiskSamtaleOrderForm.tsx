@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import style from './SamiskSamtaleOrderForm.module.css';
 import {
+    Alert,
     Button,
     Checkbox,
     CheckboxGroup,
@@ -8,8 +9,9 @@ import {
     Panel,
     TextField,
 } from '@navikt/ds-react';
+import { fetchFormSubmit } from '../../../utils/fetch';
 
-type InputState = {
+export type InputState = {
     firstName?: string;
     lastName?: string;
     phoneNo?: string;
@@ -30,24 +32,57 @@ const isValidPhone = (phoneNo?: string) =>
 export const SamiskSamtaleOrderForm = () => {
     const [inputState, setInputState] = useState<InputState>({});
     const [errorState, setErrorState] = useState<ErrorState>({});
+    const [submitted, setSubmitted] = useState(false);
+    const [fetchError, setFetchError] = useState('');
 
-    const validateInput = () => {
-        setErrorState({
+    const submitForm = () => {
+        const errors = {
             firstName: !inputState.firstName,
             lastName: !inputState.lastName,
             phoneNo: !isValidPhone(inputState.phoneNo),
             timeSelection: !(inputState.morning || inputState.afternoon),
-        });
+        };
+
+        setErrorState(errors);
+
+        if (
+            errors.firstName ||
+            errors.lastName ||
+            errors.phoneNo ||
+            errors.timeSelection
+        ) {
+            return;
+        }
+
+        fetchFormSubmit(inputState)
+            .then((res) => {
+                if (res.ok) {
+                    setInputState({});
+                    setSubmitted(true);
+                } else {
+                    throw new Error(res.statusText);
+                }
+            })
+            .catch((e) => {
+                setFetchError(e);
+            });
     };
 
-    return (
+    return submitted ? (
+        <Alert variant={'success'} className={style.submitInfo}>
+            {'Meldingen din er sendt'}
+        </Alert>
+    ) : (
         <Panel className={style.panel}>
             <Fieldset legend={''}>
                 <TextField
                     label={'Ovdanamma'}
                     error={errorState.firstName && 'Čále ovdanama'}
                     onChange={(e) => {
-                        setErrorState({ ...errorState, firstName: false });
+                        setErrorState({
+                            ...errorState,
+                            firstName: false,
+                        });
                         setInputState({
                             ...inputState,
                             firstName: e.target.value,
@@ -58,7 +93,10 @@ export const SamiskSamtaleOrderForm = () => {
                     label={'Goargu'}
                     error={errorState.lastName && 'Čále goarggu'}
                     onChange={(e) => {
-                        setErrorState({ ...errorState, lastName: false });
+                        setErrorState({
+                            ...errorState,
+                            lastName: false,
+                        });
                         setInputState({
                             ...inputState,
                             lastName: e.target.value,
@@ -69,7 +107,10 @@ export const SamiskSamtaleOrderForm = () => {
                     label={'Telefovdna'}
                     error={errorState.phoneNo && 'Čále telefon-nummara'}
                     onChange={(e) => {
-                        setErrorState({ ...errorState, phoneNo: false });
+                        setErrorState({
+                            ...errorState,
+                            phoneNo: false,
+                        });
                         setInputState({
                             ...inputState,
                             phoneNo: e.target.value,
@@ -79,11 +120,14 @@ export const SamiskSamtaleOrderForm = () => {
             </Fieldset>
             <CheckboxGroup
                 legend={'Goas heive duinna váldit oktavuođa?'}
-                className={style.boxgroup}
                 error={errorState.timeSelection && 'Vállje áiggi goas heive'}
                 onChange={() => {
-                    setErrorState({ ...errorState, timeSelection: false });
+                    setErrorState({
+                        ...errorState,
+                        timeSelection: false,
+                    });
                 }}
+                className={style.boxgroup}
             >
                 <Checkbox
                     value="morning"
@@ -108,9 +152,14 @@ export const SamiskSamtaleOrderForm = () => {
                     {'13.30-15.30'}
                 </Checkbox>
             </CheckboxGroup>
-            <Button className={style.button} onClick={() => validateInput()}>
+            <Button className={style.button} onClick={() => submitForm()}>
                 {'Sádde jearaldaga'}
             </Button>
+            {fetchError && (
+                <Alert
+                    variant={'error'}
+                >{`Feil ved innsending: ${fetchError}`}</Alert>
+            )}
         </Panel>
     );
 };

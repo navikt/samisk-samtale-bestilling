@@ -28,6 +28,7 @@ jobs:
         run: |
           cat > .env <<EOF
           ENV=prod
+          API_URL=https://
           APP_BASEPATH=/se/samegiella/bestilling-av-samtale
           APP_ORIGIN=https://www.nav.no
           DECORATOR_FALLBACK_URL=https://www.nav.no/dekoratoren
