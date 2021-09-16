@@ -2,37 +2,28 @@
 apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
-  name: nav-office-search
+  name: samisk-samtale-bestilling
   namespace: {{namespace}}
   labels:
     team: personbruker
 spec:
   image: {{image}}:{{version}}
   team: personbruker
-  port: 3005
+  port: 3006
   liveness:
-    path: /person/finnkontor/api/internal/isAlive
+    path: /person/kontakt-oss/samegiella/bestilling-av-samtale/api/internal/isAlive
     initialDelay: 10
   readiness:
-    path: /person/finnkontor/api/internal/isReady
+    path: /person/kontakt-oss/samegiella/bestilling-av-samtale/api/internal/isReady
     initialDelay: 10
   ingresses:
-    - https://finnkontor.dev.nav.no/person/finnkontor
+    - https://samisk-samtale.dev.nav.no/person/kontakt-oss/samegiella/bestilling-av-samtale
   replicas:
     min: 2
-    max: 4
-  azure:
-    application:
-      enabled: true
-      tenant: trygdeetaten.no
-  accessPolicy:
-    outbound:
-      external:
-        - host: dekoratoren.dev.nav.no
-        - host: nav-office-search-api.dev-fss-pub.nais.io
+    max: 2
   resources:
     limits:
       cpu: '2'
-      memory: 1000Mi
+      memory: 256Mi
     requests:
-      memory: 1000Mi
+      memory: 256Mi

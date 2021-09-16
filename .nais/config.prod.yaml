@@ -11,28 +11,19 @@ spec:
   team: personbruker
   port: 3006
   liveness:
-    path: /finn-nav-kontor/api/internal/isAlive
+    path: /person/kontakt-oss/samegiella/bestilling-av-samtale/api/internal/isAlive
     initialDelay: 10
   readiness:
-    path: /finn-nav-kontor/api/internal/isReady
+    path: /person/kontakt-oss/samegiella/bestilling-av-samtale/api/internal/isReady
     initialDelay: 10
   ingresses:
-    - https://www.nav.no/finn-nav-kontor
+    - https://www.nav.no/person/kontakt-oss/samegiella/bestilling-av-samtale
   replicas:
     min: 2
     max: 2
-  azure:
-    application:
-      enabled: true
-      tenant: nav.no
-  accessPolicy:
-    outbound:
-      external:
-        - host: nav.no
-        - host: nav-office-search-api.prod-fss-pub.nais.io
   resources:
     limits:
       cpu: '2'
-      memory: 1000Mi
+      memory: 256Mi
     requests:
-      memory: 1000Mi
+      memory: 256Mi
