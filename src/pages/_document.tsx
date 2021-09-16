@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line @next/next/no-document-import-in-page
 import Document, {
     DocumentContext,
     Head,
@@ -8,7 +9,6 @@ import Document, {
 } from 'next/document';
 import { getDecoratorComponents } from '../utils/decorator';
 import { Components } from '@navikt/nav-dekoratoren-moduler/ssr';
-
 
 type DocumentProps = {
     Decorator: Components;
