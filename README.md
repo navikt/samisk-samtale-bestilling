@@ -1,34 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend for bestilling av samisk samtale på telefon
 
-## Getting Started
+![Deploy-to-prod](https://github.com/navikt/samisk-samtale-bestilling/workflows/Deploy-to-prod/badge.svg) <br>
+![Deploy-to-dev](https://github.com/navikt/samisk-samtale-bestilling/workflows/Deploy-to-dev/badge.svg) <br>
 
-First, run the development server:
+## Lokal kjøring
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Kjører lokalt på [http://localhost:3006](http://localhost:3006)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Dekoratøren kan startes lokalt med `docker-compose up`
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+#### Development mode:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Kjør `npm run dev`
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+#### Production mode:
 
-## Learn More
+Kopier først innhold fra .env.development til .env.local
 
-To learn more about Next.js, take a look at the following resources:
+Kjør så `npm run start-clean`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy til dev-miljø
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+[Actions](https://github.com/navikt/nav-office-search/actions) -> Velg workflow -> Run workflow -> Velg branch -> Run workflow
 
-## Deploy on Vercel
+## Prodsetting
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Lag en PR til master, og merge inn etter godkjenning
+- Lag en release på master med versjon-bump, beskrivende tittel og oppsummering av endringene dine
+- Publiser release'en for å starte deploy til prod
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# Henvendelser
+
+Spørsmål knyttet til koden eller prosjektet kan rettes mot https://github.com/orgs/navikt/teams/personbruker
+
+## For NAV-ansatte
+
+Interne henvendelser kan sendes via Slack i kanalen #team-personbruker
