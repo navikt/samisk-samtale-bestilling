@@ -17,15 +17,11 @@ const params: Params = {
     language: 'se',
     breadcrumbs: [
         {
-            url: `/se/Samegiella`,
-            title: 'Samegiella',
-        },
-        {
             url: '/',
             title: 'Jearaldat bagadallama oažžut sámegillii telefovnnas',
         },
     ],
-}
+};
 
 const decoratorComponentsCSR = (): Components => {
     const query = objectToQueryString(params);

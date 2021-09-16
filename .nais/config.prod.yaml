@@ -11,13 +11,13 @@ spec:
   team: personbruker
   port: 3006
   liveness:
-    path: /person/kontakt-oss/samegiella/bestilling-av-samtale/api/internal/isAlive
+    path: /se/samegiella/bestilling-av-samtale/api/internal/isAlive
     initialDelay: 10
   readiness:
-    path: /person/kontakt-oss/samegiella/bestilling-av-samtale/api/internal/isReady
+    path: /se/samegiella/bestilling-av-samtale/api/internal/isReady
     initialDelay: 10
   ingresses:
-    - https://www.nav.no/person/kontakt-oss/samegiella/bestilling-av-samtale
+    - https://www.nav.no/se/samegiella/bestilling-av-samtale
   replicas:
     min: 2
     max: 2
