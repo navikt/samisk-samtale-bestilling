@@ -29,6 +29,12 @@ type ErrorState = {
 const isValidPhoneNumber = (phoneNumber?: string) =>
     !!phoneNumber && /^\+?[0-9 ]+$/.test(phoneNumber);
 
+const hasErrors = (errorState: ErrorState) =>
+    errorState.fornavn ||
+    errorState.etternavn ||
+    errorState.telefonnummer ||
+    errorState.tidsrom;
+
 export const SamiskSamtaleOrderForm = () => {
     const [inputState, setInputState] = useState<InputState>({});
     const [errorState, setErrorState] = useState<ErrorState>({});
@@ -48,12 +54,7 @@ export const SamiskSamtaleOrderForm = () => {
 
         setErrorState(errors);
 
-        if (
-            errors.fornavn ||
-            errors.etternavn ||
-            errors.telefonnummer ||
-            errors.tidsrom
-        ) {
+        if (hasErrors(errors)) {
             return;
         }
 
@@ -165,7 +166,11 @@ export const SamiskSamtaleOrderForm = () => {
                     {'13.30-15.30'}
                 </Checkbox>
             </CheckboxGroup>
-            <Button className={style.button} onClick={() => submitForm()}>
+            <Button
+                className={style.button}
+                onClick={() => submitForm()}
+                disabled={hasErrors(errorState)}
+            >
                 {'Sádde jearaldaga'}
             </Button>
             {fetchError && (
