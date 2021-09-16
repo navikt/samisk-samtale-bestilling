@@ -8,9 +8,7 @@
     "start": "next start -p 3006",
     "start-clean": "rm -fr .next && npm run build && npm start",
     "lint": "next lint",
-    "typeCheck": "tsc --noemit",
-    "deploy": "npx run-func trigger-workflow.js triggerWorkflow",
-    "deploy-dev": "npm run deploy -- deploy.dev.yml"
+    "typeCheck": "tsc --noemit"
   },
   "dependencies": {
     "@navikt/ds-css": "^0.8.1",
