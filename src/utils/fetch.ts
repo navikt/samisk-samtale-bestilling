@@ -1,5 +1,3 @@
-import { InputState } from '../components/form/samisk-samtale-order-form/SamiskSamtaleOrderForm';
-
 export const objectToQueryString = (params?: object, firstChar = '?') =>
     params
         ? Object.entries(params).reduce(
@@ -13,7 +11,17 @@ export const objectToQueryString = (params?: object, firstChar = '?') =>
           )
         : '';
 
-const submitUrl = `${process.env.APP_ORIGIN}${process.env.APP_BASEPATH}/api/submit`;
+export type SubmitData = {
+    fornavn: string;
+    etternavn: string;
+    telefonnummer: string;
+    tidsrom: 'FORMIDDAG' | 'ETTERMIDDAG' | 'BEGGE';
+};
 
-export const fetchFormSubmit = async (input: InputState) =>
-    fetch(`${submitUrl}${objectToQueryString(input)}`);
+export const fetchFormSubmit = async (data: SubmitData) =>
+    fetch(process.env.API_URL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json;charset=UTF-8' },
+        credentials: 'include',
+    });

@@ -9,6 +9,7 @@ module.exports = withTranspileModules({
     env: {
         APP_ORIGIN: process.env.APP_ORIGIN,
         APP_BASEPATH: process.env.APP_BASEPATH,
+        API_URL: process.env.API_URL,
     },
     i18n: {
         locales: ['se'],

@@ -9,25 +9,25 @@ import {
     Panel,
     TextField,
 } from '@navikt/ds-react';
-import { fetchFormSubmit } from '../../../utils/fetch';
+import { fetchFormSubmit, SubmitData } from '../../../utils/fetch';
 
 export type InputState = {
-    firstName?: string;
-    lastName?: string;
-    phoneNo?: string;
-    morning?: boolean;
-    afternoon?: boolean;
+    fornavn?: string;
+    etternavn?: string;
+    telefonnummer?: string;
+    formiddag?: boolean;
+    ettermiddag?: boolean;
 };
 
 type ErrorState = {
-    firstName?: boolean;
-    lastName?: boolean;
-    phoneNo?: boolean;
-    timeSelection?: boolean;
+    fornavn?: boolean;
+    etternavn?: boolean;
+    telefonnummer?: boolean;
+    tidsrom?: boolean;
 };
 
-const isValidPhone = (phoneNo?: string) =>
-    !!phoneNo && /^\+?[0-9 ]+$/.test(phoneNo);
+const isValidPhoneNumber = (phoneNumber?: string) =>
+    !!phoneNumber && /^\+?[0-9 ]+$/.test(phoneNumber);
 
 export const SamiskSamtaleOrderForm = () => {
     const [inputState, setInputState] = useState<InputState>({});
@@ -36,25 +36,38 @@ export const SamiskSamtaleOrderForm = () => {
     const [fetchError, setFetchError] = useState('');
 
     const submitForm = () => {
-        const errors = {
-            firstName: !inputState.firstName,
-            lastName: !inputState.lastName,
-            phoneNo: !isValidPhone(inputState.phoneNo),
-            timeSelection: !(inputState.morning || inputState.afternoon),
+        const { formiddag, etternavn, telefonnummer, fornavn, ettermiddag } =
+            inputState;
+
+        const errors: ErrorState = {
+            fornavn: !fornavn,
+            etternavn: !etternavn,
+            telefonnummer: !isValidPhoneNumber(telefonnummer),
+            tidsrom: !(formiddag || ettermiddag),
         };
 
         setErrorState(errors);
 
         if (
-            errors.firstName ||
-            errors.lastName ||
-            errors.phoneNo ||
-            errors.timeSelection
+            errors.fornavn ||
+            errors.etternavn ||
+            errors.telefonnummer ||
+            errors.tidsrom
         ) {
             return;
         }
 
-        fetchFormSubmit(inputState)
+        fetchFormSubmit({
+            fornavn,
+            etternavn,
+            telefonnummer,
+            tidsrom:
+                formiddag && ettermiddag
+                    ? 'BEGGE'
+                    : formiddag
+                    ? 'FORMIDDAG'
+                    : 'ETTERMIDDAG',
+        } as SubmitData)
             .then((res) => {
                 if (res.ok) {
                     setInputState({});
@@ -77,54 +90,54 @@ export const SamiskSamtaleOrderForm = () => {
             <Fieldset legend={''}>
                 <TextField
                     label={'Ovdanamma'}
-                    error={errorState.firstName && 'Čále ovdanama'}
+                    error={errorState.fornavn && 'Čále ovdanama'}
                     onChange={(e) => {
                         setErrorState({
                             ...errorState,
-                            firstName: false,
+                            fornavn: false,
                         });
                         setInputState({
                             ...inputState,
-                            firstName: e.target.value,
+                            fornavn: e.target.value,
                         });
                     }}
                 />
                 <TextField
                     label={'Goargu'}
-                    error={errorState.lastName && 'Čále goarggu'}
+                    error={errorState.etternavn && 'Čále goarggu'}
                     onChange={(e) => {
                         setErrorState({
                             ...errorState,
-                            lastName: false,
+                            etternavn: false,
                         });
                         setInputState({
                             ...inputState,
-                            lastName: e.target.value,
+                            etternavn: e.target.value,
                         });
                     }}
                 />
                 <TextField
                     label={'Telefovdna'}
-                    error={errorState.phoneNo && 'Čále telefon-nummara'}
+                    error={errorState.telefonnummer && 'Čále telefon-nummara'}
                     onChange={(e) => {
                         setErrorState({
                             ...errorState,
-                            phoneNo: false,
+                            telefonnummer: false,
                         });
                         setInputState({
                             ...inputState,
-                            phoneNo: e.target.value,
+                            telefonnummer: e.target.value,
                         });
                     }}
                 />
             </Fieldset>
             <CheckboxGroup
                 legend={'Goas heive duinna váldit oktavuođa?'}
-                error={errorState.timeSelection && 'Vállje áiggi goas heive'}
+                error={errorState.tidsrom && 'Vállje áiggi goas heive'}
                 onChange={() => {
                     setErrorState({
                         ...errorState,
-                        timeSelection: false,
+                        tidsrom: false,
                     });
                 }}
                 className={style.boxgroup}
@@ -134,7 +147,7 @@ export const SamiskSamtaleOrderForm = () => {
                     onChange={(e) => {
                         setInputState({
                             ...inputState,
-                            morning: e.target.checked,
+                            formiddag: e.target.checked,
                         });
                     }}
                 >
@@ -145,7 +158,7 @@ export const SamiskSamtaleOrderForm = () => {
                     onChange={(e) => {
                         setInputState({
                             ...inputState,
-                            afternoon: e.target.checked,
+                            ettermiddag: e.target.checked,
                         });
                     }}
                 >
