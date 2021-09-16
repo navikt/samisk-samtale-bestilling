@@ -20,3 +20,7 @@
     max-width: 100%;
     margin-bottom: 2rem;
 }
+
+.ingress:not(:last-child) {
+    margin-bottom: 1.5rem;
+}

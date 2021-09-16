@@ -1,5 +1,5 @@
 import React from 'react';
-import { BodyLong, GuidePanel, Heading } from '@navikt/ds-react';
+import { BodyLong, GuidePanel, Heading, Link } from '@navikt/ds-react';
 import { SamiskSamtaleOrderForm } from './form/samisk-samtale-order-form/SamiskSamtaleOrderForm';
 import style from './SamiskSamtaleApp.module.css';
 
@@ -12,12 +12,18 @@ export const SamiskSamtaleApp = () => {
             <GuidePanel poster={true} className={style.ingressPanel}>
                 <BodyLong className={style.ingress}>
                     {
-                        'Diŋgo dás davvisámegilli bálvalusa mas vástiduvvo dutnje sámegillii buot NAV – bálvalusain ja oajuin. Mii veahkehit gávdnat mo du áššiin manná, ja veahkehit du dovdat rivttiid ja geatnegasvuođaid mat leat álbmotoadjolága njuolggadusain. Don gávnnat dieđuid iežat áššis neahttabálvalusas nav.no Ditt NAV. Don sáhtát iskat mii dutnje lea máksojuvvon dás:'
+                        'Diŋgo dás davvisámegilli bálvalusa mas vástiduvvo dutnje sámegillii buot NAV – bálvalusain ja oajuin. Mii veahkehit gávdnat mo du áššiin manná, ja veahkehit du dovdat rivttiid ja geatnegasvuođaid mat leat álbmotoadjolága njuolggadusain. Don gávnnat dieđuid iežat áššis neahttabálvalusas '
                     }
-                    <br />
-                    <br />
+                    <Link href={'https://www.nav.no/person/dittnav'}>
+                        {'Ditt NAV'}
+                    </Link>
+                    {'. Don sáhtát iskat mii dutnje lea máksojuvvon dás:'}
+                </BodyLong>
+                <BodyLong className={style.ingress}>
+                    {'Don sáhtat ain riŋget NAV-bálvalussii '}
+                    <Link href={'tel:55553333'}>{'55 55 33 33'}</Link>
                     {
-                        'Don sáhtat ain riŋget NAV-bálvalussii 55 55 33 33 ja dáhtot ahte davvisámegielat bagadalli riŋge dutnje. Muite addit riegadan- ja persunnummara ja maid telefunnummara masa davvisámegielat galga riŋget.'
+                        ' ja dáhtot ahte davvisámegielat bagadalli riŋge dutnje. Muite addit riegadan- ja persunnummara ja maid telefunnummara masa davvisámegielat galga riŋget.'
                     }
                 </BodyLong>
             </GuidePanel>
