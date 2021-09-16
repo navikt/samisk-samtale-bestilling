@@ -1,6 +1,6 @@
 import React from 'react';
 import { BodyLong, GuidePanel, Heading, Link } from '@navikt/ds-react';
-import { SamiskSamtaleOrderForm } from './form/samisk-samtale-order-form/SamiskSamtaleOrderForm';
+import { SamiskSamtaleOrderForm } from './SamiskSamtaleOrderForm';
 import style from './SamiskSamtaleApp.module.css';
 
 export const SamiskSamtaleApp = () => {

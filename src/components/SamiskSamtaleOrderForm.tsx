@@ -9,7 +9,7 @@ import {
     Panel,
     TextField,
 } from '@navikt/ds-react';
-import { fetchFormSubmit, SubmitData } from '../../../utils/fetch';
+import { fetchFormSubmit, SubmitData } from '../utils/fetch';
 
 export type InputState = {
     fornavn?: string;
