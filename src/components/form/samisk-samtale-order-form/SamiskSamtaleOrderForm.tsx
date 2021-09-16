@@ -158,6 +158,7 @@ export const SamiskSamtaleOrderForm = () => {
             {fetchError && (
                 <Alert
                     variant={'error'}
+                    className={style.error}
                 >{`Feil ved innsending: ${fetchError}`}</Alert>
             )}
         </Panel>
