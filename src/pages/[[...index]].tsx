@@ -1,9 +1,9 @@
-import { GetServerSideProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { SamiskSamtaleApp } from '../components/SamiskSamtaleApp';
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
     // Redirect all requests to app base path
-    if (context.query?.index) {
+    if (context.params?.index) {
         return {
             props: {},
             redirect: {
@@ -13,6 +13,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     return { props: {} };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    return { paths: [], fallback: 'blocking' };
 };
 
 export default SamiskSamtaleApp;
