@@ -17,7 +17,7 @@ spec:
     path: /se/samegiella/bestilling-av-samtale/api/internal/isReady
     initialDelay: 10
   ingresses:
-    - https://www.dev.nav.no/se/samegiella/bestilling-av-samtale
+    - https://samisk-samtale-bestilling.dev.nav.no/se/samegiella/bestilling-av-samtale
   replicas:
     min: 2
     max: 2
