@@ -11,6 +11,7 @@ module.exports = withTranspileModules({
     APP_BASEPATH: process.env.APP_BASEPATH,
   },
   i18n: {
+    locales: ['se'],
     defaultLocale: 'se',
     localeDetection: false,
   },
