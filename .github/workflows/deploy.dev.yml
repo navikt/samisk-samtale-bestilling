@@ -24,7 +24,7 @@ jobs:
           ENV=dev
           API_URL=https://www.dev.nav.no/person/tilbakemeldinger-api/mottak/bestilling-av-samtale
           APP_BASEPATH=/se/samegiella/bestilling-av-samtale
-          APP_ORIGIN=https://samisk-samtale-bestilling.dev.nav.no
+          APP_ORIGIN=https://person.dev.nav.no
           DECORATOR_FALLBACK_URL=https://dekoratoren.dev.nav.no
           EOF
       - name: NPM cache
