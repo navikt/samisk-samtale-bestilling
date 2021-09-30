@@ -43,6 +43,7 @@ export const SamiskSamtaleOrderForm = () => {
 
     useEffect(() => {
         fetchKontaktInfo().then((res) => {
+            console.log(`received kontaktinfo: ${JSON.stringify(res)}`);
             if (!inputState.telefonnummer && res?.mobiltelefonnummer) {
                 setInputState({
                     ...inputState,
