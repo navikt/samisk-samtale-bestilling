@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './SamiskSamtaleOrderForm.module.css';
 import {
     Alert,
@@ -9,7 +9,7 @@ import {
     Panel,
     TextField,
 } from '@navikt/ds-react';
-import { fetchFormSubmit, SubmitData } from '../utils/fetch';
+import { fetchFormSubmit, fetchKontaktInfo, SubmitData } from '../utils/fetch';
 
 export type InputState = {
     fornavn?: string;
@@ -40,6 +40,17 @@ export const SamiskSamtaleOrderForm = () => {
     const [errorState, setErrorState] = useState<ErrorState>({});
     const [submitted, setSubmitted] = useState(false);
     const [fetchError, setFetchError] = useState('');
+
+    useEffect(() => {
+        fetchKontaktInfo().then((res) => {
+            if (!inputState.telefonnummer && res?.mobiltelefonnummer) {
+                setInputState({
+                    ...inputState,
+                    telefonnummer: res.mobiltelefonnummer,
+                });
+            }
+        });
+    }, []);
 
     const submitForm = () => {
         const { formiddag, etternavn, telefonnummer, fornavn, ettermiddag } =

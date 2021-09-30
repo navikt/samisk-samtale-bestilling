@@ -26,6 +26,7 @@ jobs:
           APP_BASEPATH=/se/samegiella/bestilling-av-samtale
           APP_ORIGIN=https://person.dev.nav.no
           DECORATOR_FALLBACK_URL=https://dekoratoren.dev.nav.no
+          KONTAKTINFO_API_URL=https://www.dev.nav.no/person/personopplysninger-api/kontaktinformasjon
           EOF
       - name: NPM cache
         uses: actions/cache@v2
