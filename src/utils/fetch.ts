@@ -41,7 +41,6 @@ export const fetchKontaktInfo = async (): Promise<KontaktInfoResponse | null> =>
             }
 
             if (res.status === 401) {
-                console.log('not authorized');
                 return null;
             }
 

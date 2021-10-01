@@ -6,6 +6,7 @@ import {
     Checkbox,
     CheckboxGroup,
     Fieldset,
+    Loader,
     Panel,
     TextField,
 } from '@navikt/ds-react';
@@ -38,12 +39,12 @@ const hasErrors = (errorState: ErrorState) =>
 export const SamiskSamtaleOrderForm = () => {
     const [inputState, setInputState] = useState<InputState>({});
     const [errorState, setErrorState] = useState<ErrorState>({});
-    const [submitted, setSubmitted] = useState(false);
+    const [isWaiting, setIsWaiting] = useState(false);
+    const [submitAcked, setSubmitAcked] = useState(false);
     const [fetchError, setFetchError] = useState('');
 
     useEffect(() => {
         fetchKontaktInfo().then((res) => {
-            console.log(`received kontaktinfo: ${JSON.stringify(res)}`);
             if (!inputState.telefonnummer && res?.mobiltelefonnummer) {
                 setInputState({
                     ...inputState,
@@ -70,6 +71,8 @@ export const SamiskSamtaleOrderForm = () => {
             return;
         }
 
+        setIsWaiting(true);
+
         fetchFormSubmit({
             fornavn,
             etternavn,
@@ -84,17 +87,18 @@ export const SamiskSamtaleOrderForm = () => {
             .then((res) => {
                 if (res.ok) {
                     setInputState({});
-                    setSubmitted(true);
+                    setSubmitAcked(true);
                 } else {
                     throw new Error(res.statusText);
                 }
             })
             .catch((e) => {
                 setFetchError(e);
-            });
+            })
+            .finally(() => setIsWaiting(false));
     };
 
-    return submitted ? (
+    return submitAcked ? (
         <Alert variant={'success'} className={style.submitInfo}>
             {'Meldingen din er sendt'}
         </Alert>
@@ -104,6 +108,7 @@ export const SamiskSamtaleOrderForm = () => {
                 <TextField
                     label={'Ovdanamma'}
                     error={errorState.fornavn && 'Čále ovdanama'}
+                    value={inputState.fornavn || ''}
                     onChange={(e) => {
                         setErrorState({
                             ...errorState,
@@ -118,6 +123,7 @@ export const SamiskSamtaleOrderForm = () => {
                 <TextField
                     label={'Goargu'}
                     error={errorState.etternavn && 'Čále goarggu'}
+                    value={inputState.etternavn || ''}
                     onChange={(e) => {
                         setErrorState({
                             ...errorState,
@@ -131,6 +137,7 @@ export const SamiskSamtaleOrderForm = () => {
                 />
                 <TextField
                     label={'Telefovdna'}
+                    value={inputState.telefonnummer || ''}
                     error={errorState.telefonnummer && 'Čále telefon-nummara'}
                     onChange={(e) => {
                         setErrorState({
@@ -181,8 +188,9 @@ export const SamiskSamtaleOrderForm = () => {
             <Button
                 className={style.button}
                 onClick={() => submitForm()}
-                disabled={hasErrors(errorState)}
+                disabled={hasErrors(errorState) || isWaiting}
             >
+                {isWaiting && <Loader />}
                 {'Sádde jearaldaga'}
             </Button>
             {fetchError && (
