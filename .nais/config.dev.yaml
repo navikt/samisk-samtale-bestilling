@@ -18,6 +18,14 @@ spec:
     initialDelay: 10
   ingresses:
     - https://person.dev.nav.no/se/samegiella/bestilling-av-samtale
+  accessPolicy:
+    outbound:
+      rules:
+        - application: tilbakemeldinger-api
+          namespace: personbruker
+          cluster: dev-fss
+      external:
+        - host: tilbakemeldinger-api.dev-fss-pub.nais.io
   replicas:
     min: 1
     max: 1
