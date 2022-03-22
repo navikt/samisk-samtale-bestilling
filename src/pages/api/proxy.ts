@@ -3,6 +3,7 @@ import process from 'process';
 
 const proxyHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
+        console.log(req.body)
         const response = await fetch(`${process.env.API_URL}`, {
             method: 'POST',
             body: req.body,
