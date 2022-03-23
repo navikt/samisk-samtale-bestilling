@@ -1,5 +1,3 @@
-import * as process from 'process';
-
 export const objectToQueryString = (params?: object, firstChar = '?') =>
     params
         ? Object.entries(params).reduce(
