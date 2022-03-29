@@ -22,11 +22,11 @@ jobs:
         run: |
           cat > .env <<EOF
           ENV=dev
-          API_URL=https://www.dev.nav.no/person/tilbakemeldinger-api/mottak/bestilling-av-samtale
+          API_URL=https://tilbakemeldinger-api.dev-fss-pub.nais.io/mottak/bestilling-av-samtale
           APP_BASEPATH=/se/samegiella/bestilling-av-samtale
           APP_ORIGIN=https://person.dev.nav.no
           DECORATOR_FALLBACK_URL=https://dekoratoren.dev.nav.no
-          KONTAKTINFO_API_URL=https://www.dev.nav.no/person/personopplysninger-api/kontaktinformasjon
+          KONTAKTINFO_API_URL=https://person.dev.nav.no/person/personopplysninger-api/kontaktinformasjon
           EOF
       - name: NPM cache
         uses: actions/cache@v2

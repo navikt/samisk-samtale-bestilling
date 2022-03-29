@@ -19,7 +19,7 @@ export type SubmitData = {
 };
 
 export const fetchFormSubmit = async (data: SubmitData) =>
-    fetch(process.env.API_URL, {
+    fetch(`${process.env.APP_ORIGIN}${process.env.APP_BASEPATH}/api/proxy`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json;charset=UTF-8' },
