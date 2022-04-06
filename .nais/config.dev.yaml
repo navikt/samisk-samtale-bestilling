@@ -17,7 +17,7 @@ spec:
     path: /se/samegiella/bestilling-av-samtale/api/internal/isReady
     initialDelay: 10
   ingresses:
-    - https://person.dev.nav.no/se/samegiella/bestilling-av-samtale
+    - https://www.dev.nav.no/se/samegiella/bestilling-av-samtale
   accessPolicy:
     outbound:
       rules:
