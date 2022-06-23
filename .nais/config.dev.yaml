@@ -18,6 +18,9 @@ spec:
     initialDelay: 10
   ingresses:
     - https://www.dev.nav.no/se/samegiella/bestilling-av-samtale
+  env:
+    - name: NPM_CONFIG_CACHE
+      value: /tmp/npm-cache
   accessPolicy:
     outbound:
       rules:
