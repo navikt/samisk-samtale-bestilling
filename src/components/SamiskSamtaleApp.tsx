@@ -6,7 +6,7 @@ import style from './SamiskSamtaleApp.module.css';
 export const SamiskSamtaleApp = () => {
     return (
         <div role={'main'} className={style.appContainer}>
-            <Heading size={'2xlarge'} className={style.title}>
+            <Heading size={'xlarge'} className={style.title}>
                 {'Jearaldat bagadallama oažžut sámegillii telefovnnas'}
             </Heading>
             <GuidePanel poster={true} className={style.ingressPanel}>
