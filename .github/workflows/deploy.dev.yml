@@ -34,13 +34,6 @@ jobs:
           DECORATOR_FALLBACK_URL=https://dekoratoren.dev.nav.no
           KONTAKTINFO_API_URL=https://person.dev.nav.no/person/personopplysninger-api/kontaktinformasjon
           EOF
-      - name: NPM cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
       - name: Nextjs cache
         uses: actions/cache@v2
         with:
