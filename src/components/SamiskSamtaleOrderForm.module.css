@@ -3,14 +3,14 @@
     padding: 2rem;
     background-color: var(--navds-color-gray-10);
 }
+.fields {
+    display: grid;
+    gap: var(--navds-spacing-6);
+}
 
 .submitInfo {
     width: 100%;
     padding: 2rem;
-}
-
-.boxgroup {
-    margin-top: 1.5rem;
 }
 
 .button {
