@@ -14,8 +14,8 @@ export const SamiskSamtaleApp = () => {
                     {
                         'Diŋgo dás davvisámegilli bálvalusa mas vástiduvvo dutnje sámegillii buot NAV – bálvalusain ja oajuin. Mii veahkehit gávdnat mo du áššiin manná, ja veahkehit du dovdat rivttiid ja geatnegasvuođaid mat leat álbmotoadjolága njuolggadusain. Don gávnnat dieđuid iežat áššis neahttabálvalusas '
                     }
-                    <Link href={'https://www.nav.no/person/dittnav'}>
-                        {'Ditt NAV'}
+                    <Link href={'https://www.nav.no/minside/'}>
+                        {'Min side'}
                     </Link>
                     {'. Don sáhtát iskat mii dutnje lea máksojuvvon dás:'}
                 </BodyLong>

@@ -104,7 +104,7 @@ export const SamiskSamtaleOrderForm = () => {
         </Alert>
     ) : (
         <Panel className={style.panel}>
-            <Fieldset legend={''}>
+            <div className={style.fields}>
                 <TextField
                     label={'Ovdanamma'}
                     error={errorState.fornavn && 'Čále ovdanama'}
@@ -150,41 +150,41 @@ export const SamiskSamtaleOrderForm = () => {
                         });
                     }}
                 />
-            </Fieldset>
-            <CheckboxGroup
-                legend={'Goas heive duinna váldit oktavuođa?'}
-                error={errorState.tidsrom && 'Vállje áiggi goas heive'}
-                onChange={() => {
-                    setErrorState({
-                        ...errorState,
-                        tidsrom: false,
-                    });
-                }}
-                className={style.boxgroup}
-            >
-                <Checkbox
-                    value="morning"
-                    onChange={(e) => {
-                        setInputState({
-                            ...inputState,
-                            formiddag: e.target.checked,
+                <CheckboxGroup
+                    legend={'Goas heive duinna váldit oktavuođa?'}
+                    error={errorState.tidsrom && 'Vállje áiggi goas heive'}
+                    onChange={() => {
+                        setErrorState({
+                            ...errorState,
+                            tidsrom: false,
                         });
                     }}
+                    className={style.boxgroup}
                 >
-                    {'08.00-10.00'}
-                </Checkbox>
-                <Checkbox
-                    value="afternoon"
-                    onChange={(e) => {
-                        setInputState({
-                            ...inputState,
-                            ettermiddag: e.target.checked,
-                        });
-                    }}
-                >
-                    {'13.30-15.30'}
-                </Checkbox>
-            </CheckboxGroup>
+                    <Checkbox
+                        value="morning"
+                        onChange={(e) => {
+                            setInputState({
+                                ...inputState,
+                                formiddag: e.target.checked,
+                            });
+                        }}
+                    >
+                        {'08.00-10.00'}
+                    </Checkbox>
+                    <Checkbox
+                        value="afternoon"
+                        onChange={(e) => {
+                            setInputState({
+                                ...inputState,
+                                ettermiddag: e.target.checked,
+                            });
+                        }}
+                    >
+                        {'13.30-15.30'}
+                    </Checkbox>
+                </CheckboxGroup>
+            </div>
             <Button
                 className={style.button}
                 onClick={() => submitForm()}
