@@ -17,4 +17,10 @@ module.exports = withTranspileModules({
         defaultLocale: 'se',
         localeDetection: false,
     },
+    webpack: (config) =>  {
+        config.resolve.fallback = {
+            canvas: false,
+        };
+        return config;
+    }
 });
