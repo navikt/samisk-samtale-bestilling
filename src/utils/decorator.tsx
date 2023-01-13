@@ -27,18 +27,18 @@ const decoratorComponentsCSR = (): Components => {
     const query = objectToQueryString(params);
 
     return {
-        Header: () => <div id="decorator-header"></div>,
+        Header: () => <div id="decorator-header" />,
         Styles: () => (
             <link href={`${decoratorUrl}/css/client.css`} rel="stylesheet" />
         ),
-        Footer: () => <div id="decorator-footer"></div>,
+        Footer: () => <div id="decorator-footer" />,
         Scripts: () => (
             <>
                 <div
                     id="decorator-env"
                     data-src={`${decoratorUrl}/env${query || ''}`}
-                ></div>
-                <script async={true} src={`${decoratorUrl}/client.js`}></script>
+                />
+                 <script async={true} src={`${decoratorUrl}/client.js`} />
             </>
         ),
     };
@@ -46,10 +46,17 @@ const decoratorComponentsCSR = (): Components => {
 
 export const getDecoratorComponents = async (): Promise<Components> => {
     try {
-        const decoratorComponents = await Promise.race([
-            fetchDecoratorReact({
+        const props = ( decoratorEnv === 'localhost' ?
+            {
                 env: decoratorEnv,
                 port: decoratorLocalPort,
+            } :
+            {
+                env: decoratorEnv,
+            });
+        const decoratorComponents = await Promise.race([
+            fetchDecoratorReact({
+                ...props,
                 ...params,
             }),
             new Promise((res, rej) =>

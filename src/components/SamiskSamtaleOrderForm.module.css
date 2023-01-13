@@ -1,11 +1,11 @@
 .panel {
     width: 100%;
     padding: 2rem;
-    background-color: var(--navds-color-gray-10);
+    background-color: var(--a-gray-100);
 }
 .fields {
     display: grid;
-    gap: var(--navds-spacing-6);
+    gap: var(--a-spacing-6);
 }
 
 .submitInfo {
