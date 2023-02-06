@@ -2,7 +2,7 @@ import React from 'react';
 import { LocaleModule } from './nb';
 
 export const localeModuleSe: LocaleModule = {
-    fornavn: 'Fornavn',
+    fornavn: 'Ovdanamma',
     pageTitle: 'Find a NAV office',
     breadcrumb1: 'Contact us',
     breadcrumb2: 'Find a NAV office',

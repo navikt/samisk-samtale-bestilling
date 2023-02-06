@@ -6,16 +6,16 @@ import {
 } from '@navikt/nav-dekoratoren-moduler/ssr';
 import { objectToQueryString } from './fetch';
 import { Params } from '@navikt/nav-dekoratoren-moduler';
-// import { useRouter } from 'next/router';
+import { Locale } from '../localization/LocaleString';
 
 const decoratorUrl = process.env.DECORATOR_FALLBACK_URL;
 const decoratorEnv = process.env.ENV as Props['env'];
 const decoratorLocalPort = process.env.DECORATOR_LOCAL_PORT || 8100;
 const fetchTimeoutMs = 15000;
 
-const params: Params = {
+export const getDecoratorParams = (locale: Locale): Params => ({
     context: 'privatperson',
-    language: 'se',
+    language: locale,
     breadcrumbs: [
         {
             url: '/',
@@ -23,15 +23,13 @@ const params: Params = {
         },
     ],
     availableLanguages: [
-        { locale: 'nb', url: '/no/samegiella/bestilling-av-samtale' },
-        { locale: 'se', url: '/se/samegiella/bestilling-av-samtale' },
+        { locale: 'nb', url: '/person/bestilling-av-samisk-samtale/nb' },
+        { locale: 'se', url: '/person/bestilling-av-samisk-samtale' },
     ],
-};
+});
 
-const decoratorComponentsCSR = (): Components => {
-    // const router = useRouter();
-    // const locale = router.locale as Locale;
-    const query = objectToQueryString(params);
+const decoratorComponentsCSR = (locale: Locale): Components => {
+    const query = objectToQueryString(getDecoratorParams(locale));
 
     return {
         Header: () => <div id="decorator-header" />,
@@ -51,7 +49,9 @@ const decoratorComponentsCSR = (): Components => {
     };
 };
 
-export const getDecoratorComponents = async (): Promise<Components> => {
+export const getDecoratorComponents = async (
+    locale: Locale
+): Promise<Components> => {
     try {
         const props =
             decoratorEnv === 'localhost'
@@ -64,8 +64,8 @@ export const getDecoratorComponents = async (): Promise<Components> => {
                   };
         const decoratorComponents = await Promise.race([
             fetchDecoratorReact({
+                ...getDecoratorParams(locale),
                 ...props,
-                ...params,
             }),
             new Promise((res, rej) =>
                 setTimeout(() => rej('Fetch timeout'), fetchTimeoutMs)
@@ -75,6 +75,6 @@ export const getDecoratorComponents = async (): Promise<Components> => {
         return decoratorComponents as Components;
     } catch (e) {
         console.error(`Failed to fetch decorator - ${e}`);
-        return decoratorComponentsCSR();
+        return decoratorComponentsCSR(locale);
     }
 };

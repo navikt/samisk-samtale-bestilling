@@ -17,7 +17,7 @@ spec:
     path: /se/samegiella/bestilling-av-samtale/api/internal/isReady
     initialDelay: 10
   ingresses:
-    - https://www.dev.nav.no/se/samegiella/bestilling-av-samtale
+    - https://www.dev.nav.no/person/bestilling-av-samisk-samtale
   env:
     - name: NPM_CONFIG_CACHE
       value: /tmp/npm-cache
