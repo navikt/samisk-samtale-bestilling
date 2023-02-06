@@ -11,6 +11,7 @@ import {
     TextField,
 } from '@navikt/ds-react';
 import { fetchFormSubmit, fetchKontaktInfo, SubmitData } from '../utils/fetch';
+import { LocaleString } from '../localization/LocaleString';
 
 export type InputState = {
     fornavn?: string;
@@ -106,7 +107,7 @@ export const SamiskSamtaleOrderForm = () => {
         <Panel className={style.panel}>
             <div className={style.fields}>
                 <TextField
-                    label={'Ovdanamma'}
+                    label={<LocaleString id={'fornavn'} />}
                     error={errorState.fornavn && 'Čále ovdanama'}
                     value={inputState.fornavn || ''}
                     onChange={(e) => {

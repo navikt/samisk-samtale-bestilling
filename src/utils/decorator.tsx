@@ -6,6 +6,7 @@ import {
 } from '@navikt/nav-dekoratoren-moduler/ssr';
 import { objectToQueryString } from './fetch';
 import { Params } from '@navikt/nav-dekoratoren-moduler';
+// import { useRouter } from 'next/router';
 
 const decoratorUrl = process.env.DECORATOR_FALLBACK_URL;
 const decoratorEnv = process.env.ENV as Props['env'];
@@ -21,9 +22,15 @@ const params: Params = {
             title: 'Jearaldat bagadallama oažžut sámegillii telefovnnas',
         },
     ],
+    availableLanguages: [
+        { locale: 'nb', url: '/no/samegiella/bestilling-av-samtale' },
+        { locale: 'se', url: '/se/samegiella/bestilling-av-samtale' },
+    ],
 };
 
 const decoratorComponentsCSR = (): Components => {
+    // const router = useRouter();
+    // const locale = router.locale as Locale;
     const query = objectToQueryString(params);
 
     return {
@@ -38,7 +45,7 @@ const decoratorComponentsCSR = (): Components => {
                     id="decorator-env"
                     data-src={`${decoratorUrl}/env${query || ''}`}
                 />
-                 <script async={true} src={`${decoratorUrl}/client.js`} />
+                <script async={true} src={`${decoratorUrl}/client.js`} />
             </>
         ),
     };
@@ -46,14 +53,15 @@ const decoratorComponentsCSR = (): Components => {
 
 export const getDecoratorComponents = async (): Promise<Components> => {
     try {
-        const props = ( decoratorEnv === 'localhost' ?
-            {
-                env: decoratorEnv,
-                port: decoratorLocalPort,
-            } :
-            {
-                env: decoratorEnv,
-            });
+        const props =
+            decoratorEnv === 'localhost'
+                ? {
+                      env: decoratorEnv,
+                      port: decoratorLocalPort,
+                  }
+                : {
+                      env: decoratorEnv,
+                  };
         const decoratorComponents = await Promise.race([
             fetchDecoratorReact({
                 ...props,

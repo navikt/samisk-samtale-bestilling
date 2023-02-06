@@ -13,14 +13,14 @@ module.exports = withTranspileModules({
         KONTAKTINFO_API_URL: process.env.KONTAKTINFO_API_URL,
     },
     i18n: {
-        locales: ['se'],
+        locales: ['se', 'nb'],
         defaultLocale: 'se',
         localeDetection: false,
     },
-    webpack: (config) =>  {
+    webpack: (config) => {
         config.resolve.fallback = {
             canvas: false,
         };
         return config;
-    }
+    },
 });
