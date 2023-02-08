@@ -6,7 +6,7 @@ import {
 } from '@navikt/nav-dekoratoren-moduler/ssr';
 import { objectToQueryString } from './fetch';
 import { Params } from '@navikt/nav-dekoratoren-moduler';
-import { Locale } from '../localization/LocaleString';
+import { Locale, localeString } from '../localization/LocaleString';
 
 const decoratorUrl = process.env.DECORATOR_FALLBACK_URL;
 const decoratorEnv = process.env.ENV as Props['env'];
@@ -18,8 +18,8 @@ export const getDecoratorParams = (locale: Locale): Params => ({
     language: locale,
     breadcrumbs: [
         {
-            url: '/',
-            title: 'Jearaldat bagadallama oažžut sámegillii telefovnnas',
+            url: `/`,
+            title: localeString('tittel', locale),
         },
     ],
     availableLanguages: [

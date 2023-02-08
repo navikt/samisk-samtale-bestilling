@@ -2,77 +2,35 @@ import React from 'react';
 import { LocaleModule } from './nb';
 
 export const localeModuleSe: LocaleModule = {
+    tittel: 'Jearaldat bagadallama oažžut sámegillii telefovnnas',
     fornavn: 'Ovdanamma',
-    pageTitle: 'Find a NAV office',
-    breadcrumb1: 'Contact us',
-    breadcrumb2: 'Find a NAV office',
-    ingressLine1:
-        'Do you not have electronic ID? Or are you trying to find the NAV office on behalf of someone else?',
-    ingressLine2:
-        'If so, you can find a NAV office using a post code or town/city.',
-    inputLabel: 'Enter a post code or town/city:',
-    inputSubmit: 'Search',
-    errorMissingQuery: 'Missing search query',
-    errorInvalidQuery: 'Invalid search query',
-    errorInvalidPostnr: 'The post code does not exist',
-    errorServerError: 'Unknown server error',
-    errorInvalidResult: 'Server error: invalid search result',
-    errorInputValidationLength:
-        'Enter at least two letters or a valid post code',
-    errorInputValidationPostnr: 'Post code search must be four digits',
-    errorInputValidationName: 'Invalid characters in search',
-    nameResultHeader: 'Search results for ',
-    postnrResultNone: (postnrOgPoststed, adresseQuery) => (
+    etternavn: 'Goargu',
+    telefonnummer: 'Telefovdna',
+    tidsrom: 'Goas heive duinna váldit oktavuođa?',
+    ingress: () => (
         <>
-            {`No NAV office found for `}
-            <strong>{postnrOgPoststed}</strong>
-            {adresseQuery && ` with street name ${adresseQuery}`}
+            {
+                <>
+                    Diŋgo dás davvisámegilli bálvalusa mas vástiduvvo dutnje
+                    sámegillii buot NAV – bálvalusain ja oajuin. Mii veahkehit
+                    gávdnat mo du áššiin manná, ja veahkehit du dovdat rivttiid
+                    ja geatnegasvuođaid mat leat álbmotoadjolága njuolggadusain.
+                    Don gávnnat dieđuid iežat áššis neahttabálvalusas&nbsp;
+                    <a href="https://www.nav.no/minside">Min side</a>. Don
+                    sáhtát iskat mii dutnje lea máksojuvvon dás: <br />
+                    <br />
+                    Don sáhtat ain riŋget NAV-bálvalussii&nbsp;
+                    <a href="tel:55553333">55 55 33 33</a>&nbsp; ja dáhtot ahte
+                    davvisámegielat bagadalli riŋge dutnje. Muite addit
+                    riegadan- ja persunnummara ja maid telefunnummara masa
+                    davvisámegielat galga riŋget.
+                </>
+            }
         </>
     ),
-    postnrResultOne: (postnrOgPoststed) => (
-        <>
-            {'NAV office for '}
-            <strong>{postnrOgPoststed}</strong>
-            {':'}
-        </>
-    ),
-    postnrResultMany: (numHits, postnrOgPoststed, postnr) => (
-        <>
-            {`${numHits} offices cover `}
-            <strong>{postnrOgPoststed}</strong>
-            {`. You can add a street name and building number to narrow the search, e.g. ${postnr} Example-street 12`}
-        </>
-    ),
-    postnrResultPostbox: (postnr, kommuneNavn, numHits) => (
-        <>
-            {`${postnr} is a post code for PO boxes in `}
-            <strong>{kommuneNavn}</strong>
-            {`. NAV office${
-                Number(numHits) > 1 ? 's' : ''
-            } for this town/city:`}
-        </>
-    ),
-    postnrResultServiceBox: (postnr, kommuneNavn, numHits) => (
-        <>
-            {`${postnr} is a service post code in `}
-            <strong>{kommuneNavn}</strong>
-            {`. NAV office${
-                Number(numHits) > 1 ? 's' : ''
-            } for this town/city:`}
-        </>
-    ),
-    postnrResultBydeler: (postnr, kommuneNavn, numHits) => (
-        <>
-            {'No specific office found for '}
-            <strong>{postnr}</strong>
-            {' in '}
-            <strong>{kommuneNavn}</strong>
-            {`. ${Number(numHits) > 1 ? 'All ' : ''}NAV office${
-                Number(numHits) > 1 ? 's' : ''
-            } for this town/city:`}
-        </>
-    ),
-    nameResultNone: (input) => `No results for "${input}"`,
-    nameResultFound: (input, numHits) =>
-        `Search results for "${input}" (${numHits}):`,
+    knapp: 'Sádde jearaldaga',
+    feilmeldingFornavn: 'Čále ovdanama',
+    feilmeldingEtternavn: 'Čále goarggu',
+    feilmeldingTelefonnummer: 'Čále telefon-nummara',
+    feilmeldingTidsrom: 'Vállje áiggi goas heive',
 };

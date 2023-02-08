@@ -1,108 +1,46 @@
 import React from 'react';
 
 export type LocaleStringId =
+    | 'tittel'
     | 'fornavn'
-    | 'pageTitle'
-    | 'ingressLine1'
-    | 'ingressLine2'
-    | 'inputLabel'
-    | 'inputSubmit'
-    | 'errorMissingQuery'
-    | 'errorInvalidQuery'
-    | 'errorInvalidPostnr'
-    | 'errorServerError'
-    | 'errorInvalidResult'
-    | 'errorInputValidationLength'
-    | 'errorInputValidationPostnr'
-    | 'errorInputValidationName'
-    | 'nameResultHeader'
-    | 'postnrResultNone'
-    | 'postnrResultOne'
-    | 'postnrResultMany'
-    | 'postnrResultPostbox'
-    | 'postnrResultServiceBox'
-    | 'postnrResultBydeler'
-    | 'nameResultNone'
-    | 'nameResultFound'
-    | 'breadcrumb1'
-    | 'breadcrumb2';
+    | 'etternavn'
+    | 'telefonnummer'
+    | 'tidsrom'
+    | 'ingress'
+    | 'knapp'
+    | 'feilmeldingFornavn'
+    | 'feilmeldingEtternavn'
+    | 'feilmeldingTelefonnummer'
+    | 'feilmeldingTidsrom';
 
 export type LocaleModule = typeof localeModuleNb;
 
 export const localeModuleNb: {
     [key in LocaleStringId]: string | ((...args: string[]) => React.ReactNode);
 } = {
+    tittel: 'Bestille en telefonsamtale med NAV på nordsamisk',
     fornavn: 'Fornavn',
-    pageTitle: 'Søk opp NAV-kontor',
-    breadcrumb1: 'Kontakt oss',
-    breadcrumb2: 'Søk opp NAV-kontor',
-    ingressLine1:
-        'Mangler du elektronisk ID? Eller skal du finne NAV-kontor på vegne av noen andre?',
-    ingressLine2:
-        'Da kan du søke opp NAV-kontor ved hjelp av postnummer eller sted/by.',
-    inputLabel: 'Skriv inn et postnummer eller stedsnavn:',
-    inputSubmit: 'Søk',
-    errorMissingQuery: 'Mangler søke-streng',
-    errorInvalidQuery: 'Feil i søke-streng',
-    errorInvalidPostnr: 'Postnummeret finnes ikke',
-    errorServerError: 'Ukjent server-feil',
-    errorInvalidResult: 'Server-feil: Feil i søke-resultatet',
-    errorInputValidationLength:
-        'Skriv inn minst to bokstaver eller et postnummer',
-    errorInputValidationPostnr: 'Postnummer-søk må være fire siffer',
-    errorInputValidationName: 'Søket inneholder ugyldige tegn',
-    nameResultHeader: 'Søkeresultat for ',
-    postnrResultNone: (postnrOgPoststed, adresseQuery) => (
+    etternavn: 'Etternavn',
+    telefonnummer: 'Telefon',
+    tidsrom: 'Ønsket tidspunkt for samtale',
+    ingress: () => (
         <>
-            {`Ingen NAV-kontor funnet for `}
-            <strong>{postnrOgPoststed}</strong>
-            {adresseQuery && ` med gatenavn ${adresseQuery}`}
+            {
+                <>
+                    Her kan du bestille en telefonsamtale med NAV på nordsamisk.
+                    Vi hjelper deg med status i saken din og veileder deg om
+                    rettigheter og plikter. <br /> For å finne informasjon om
+                    dine saker og utbetalinger, kan du logge inn på
+                    <a href="https://www.nav.no/minside"> nav.no </a>. <br /> Du
+                    kan også ringe NAV på <a href="tel:55553333">55 55 33 33</a>
+                    &nbsp; og be om å bli kontaktet av en samisk veileder.
+                </>
+            }
         </>
     ),
-    postnrResultOne: (postnrOgPoststed) => (
-        <>
-            {'NAV-kontor for '}
-            <strong>{postnrOgPoststed}</strong>
-            {':'}
-        </>
-    ),
-    postnrResultMany: (numHits, postnrOgPoststed, postnr) => (
-        <>
-            {`${numHits} kontorer dekker `}
-            <strong>{postnrOgPoststed}</strong>
-            {`. Du kan legge til gatenavn og husnummer for å spisse søket, f.eks. ${postnr} Eksempelgata 12`}
-        </>
-    ),
-    postnrResultPostbox: (postnr, kommuneNavn, numHits) => (
-        <>
-            {`${postnr} er et postnummer for postbokser i `}
-            <strong>{kommuneNavn}</strong>
-            {` kommune. Kommunens NAV-kontor${
-                Number(numHits) > 1 ? 'er' : ''
-            }:`}
-        </>
-    ),
-    postnrResultServiceBox: (postnr, kommuneNavn, numHits) => (
-        <>
-            {`${postnr} er et servicepostnummer i `}
-            <strong>{kommuneNavn}</strong>
-            {` kommune. Kommunens NAV-kontor${
-                Number(numHits) > 1 ? 'er' : ''
-            }:`}
-        </>
-    ),
-    postnrResultBydeler: (postnr, kommuneNavn, numHits) => (
-        <>
-            {'Fant ingen kontor spesifikt tilknyttet '}
-            <strong>{postnr}</strong>
-            {' i '}
-            <strong>{kommuneNavn}</strong>
-            {` kommune. ${
-                Number(numHits) > 1 ? 'Alle k' : 'K'
-            }ommunens NAV-kontor${Number(numHits) > 1 ? 'er' : ''}:`}
-        </>
-    ),
-    nameResultNone: (input) => `Ingen resultater for "${input}"`,
-    nameResultFound: (input, numHits) =>
-        `Søkeresultat for "${input}" (${numHits}):`,
+    knapp: 'Send bestilling',
+    feilmeldingFornavn: 'Skriv fornavnet ditt',
+    feilmeldingEtternavn: 'Skriv etternavnet ditt',
+    feilmeldingTelefonnummer: 'Skriv telefonnummeret ditt',
+    feilmeldingTidsrom: 'Skriv telefonnummeret ditt ',
 };
