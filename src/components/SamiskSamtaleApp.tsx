@@ -1,8 +1,7 @@
 import { BodyLong, GuidePanel, Heading, Link } from '@navikt/ds-react';
 import { SamiskSamtaleOrderForm } from './SamiskSamtaleOrderForm';
 import style from './SamiskSamtaleApp.module.css';
-import { useRouter } from 'next/router';
-import { Locale, LocaleString } from '../localization/LocaleString';
+import { LocaleString } from '../localization/LocaleString';
 
 export const SamiskSamtaleApp = () => {
     return (
