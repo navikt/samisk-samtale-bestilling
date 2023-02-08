@@ -21,8 +21,6 @@ class MyDocument extends Document<DocumentProps> {
 
         const locale = ctx.locale as Locale;
 
-        console.log('locale', locale);
-
         const Decorator = await getDecoratorComponents(locale);
 
         return {
