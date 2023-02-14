@@ -9,6 +9,7 @@ import Document, {
 } from 'next/document';
 import { getDecoratorComponents } from '../utils/decorator';
 import { Components } from '@navikt/nav-dekoratoren-moduler/ssr';
+import { Locale } from '../localization/LocaleString';
 
 type DocumentProps = {
     Decorator: Components;
@@ -18,7 +19,9 @@ class MyDocument extends Document<DocumentProps> {
     static async getInitialProps(ctx: DocumentContext) {
         const initialProps = await Document.getInitialProps(ctx);
 
-        const Decorator = await getDecoratorComponents();
+        const locale = ctx.locale as Locale;
+
+        const Decorator = await getDecoratorComponents(locale);
 
         return {
             ...initialProps,

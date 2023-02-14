@@ -11,6 +11,7 @@ import {
     TextField,
 } from '@navikt/ds-react';
 import { fetchFormSubmit, fetchKontaktInfo, SubmitData } from '../utils/fetch';
+import { LocaleString } from '../localization/LocaleString';
 
 export type InputState = {
     fornavn?: string;
@@ -106,8 +107,12 @@ export const SamiskSamtaleOrderForm = () => {
         <Panel className={style.panel}>
             <div className={style.fields}>
                 <TextField
-                    label={'Ovdanamma'}
-                    error={errorState.fornavn && 'Čále ovdanama'}
+                    label={<LocaleString id={'fornavn'} />}
+                    error={
+                        errorState.fornavn && (
+                            <LocaleString id={'feilmeldingFornavn'} />
+                        )
+                    }
                     value={inputState.fornavn || ''}
                     onChange={(e) => {
                         setErrorState({
@@ -121,8 +126,12 @@ export const SamiskSamtaleOrderForm = () => {
                     }}
                 />
                 <TextField
-                    label={'Goargu'}
-                    error={errorState.etternavn && 'Čále goarggu'}
+                    label={<LocaleString id={'etternavn'} />}
+                    error={
+                        errorState.etternavn && (
+                            <LocaleString id={'feilmeldingEtternavn'} />
+                        )
+                    }
                     value={inputState.etternavn || ''}
                     onChange={(e) => {
                         setErrorState({
@@ -136,9 +145,13 @@ export const SamiskSamtaleOrderForm = () => {
                     }}
                 />
                 <TextField
-                    label={'Telefovdna'}
+                    label={<LocaleString id={'telefonnummer'} />}
                     value={inputState.telefonnummer || ''}
-                    error={errorState.telefonnummer && 'Čále telefon-nummara'}
+                    error={
+                        errorState.telefonnummer && (
+                            <LocaleString id={'feilmeldingTelefonnummer'} />
+                        )
+                    }
                     onChange={(e) => {
                         setErrorState({
                             ...errorState,
@@ -151,8 +164,12 @@ export const SamiskSamtaleOrderForm = () => {
                     }}
                 />
                 <CheckboxGroup
-                    legend={'Goas heive duinna váldit oktavuođa?'}
-                    error={errorState.tidsrom && 'Vállje áiggi goas heive'}
+                    legend={<LocaleString id={'tidsrom'} />}
+                    error={
+                        errorState.tidsrom && (
+                            <LocaleString id={'feilmeldingTidsrom'} />
+                        )
+                    }
                     onChange={() => {
                         setErrorState({
                             ...errorState,
@@ -191,7 +208,7 @@ export const SamiskSamtaleOrderForm = () => {
                 disabled={hasErrors(errorState) || isWaiting}
             >
                 {isWaiting && <Loader />}
-                {'Sádde jearaldaga'}
+                {<LocaleString id={'knapp'} />}
             </Button>
             {fetchError && (
                 <Alert
