@@ -7,21 +7,19 @@ import Document, {
     Main,
     NextScript,
 } from 'next/document';
-import { getDecoratorComponents } from '../utils/decorator';
-import { Components } from '@navikt/nav-dekoratoren-moduler/ssr';
+import { DecoratorComponents } from "@navikt/nav-dekoratoren-moduler/ssr";
+import { getDecorator } from '../utils/decorator';
 import { Locale } from '../localization/LocaleString';
 
 type DocumentProps = {
-    Decorator: Components;
+    Decorator: DecoratorComponents;
 };
 
 class MyDocument extends Document<DocumentProps> {
     static async getInitialProps(ctx: DocumentContext) {
         const initialProps = await Document.getInitialProps(ctx);
-
         const locale = ctx.locale as Locale;
-
-        const Decorator = await getDecoratorComponents(locale);
+        const Decorator = await getDecorator(locale);
 
         return {
             ...initialProps,
