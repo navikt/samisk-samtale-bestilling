@@ -27,6 +27,8 @@ spec:
         - application: tilbakemeldinger-api
           namespace: personbruker
           cluster: dev-fss
+        - application: nav-dekoratoren
+          namespace: personbruker
       external:
         - host: tilbakemeldinger-api.dev-fss-pub.nais.io
   replicas:
