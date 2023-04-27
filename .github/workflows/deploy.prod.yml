@@ -34,7 +34,7 @@ jobs:
               run: |
                   cat > .env <<EOF
                   ENV=prod
-                  API_URL=https://tilbakemeldinger-api.prod-fss-pub.nais.io/mottak/bestilling-av-samtale
+                  API_URL=http://tilbakemeldingsmottak-api.teamserviceklage
                   APP_BASEPATH=/person/bestilling-av-samisk-samtale
                   APP_ORIGIN=https://www.nav.no
                   DECORATOR_FALLBACK_URL=https://www.nav.no/dekoratoren
