@@ -1,7 +1,6 @@
 import * as querystring from 'querystring';
 
 import Cache from 'node-cache';
-import { fetchJson } from './fetch';
 
 const cacheKey = 'authHeader';
 
@@ -22,10 +21,11 @@ const fetchAccessToken = async (
 ): Promise<TokenResponse | null> => {
     console.log('Refreshing access token...');
 
-    const response = await fetchJson(azureAdTokenApi, {
+    const response = await fetch(azureAdTokenApi, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
+            accept: 'application/json',
         },
         body: querystring.stringify({
             grant_type: 'client_credentials',
@@ -35,12 +35,14 @@ const fetchAccessToken = async (
         }),
     });
 
-    if (!response.access_token) {
-        console.error('Bad response from token service', response);
+    const responseJson = await response.json();
+
+    if (!response.ok) {
+        console.error('Bad response from token service', responseJson);
         return null;
     }
 
-    return response;
+    return responseJson.access_token;
 };
 
 export const getAzureadToken = async (scope: string) => {

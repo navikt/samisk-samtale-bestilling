@@ -7,6 +7,11 @@ const proxyHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         const accessToken = await getAzureadToken(
             `api://${process.env.ENV}-gcp.teamserviceklage.tilbakemeldingsmottak-api/.default`
         );
+
+        if (!accessToken) {
+            return res.status(500).json('Failed to fetch access token');
+        }
+
         const response = await fetch(
             `${process.env.API_URL}/rest/bestilling-av-samtale`,
             {
