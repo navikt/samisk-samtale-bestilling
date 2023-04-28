@@ -8,7 +8,7 @@ const proxyHandler = async (req: NextApiRequest, res: NextApiResponse) => {
             `api://${process.env.ENV}-gcp.teamserviceklage.tilbakemeldingsmottak-api/.default`
         );
         const response = await fetch(
-            `${process.env.API_URL}/rest/mottak/bestilling-av-samtale`,
+            `${process.env.API_URL}/rest/bestilling-av-samtale`,
             {
                 method: 'POST',
                 body: JSON.stringify(req.body),
