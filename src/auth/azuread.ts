@@ -42,7 +42,7 @@ const fetchAccessToken = async (
         return null;
     }
 
-    return responseJson.access_token;
+    return responseJson;
 };
 
 export const getAzureadToken = async (scope: string) => {
