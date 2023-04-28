@@ -42,9 +42,6 @@ const fetchAccessToken = async (
         return null;
     }
 
-    console.log("Alt bra")
-    console.log(responseJson)
-
     return responseJson.access_token;
 };
 
