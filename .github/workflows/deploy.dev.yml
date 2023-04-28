@@ -31,7 +31,7 @@ jobs:
                   APP_BASEPATH=/person/bestilling-av-samisk-samtale
                   APP_ORIGIN=https://www.dev.nav.no
                   DECORATOR_FALLBACK_URL=https://dekoratoren.dev.nav.no
-                  KONTAKTINFO_API_URL=https://person.dev.nav.no/person/personopplysninger-api/kontaktinformasjon
+                  KONTAKTINFO_API_URL=https://person.ekstern.dev.nav.no/person/personopplysninger-api/kontaktinformasjon
                   EOF
             - name: Nextjs cache
               uses: actions/cache@v2
