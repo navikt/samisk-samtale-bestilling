@@ -29,9 +29,9 @@ jobs:
                   ENV=dev
                   API_URL=https://tilbakemeldinger-api.dev-fss-pub.nais.io/mottak/bestilling-av-samtale
                   APP_BASEPATH=/person/bestilling-av-samisk-samtale
-                  APP_ORIGIN=https://www.dev.nav.no
-                  DECORATOR_FALLBACK_URL=https://dekoratoren.dev.nav.no
-                  KONTAKTINFO_API_URL=https://person.dev.nav.no/person/personopplysninger-api/kontaktinformasjon
+                  APP_ORIGIN=https://www.intern.dev.nav.no
+                  DECORATOR_FALLBACK_URL=https://dekoratoren.ekstern.dev.nav.no
+                  KONTAKTINFO_API_URL=https://www.intern.dev.nav.no/person/personopplysninger-api/kontaktinformasjon
                   EOF
             - name: Nextjs cache
               uses: actions/cache@v2

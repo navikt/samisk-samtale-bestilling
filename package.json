@@ -11,26 +11,24 @@
         "typeCheck": "tsc --noemit"
     },
     "dependencies": {
-        "@navikt/ds-css": "2.8.12",
-        "@navikt/ds-react": "2.8.12",
+        "@navikt/ds-css": "2.9.3",
+        "@navikt/ds-react": "2.9.3",
         "@navikt/nav-dekoratoren-moduler": "2.0.0",
-        "amplitude-js": "8.21.8",
+        "amplitude-js": "8.21.9",
         "classnames": "2.3.2",
-        "html-react-parser": "3.0.15",
-        "jsdom": "21.1.1",
-        "n": "^9.0.1",
-        "next": "12.3.1",
+        "html-react-parser": "3.0.16",
+        "jsdom": "21.1.2",
+        "next": "13.3.4",
         "node-cache": "5.1.2",
         "react": "18.2.0",
         "react-dom": "18.2.0"
     },
     "devDependencies": {
-        "@types/node": "18.15.11",
-        "@types/react": "18.0.35",
-        "eslint": "8.38.0",
-        "eslint-config-next": "12.3.1",
-        "next-transpile-modules": "9.0.0",
-        "prettier": "2.8.7",
+        "@types/node": "18.16.3",
+        "@types/react": "18.2.0",
+        "eslint": "8.39.0",
+        "eslint-config-next": "12.3.4",
+        "prettier": "2.8.8",
         "typescript": "5.0.4"
     },
     "browserslist": {
