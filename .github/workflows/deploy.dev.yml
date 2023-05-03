@@ -27,7 +27,7 @@ jobs:
               run: |
                   cat > .env <<EOF
                   ENV=dev
-                  API_URL=https://tilbakemeldinger-api.dev-fss-pub.nais.io/mottak/bestilling-av-samtale
+                  API_URL=http://tilbakemeldingsmottak-api.teamserviceklage
                   APP_BASEPATH=/person/bestilling-av-samisk-samtale
                   APP_ORIGIN=https://www.intern.dev.nav.no
                   DECORATOR_FALLBACK_URL=https://dekoratoren.ekstern.dev.nav.no
