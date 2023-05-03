@@ -1,9 +1,4 @@
-const withTranspileModules = require('next-transpile-modules')([
-    '@navikt/nav-dekoratoren-moduler',
-    '@navikt/ds-react',
-]);
-
-module.exports = withTranspileModules({
+module.exports = {
     reactStrictMode: true,
     basePath: process.env.APP_BASEPATH,
     env: {
@@ -17,10 +12,14 @@ module.exports = withTranspileModules({
         defaultLocale: 'se',
         localeDetection: false,
     },
+    transpilePackages: [
+        '@navikt/nav-dekoratoren-moduler',
+        '@navikt/ds-react',
+    ],
     webpack: (config) => {
         config.resolve.fallback = {
             canvas: false,
         };
         return config;
     },
-});
+};
