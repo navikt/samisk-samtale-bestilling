@@ -24,19 +24,19 @@ spec:
   accessPolicy:
     outbound:
       rules:
-        - application: tilbakemeldinger-api
-          namespace: personbruker
-          cluster: prod-fss
+        - application: tilbakemeldingsmottak-api
+          namespace: teamserviceklage
         - application: nav-dekoratoren
           namespace: personbruker
-      external:
-        - host: tilbakemeldinger-api.prod-fss-pub.nais.io
+  azure:
+    application:
+      enabled: true
   replicas:
     min: 1
     max: 1
   resources:
     limits:
-      cpu: '2'
       memory: 512Mi
     requests:
-      memory: 256Mi
+      cpu: 50m
+      memory: 192Mi
