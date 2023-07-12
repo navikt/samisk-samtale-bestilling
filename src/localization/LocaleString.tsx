@@ -1,4 +1,3 @@
-import React from 'react';
 import { LocaleModule, localeModuleNb, LocaleStringId } from './nb';
 import { localeModuleSe } from './se';
 
@@ -18,11 +17,7 @@ type Props = {
     args?: string[];
 };
 
-export const localeString = (
-    id: Props['id'],
-    locale: Locale = defaultLocale,
-    args: Props['args'] = []
-): string => {
+export const localeString = (id: Props['id'], locale: Locale = defaultLocale, args: Props['args'] = []): string => {
     const value = localeModules[locale][id] || localeModules[defaultLocale][id];
     if (!value) {
         return id;
@@ -35,9 +30,7 @@ export const localeString = (
 
 export const LocaleString = ({ id, args = [] }: Props) => {
     const router = useRouter();
-    const locale = (router.locale ||
-        router.defaultLocale ||
-        defaultLocale) as Locale;
+    const locale = (router.locale || router.defaultLocale || defaultLocale) as Locale;
 
     const value = localeModules[locale][id] || localeModules[defaultLocale][id];
     if (!value) {

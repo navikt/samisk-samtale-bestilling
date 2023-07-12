@@ -1,13 +1,5 @@
-import React from 'react';
-// eslint-disable-next-line @next/next/no-document-import-in-page
-import Document, {
-    DocumentContext,
-    Head,
-    Html,
-    Main,
-    NextScript,
-} from 'next/document';
-import { DecoratorComponents } from "@navikt/nav-dekoratoren-moduler/ssr";
+import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
+import { DecoratorComponents } from '@navikt/nav-dekoratoren-moduler/ssr';
 import { getDecorator } from '../utils/decorator';
 import { Locale } from '../localization/LocaleString';
 
