@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 declare global {
     namespace NodeJS {
         interface ProcessEnv {
@@ -8,6 +10,12 @@ declare global {
             DECORATOR_LOCAL_URL: string;
             KONTAKTINFO_API_URL: string;
         }
+    }
+
+    interface ImportMeta {
+        env: {
+            APP_BASEPATH: string;
+        };
     }
 }
 

@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "allowJs": true,
+    "baseUrl": "src",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "lib": [
+      "dom",
+      "es2021"
+    ],
+    "moduleResolution": "node",
+    "module": "NodeNext",
+    "outDir": "dist/server",
+    "strict": true,
+    "target": "ES2021"
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
