@@ -1,20 +1,15 @@
-import React from 'react';
-import {
-    DecoratorEnvProps,
-    DecoratorParams,
-    fetchDecoratorReact,
-} from '@navikt/nav-dekoratoren-moduler/ssr';
+import { DecoratorEnvProps, DecoratorParams, fetchDecoratorReact } from '@navikt/nav-dekoratoren-moduler/ssr';
 import { Locale, localeString } from '../localization/LocaleString';
 
 const { DECORATOR_LOCAL_URL, ENV } = process.env;
-const decoratorEnv = ENV as DecoratorEnvProps['env'] || 'prod';
+const decoratorEnv = (ENV as DecoratorEnvProps['env']) || 'prod';
 
-export const getDecoratorParams = (locale: Locale):DecoratorParams => ({
+export const getDecoratorParams = (locale: Locale): DecoratorParams => ({
     context: 'privatperson',
     language: locale,
     breadcrumbs: [
         {
-            url: `/`,
+            url: '/',
             title: localeString('tittel', locale),
         },
     ],
@@ -28,12 +23,12 @@ export const getDecorator = async (locale: Locale) => {
     const envProps =
         decoratorEnv === 'localhost'
             ? {
-                env: decoratorEnv,
-                localUrl: DECORATOR_LOCAL_URL,
-            }
+                  env: decoratorEnv,
+                  localUrl: DECORATOR_LOCAL_URL,
+              }
             : {
-                env: decoratorEnv,
-            };
+                  env: decoratorEnv,
+              };
     const decoratorProps = { ...envProps, params: getDecoratorParams(locale) };
 
     return fetchDecoratorReact(decoratorProps);

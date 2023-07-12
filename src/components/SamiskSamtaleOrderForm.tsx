@@ -1,15 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from './SamiskSamtaleOrderForm.module.css';
-import {
-    Alert,
-    Button,
-    Checkbox,
-    CheckboxGroup,
-    Fieldset,
-    Loader,
-    Panel,
-    TextField,
-} from '@navikt/ds-react';
+import { Alert, Button, Checkbox, CheckboxGroup, Loader, Panel, TextField } from '@navikt/ds-react';
 import { fetchFormSubmit, fetchKontaktInfo, SubmitData } from '../utils/fetch';
 import { LocaleString } from '../localization/LocaleString';
 
@@ -28,14 +19,9 @@ type ErrorState = {
     tidsrom?: boolean;
 };
 
-const isValidPhoneNumber = (phoneNumber?: string) =>
-    !!phoneNumber && /^\+?[0-9 ]+$/.test(phoneNumber);
+const isValidPhoneNumber = (phoneNumber?: string) => !!phoneNumber && /^\+?[0-9 ]+$/.test(phoneNumber);
 
-const hasErrors = (errorState: ErrorState) =>
-    errorState.fornavn ||
-    errorState.etternavn ||
-    errorState.telefonnummer ||
-    errorState.tidsrom;
+const hasErrors = (errorState: ErrorState) => errorState.fornavn || errorState.etternavn || errorState.telefonnummer || errorState.tidsrom;
 
 export const SamiskSamtaleOrderForm = () => {
     const [inputState, setInputState] = useState<InputState>({});
@@ -53,11 +39,11 @@ export const SamiskSamtaleOrderForm = () => {
                 });
             }
         });
+        /* eslint-disable-next-line */
     }, []);
 
     const submitForm = () => {
-        const { formiddag, etternavn, telefonnummer, fornavn, ettermiddag } =
-            inputState;
+        const { formiddag, etternavn, telefonnummer, fornavn, ettermiddag } = inputState;
 
         const errors: ErrorState = {
             fornavn: !fornavn,
@@ -78,12 +64,7 @@ export const SamiskSamtaleOrderForm = () => {
             fornavn,
             etternavn,
             telefonnummer,
-            tidsrom:
-                formiddag && ettermiddag
-                    ? 'BEGGE'
-                    : formiddag
-                    ? 'FORMIDDAG'
-                    : 'ETTERMIDDAG',
+            tidsrom: formiddag && ettermiddag ? 'BEGGE' : formiddag ? 'FORMIDDAG' : 'ETTERMIDDAG',
         } as SubmitData)
             .then((res) => {
                 if (res.ok) {
@@ -108,11 +89,7 @@ export const SamiskSamtaleOrderForm = () => {
             <div className={style.fields}>
                 <TextField
                     label={<LocaleString id={'fornavn'} />}
-                    error={
-                        errorState.fornavn && (
-                            <LocaleString id={'feilmeldingFornavn'} />
-                        )
-                    }
+                    error={errorState.fornavn && <LocaleString id={'feilmeldingFornavn'} />}
                     value={inputState.fornavn || ''}
                     onChange={(e) => {
                         setErrorState({
@@ -127,11 +104,7 @@ export const SamiskSamtaleOrderForm = () => {
                 />
                 <TextField
                     label={<LocaleString id={'etternavn'} />}
-                    error={
-                        errorState.etternavn && (
-                            <LocaleString id={'feilmeldingEtternavn'} />
-                        )
-                    }
+                    error={errorState.etternavn && <LocaleString id={'feilmeldingEtternavn'} />}
                     value={inputState.etternavn || ''}
                     onChange={(e) => {
                         setErrorState({
@@ -147,11 +120,7 @@ export const SamiskSamtaleOrderForm = () => {
                 <TextField
                     label={<LocaleString id={'telefonnummer'} />}
                     value={inputState.telefonnummer || ''}
-                    error={
-                        errorState.telefonnummer && (
-                            <LocaleString id={'feilmeldingTelefonnummer'} />
-                        )
-                    }
+                    error={errorState.telefonnummer && <LocaleString id={'feilmeldingTelefonnummer'} />}
                     onChange={(e) => {
                         setErrorState({
                             ...errorState,
@@ -165,11 +134,7 @@ export const SamiskSamtaleOrderForm = () => {
                 />
                 <CheckboxGroup
                     legend={<LocaleString id={'tidsrom'} />}
-                    error={
-                        errorState.tidsrom && (
-                            <LocaleString id={'feilmeldingTidsrom'} />
-                        )
-                    }
+                    error={errorState.tidsrom && <LocaleString id={'feilmeldingTidsrom'} />}
                     onChange={() => {
                         setErrorState({
                             ...errorState,
@@ -202,20 +167,11 @@ export const SamiskSamtaleOrderForm = () => {
                     </Checkbox>
                 </CheckboxGroup>
             </div>
-            <Button
-                className={style.button}
-                onClick={() => submitForm()}
-                disabled={hasErrors(errorState) || isWaiting}
-            >
+            <Button className={style.button} onClick={() => submitForm()} disabled={hasErrors(errorState) || isWaiting}>
                 {isWaiting && <Loader />}
                 {<LocaleString id={'knapp'} />}
             </Button>
-            {fetchError && (
-                <Alert
-                    variant={'error'}
-                    className={style.error}
-                >{`Feil ved innsending: ${fetchError}`}</Alert>
-            )}
+            {fetchError && <Alert variant={'error'} className={style.error}>{`Feil ved innsending: ${fetchError}`}</Alert>}
         </Panel>
     );
 };
