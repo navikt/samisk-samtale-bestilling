@@ -8,14 +8,14 @@
     "isolatedModules": true,
     "skipLibCheck": true,
     "lib": [
-      "dom",
       "es2021"
     ],
     "moduleResolution": "node",
     "module": "NodeNext",
     "outDir": "dist/server",
     "strict": true,
-    "target": "ES2021"
+    "target": "ES2021",
+    "resolveJsonModule": true
   },
   "include": [
     "src/**/*.ts"

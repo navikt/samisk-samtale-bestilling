@@ -7,15 +7,13 @@ import { createCspMiddleware } from '../utils/cspMiddleware';
 
 const assetsDir = path.resolve(process.cwd(), 'dist', 'client', 'assets');
 
-const isProd = process.env.NODE_ENV !== 'development';
+const isProd = process.env.ENV !== 'localhost';
 
 export const setupSiteRoutes = async (router: Router) => {
     let render: HtmlRenderer;
 
     if (isProd) {
-        console.log(
-            `Configuring site endpoints for production mode - Using assets dir ${assetsDir}`
-        );
+        console.log(`Configuring site endpoints for production mode - Using assets dir ${assetsDir}`);
 
         router.use(
             '/assets',
@@ -41,11 +39,7 @@ export const setupSiteRoutes = async (router: Router) => {
         render = devRender(vite);
     }
 
-    router.use(
-        '*',
-        createCacheMiddleware({ ttlSec: 600, maxSize: 100 }),
-        await createCspMiddleware()
-    );
+    router.use('*', createCacheMiddleware({ ttlSec: 600, maxSize: 100 }), await createCspMiddleware());
 
     router.get('*', async (req, res) => {
         const html = await render(req.originalUrl);

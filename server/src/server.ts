@@ -8,9 +8,9 @@ import { setupSiteRoutes } from './site/setupSiteRoutes.js';
 import { setupApiRoutes } from './api/setupApiRoutes';
 import { setupErrorHandlers } from './utils/errorHandlers';
 
-const { APP_PORT, APP_BASEPATH, ENV, NODE_ENV } = process.env;
+const { APP_PORT, APP_BASEPATH, ENV } = process.env;
 
-console.log('env:', APP_PORT, APP_BASEPATH, ENV, NODE_ENV);
+console.log('env:', APP_PORT, APP_BASEPATH, ENV);
 
 const isLocal = ENV === 'localhost';
 

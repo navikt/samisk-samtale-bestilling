@@ -8,16 +8,12 @@ type CacheMiddlewareOptions = {
 };
 
 type ResponseCacheEntry = {
-    sentData: any;
+    sentData: unknown;
     statusCode: number;
 };
 
-export const createCacheMiddleware = ({
-    cacheOnErrors = false,
-    ttlSec,
-    maxSize,
-}: CacheMiddlewareOptions): RequestHandler => {
-    if (process.env.NODE_ENV === 'development') {
+export const createCacheMiddleware = ({ cacheOnErrors = false, ttlSec, maxSize }: CacheMiddlewareOptions): RequestHandler => {
+    if (process.env.ENV === 'localhost') {
         return (req, res, next) => {
             next();
         };

@@ -16,7 +16,7 @@ const myDirectives = {
     'script-src-elem': [SELF],
     'style-src': [SELF],
     'style-src-elem': [SELF],
-    ...(process.env.NODE_ENV === 'development' && {
+    ...(process.env.ENV === 'localhost' && {
         'connect-src': [HMR_SERVER],
     }),
 };

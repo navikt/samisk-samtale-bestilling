@@ -4,8 +4,8 @@ import './global.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { App } from './App';
 import { BrowserRouter } from 'react-router-dom';
+import { SamiskSamtaleApp } from './components/SamiskSamtaleApp';
 
 const parseAppContext = () => {
     try {
@@ -21,7 +21,7 @@ const AppWithContext = () => {
     return (
         <React.StrictMode>
             <BrowserRouter basename={import.meta.env.BASE_URL}>
-                <App appContext={parseAppContext()} />
+                <SamiskSamtaleApp appContext={parseAppContext()} />
             </BrowserRouter>
         </React.StrictMode>
     );
