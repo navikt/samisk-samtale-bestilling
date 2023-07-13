@@ -10,6 +10,7 @@ node_modules
 
 # server
 /server/dist/**
+/server/src/_ssr-dist
 
 # production
 /build
