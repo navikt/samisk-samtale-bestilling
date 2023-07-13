@@ -9,7 +9,7 @@ import { SamiskSamtaleApp } from './components/SamiskSamtaleApp';
 
 const parseAppContext = () => {
     try {
-        const contextElement = document.getElementById('app-context');
+        const contextElement = document.getElementById('app');
         return contextElement ? JSON.parse(contextElement.innerText) : {};
     } catch (e) {
         console.error(`Failed to parse app context - ${e}`);

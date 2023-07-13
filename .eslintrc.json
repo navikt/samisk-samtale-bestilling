@@ -29,6 +29,8 @@
         "max-len": [1, { "code": 150, "ignoreComments": true, "ignoreStrings": true }],
         "indent": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
-        "react/display-name": "off"
+        "react/display-name": "off",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "warn"
     }
 }

@@ -1,4 +1,4 @@
-import { LocaleModule } from './nb';
+import { LocaleModule } from './localeUtils';
 
 export const localeModuleSe: LocaleModule = {
     tittel: 'Jearaldat bagadallama oažžut sámegillii telefovnnas',
@@ -6,8 +6,7 @@ export const localeModuleSe: LocaleModule = {
     etternavn: 'Goargu',
     telefonnummer: 'Telefovdna',
     tidsrom: 'Goas heive duinna váldit oktavuođa?',
-    ingress: () => (
-        <>
+    ingress: `
             Diŋgo dás davvisámegilli bálvalusa mas vástiduvvo dutnje sámegillii buot NAV – bálvalusain ja oajuin. Mii veahkehit gávdnat mo du áššiin
             manná, ja veahkehit du dovdat rivttiid ja geatnegasvuođaid mat leat álbmotoadjolága njuolggadusain. Don gávnnat dieđuid iežat áššis
             neahttabálvalusas&nbsp;
@@ -16,8 +15,7 @@ export const localeModuleSe: LocaleModule = {
             Don sáhtat ain riŋget NAV-bálvalussii&nbsp;
             <a href="tel:55553333">55 55 33 33</a>&nbsp; ja dáhtot ahte davvisámegielat bagadalli riŋge dutnje. Muite addit riegadan- ja persunnummara
             ja maid telefunnummara masa davvisámegielat galga riŋget.
-        </>
-    ),
+            `,
     knapp: 'Sádde jearaldaga',
     feilmeldingFornavn: 'Čále ovdanama',
     feilmeldingEtternavn: 'Čále goarggu',
