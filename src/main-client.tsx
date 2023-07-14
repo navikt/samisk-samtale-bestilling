@@ -6,6 +6,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { SamiskSamtaleApp } from './components/SamiskSamtaleApp';
+import { Locale } from '../common/localization/localeUtils';
+import { LocaleProvider } from './utils/useLocale';
 
 const parseAppContext = () => {
     try {
@@ -17,29 +19,32 @@ const parseAppContext = () => {
     }
 };
 
-const AppWithContext = () => {
+const AppWithContext = ({ locale }: { locale: Locale }) => {
     return (
         <React.StrictMode>
-            <BrowserRouter basename={import.meta.env.BASE_URL}>
-                <SamiskSamtaleApp appContext={parseAppContext()} />
-            </BrowserRouter>
+            <LocaleProvider value={locale}>
+                <BrowserRouter basename={import.meta.env.BASE_URL}>
+                    <SamiskSamtaleApp appContext={parseAppContext()} />
+                </BrowserRouter>
+            </LocaleProvider>
         </React.StrictMode>
     );
 };
 
 const renderOrHydrate = () => {
     const rootElement = document.getElementById('app') as HTMLElement;
+    const locale = document.documentElement.lang as Locale;
 
     // We should only attempt to hydrate if the root element has child elements
     // to hydrate. Also, hydration causes glitches with our HMR workaround
     // below, used in dev mode.
     if (rootElement.hasChildNodes() && import.meta.env.PROD) {
         console.log('Hydrating!');
-        ReactDOM.hydrateRoot(rootElement, <AppWithContext />);
+        ReactDOM.hydrateRoot(rootElement, <AppWithContext locale={locale} />);
     } else {
         console.log('Rendering!');
         const root = ReactDOM.createRoot(rootElement);
-        root.render(<AppWithContext />);
+        root.render(<AppWithContext locale={locale} />);
     }
 };
 

@@ -1,31 +1,31 @@
 import dotenv from 'dotenv';
 
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: `${__dirname}/../../.env` });
 
 import express from 'express';
 import compression from 'compression';
+import bodyParser from 'body-parser';
 import { setupSiteRoutes } from './site/setupSiteRoutes.js';
 import { setupApiRoutes } from './api/setupApiRoutes';
 import { setupErrorHandlers } from './utils/errorHandlers';
 
-const { APP_PORT, APP_BASEPATH, ENV } = process.env;
-
-console.log('env:', APP_PORT, APP_BASEPATH, ENV);
+const { APP_PORT, VITE_APP_BASEPATH, ENV } = process.env;
 
 const isLocal = ENV === 'localhost';
 
 const app = express();
 app.use('*', compression());
+app.use(bodyParser.json());
 
 const siteRouter = express.Router();
 const apiRouter = express.Router();
 
-app.use(APP_BASEPATH, siteRouter);
+app.use(VITE_APP_BASEPATH, siteRouter);
 siteRouter.use('/api', apiRouter);
 
 // Redirect from root to basepath in local development environments
-if (isLocal && APP_BASEPATH && APP_BASEPATH !== '/') {
-    app.get('/', (req, res) => res.redirect(APP_BASEPATH));
+if (isLocal && VITE_APP_BASEPATH && VITE_APP_BASEPATH !== '/') {
+    app.get('/', (req, res) => res.redirect(VITE_APP_BASEPATH));
 }
 
 setupApiRoutes(apiRouter)

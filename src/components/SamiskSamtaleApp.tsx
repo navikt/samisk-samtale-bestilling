@@ -3,13 +3,7 @@ import { SamiskSamtaleOrderForm } from './SamiskSamtaleOrderForm';
 import style from './SamiskSamtaleApp.module.css';
 import { LocaleString } from './LocaleString';
 
-type Props = {
-    appContext: unknown;
-};
-
-export const SamiskSamtaleApp = ({ appContext }: Props) => {
-    console.log(`App context: ${JSON.stringify(appContext)}`);
-
+export const SamiskSamtaleApp = () => {
     return (
         <div role={'main'} className={style.appContainer}>
             <Heading size={'xlarge'} className={style.title}>

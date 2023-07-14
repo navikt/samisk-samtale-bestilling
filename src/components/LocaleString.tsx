@@ -1,5 +1,5 @@
-import { defaultLocale, localeModules } from '../../common/localization/localeUtils';
-import { LocaleStringId } from '../../common/localization/localeUtils';
+import { defaultLocale, localeModules, LocaleStringId } from '../../common/localization/localeUtils';
+import { useLocale } from '../utils/useLocale';
 
 type Props = {
     id: LocaleStringId;
@@ -7,7 +7,8 @@ type Props = {
 
 export const LocaleString = ({ id }: Props) => {
     // const locale = (router.locale || router.defaultLocale || defaultLocale) as Locale;
-    const locale = defaultLocale;
+    // const locale = defaultLocale;
+    const locale = useLocale();
 
     const value = localeModules[locale][id] || localeModules[defaultLocale][id];
     if (!value) {

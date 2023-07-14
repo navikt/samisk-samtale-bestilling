@@ -4,7 +4,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "npm-run-all build:*",
+        "build": "rm -fr dist && npm-run-all build:*",
         "build:client": "vite build --outDir ./server/dist/client",
         "build:ssr": "vite build --outDir ./server/src/_ssr-dist --ssr src/main-server.tsx",
         "build:server": "npm run build --workspace server",
@@ -13,18 +13,19 @@
         "lint": "eslint",
         "start-local": "cp .env.local-prod .env && npm run start --workspace server",
         "decorator-local": "docker compose up",
-        "dev-prepare": "node preact-compat-symlinks.js && cp .env.development .env",
+        "dev-prepare": "node preact-compat-symlinks.js && cp .env.development ./server/dist/.env",
         "dev": "npm run dev-prepare && npm run dev --workspace server"
     },
     "workspaces": [
         "server"
     ],
     "dependencies": {
-        "@navikt/ds-css": "4.6.1",
-        "@navikt/ds-react": "4.6.1",
+        "@navikt/ds-css": "4.11.2",
+        "@navikt/ds-react": "4.11.2",
         "@navikt/nav-dekoratoren-moduler": "2.1.1",
         "@preact/compat": "17.1.2",
         "amplitude-js": "8.21.9",
+        "body-parser": "^1.20.2",
         "classnames": "2.3.2",
         "html-react-parser": "4.0.0",
         "jsdom": "22.1.0",

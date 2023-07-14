@@ -15,7 +15,7 @@ export const localeModuleNb: {
             utbetalinger, kan du logge inn på&nbsp;
             <a href="https://www.nav.no/minside">nav.no</a>. <br /> Du kan også
             ringe NAV på <a href="tel:+4755553333">55 55 33 33</a>
-            &nbsp; og be om å bli kontaktet av en samisk veileder.
+            &nbsp;og be om å bli kontaktet av en samisk veileder.
             `,
     knapp: 'Send bestilling',
     feilmeldingFornavn: 'Skriv fornavnet ditt',

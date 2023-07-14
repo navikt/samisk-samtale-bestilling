@@ -2,11 +2,7 @@ export const objectToQueryString = (params?: object, firstChar = '?') =>
     params
         ? Object.entries(params).reduce(
               (acc, [k, v], i) =>
-                  v !== undefined
-                      ? `${acc}${i ? '&' : firstChar}${k}=${encodeURIComponent(
-                            typeof v === 'object' ? JSON.stringify(v) : v
-                        )}`
-                      : acc,
+                  v !== undefined ? `${acc}${i ? '&' : firstChar}${k}=${encodeURIComponent(typeof v === 'object' ? JSON.stringify(v) : v)}` : acc,
               ''
           )
         : '';
@@ -19,7 +15,7 @@ export type SubmitData = {
 };
 
 export const fetchFormSubmit = async (data: SubmitData) =>
-    fetch(`${process.env.APP_ORIGIN}${process.env.APP_BASEPATH}/api/proxy`, {
+    fetch(`${import.meta.env.VITE_APP_ORIGIN}${import.meta.env.VITE_APP_BASEPATH}/api/proxy`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json;charset=UTF-8' },
@@ -34,7 +30,7 @@ export type KontaktInfoResponse = {
 };
 
 export const fetchKontaktInfo = async (): Promise<KontaktInfoResponse | null> =>
-    fetch(process.env.KONTAKTINFO_API_URL)
+    fetch(import.meta.env.VITE_KONTAKTINFO_API_URL)
         .then((res) => {
             if (res.ok) {
                 return res.json();
@@ -44,11 +40,9 @@ export const fetchKontaktInfo = async (): Promise<KontaktInfoResponse | null> =>
                 return null;
             }
 
-            throw new Error(
-                `Error fetching kontaktinfo: ${res.status} ${res.statusText}`
-            );
+            throw new Error(`Error fetching kontaktinfo: ${res.status} ${res.statusText}`);
         })
         .catch((e) => {
-            console.error(e);
+            console.error(`Failet to fetch from ${import.meta.env.VITE_KONTAKTINFO_API_URL}: ${e}`);
             return null;
         });

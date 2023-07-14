@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => {
             // list must also include transitive dependencies.
             noExternal: ['@navikt/ds-react', '@navikt/ds-icons', '@navikt/aksel-icons', '@navikt/ds-css', 'react-router', 'react-router-dom'],
         },
-        base: process.env.APP_BASEPATH,
+        base: process.env.VITE_APP_BASEPATH,
         css: {
             modules: {
                 // Create stable (but verbose!) classnames in dev mode, in order

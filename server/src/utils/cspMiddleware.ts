@@ -9,15 +9,16 @@ import { SELF } from 'csp-header';
  * Refresh every 10 minutes to ensure we stay in sync with nav-dekoratoren
  * */
 
-const HMR_SERVER = 'ws://localhost:24678';
+const HMR_SERVERS = ['ws://localhost:24678', 'http://localhost:24678'];
 
 const myDirectives = {
     'script-src': [SELF],
     'script-src-elem': [SELF],
     'style-src': [SELF],
     'style-src-elem': [SELF],
+    'img-src': ['\'self\' data:'],
     ...(process.env.ENV === 'localhost' && {
-        'connect-src': [HMR_SERVER],
+        'connect-src': HMR_SERVERS,
     }),
 };
 

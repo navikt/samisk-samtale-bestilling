@@ -1,4 +1,5 @@
 import { injectDecoratorServerSide, DecoratorParams } from '@navikt/nav-dekoratoren-moduler/ssr';
+import { Locale, localeString } from '../../../common/localization/localeUtils';
 
 const decoratorEnv = process.env.ENV;
 const decoratorLocalPort = 8100;
@@ -11,15 +12,14 @@ export const decoratorEnvProps =
               port: decoratorLocalPort,
               localUrl,
           }
-        : { env: decoratorEnv, localUrl };
-const locale = 'se';
+        : { env: decoratorEnv };
 const paramsDefault: DecoratorParams = {
     context: 'privatperson',
-    language: locale,
+    language: 'se',
     breadcrumbs: [
         {
             url: '/',
-            title: 'title',
+            title: 'Samisk samtalebestilling',
         },
     ],
     availableLanguages: [
@@ -28,9 +28,17 @@ const paramsDefault: DecoratorParams = {
     ],
 };
 
-const _injectWithDecorator = (params: DecoratorParams, templatePath: string, retries = 3): Promise<string | null> =>
-    injectDecoratorServerSide({
-        ...params,
+const buildBreadCrumbs = (locale: Locale) => {
+    return [{ url: '/', title: localeString('tittel', locale) }];
+};
+
+const _injectWithDecorator = (params: DecoratorParams, templatePath: string, retries = 3): Promise<string | null> => {
+    return injectDecoratorServerSide({
+        params: {
+            ...paramsDefault,
+            ...params,
+            breadcrumbs: buildBreadCrumbs(params.language as Locale),
+        },
         ...decoratorEnvProps,
         filePath: templatePath,
     }).catch((e) => {
@@ -52,6 +60,6 @@ const _injectWithDecorator = (params: DecoratorParams, templatePath: string, ret
 
         return _injectWithDecorator(params, templatePath, retries - 1);
     });
+};
 
-export const injectWithDecorator = async (templatePath: string, params: DecoratorParams = paramsDefault) =>
-    _injectWithDecorator(params, templatePath);
+export const injectWithDecorator = async (templatePath: string, params: DecoratorParams) => _injectWithDecorator(params, templatePath);

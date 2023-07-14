@@ -31,7 +31,7 @@ export const setupSiteRoutes = async (router: Router) => {
             server: { middlewareMode: true },
             appType: 'custom',
             root: '../',
-            base: process.env.APP_BASEPATH,
+            base: process.env.VITE_APP_BASEPATH,
         });
 
         router.use(vite.middlewares);

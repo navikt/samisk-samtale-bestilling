@@ -10,19 +10,17 @@ export type AppContext = {
 };
 
 const processTemplate = async (locale: Locale, templateHtml: string, appHtml: string, appContext: AppContext = {}) => {
-    console.log('processing');
     return templateHtml
         .replace('<!--ssr-app-html-->', appHtml)
         .replace('%%LANG%%', locale || defaultLocale)
-        .replace('%%TITLE%%', localeString('tittel', locale) as string)
+        .replace('%%TITLE%%', localeString('tittel', locale))
         .replace('"ssr-app-context"', JSON.stringify(appContext));
 };
 
 export const prodRender: HtmlRenderer = async (locale, url, context) => {
-    console.log(`Rendering for prod with locale ${locale}`);
     try {
-        const template = await buildHtmlTemplate();
-        const appHtml = render(url, {});
+        const template = await buildHtmlTemplate(locale);
+        const appHtml = render(url, locale);
         return processTemplate(locale, template, appHtml, context);
     } catch (e) {
         console.error(`Rendering failed ${e}`);
@@ -35,9 +33,9 @@ export const devRender =
     async (locale, url, context) => {
         console.log(`Rendering for development with locale ${locale}`);
         try {
-            const template = await buildHtmlTemplate();
+            const template = await buildHtmlTemplate(locale);
             const { render } = await vite.ssrLoadModule('/src/main-server.tsx');
-            const appHtml = render(url, context);
+            const appHtml = render(url, locale);
             const html = await vite.transformIndexHtml(url, template);
             return processTemplate(locale, html, appHtml, context);
         } catch (e) {
