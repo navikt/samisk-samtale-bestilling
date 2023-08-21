@@ -28,16 +28,12 @@ jobs:
                   cat > .env <<EOF
                   ENV=dev
                   API_URL=http://tilbakemeldingsmottak-api.teamserviceklage
-                  APP_BASEPATH=/person/bestilling-av-samisk-samtale
-                  APP_ORIGIN=https://www.intern.dev.nav.no
+                  VITE_APP_BASEPATH=/person/bestilling-av-samisk-samtale
+                  VITE_APP_ORIGIN=https://www.intern.dev.nav.no
+                  APP_PORT=3006
                   DECORATOR_FALLBACK_URL=https://dekoratoren.ekstern.dev.nav.no
-                  KONTAKTINFO_API_URL=https://www.intern.dev.nav.no/person/personopplysninger-api/kontaktinformasjon
+                  VITE_KONTAKTINFO_API_URL=https://www.intern.dev.nav.no/person/personopplysninger-api/kontaktinformasjon
                   EOF
-            - name: Nextjs cache
-              uses: actions/cache@v2
-              with:
-                  path: ${{ github.workspace }}/.next/cache
-                  key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}
             - name: Install dependencies
               run: npm ci
               env:

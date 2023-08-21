@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import style from './SamiskSamtaleOrderForm.module.css';
 import { Alert, Button, Checkbox, CheckboxGroup, Loader, Panel, TextField } from '@navikt/ds-react';
 import { fetchFormSubmit, fetchKontaktInfo, SubmitData } from '../utils/fetch';
-import { LocaleString } from '../localization/LocaleString';
+import { LocaleString } from './LocaleString';
 
 export type InputState = {
     fornavn?: string;
