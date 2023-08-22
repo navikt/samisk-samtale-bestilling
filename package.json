@@ -22,7 +22,7 @@
     "dependencies": {
         "@navikt/ds-css": "4.11.2",
         "@navikt/ds-react": "4.11.2",
-        "@navikt/nav-dekoratoren-moduler": "2.1.1",
+        "@navikt/nav-dekoratoren-moduler": "2.1.2",
         "@preact/compat": "17.1.2",
         "amplitude-js": "8.21.9",
         "body-parser": "^1.20.2",
