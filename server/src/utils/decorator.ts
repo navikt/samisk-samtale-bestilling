@@ -38,6 +38,7 @@ const _injectWithDecorator = (params: DecoratorParams, templatePath: string, ret
             ...paramsDefault,
             ...params,
             breadcrumbs: buildBreadCrumbs(params.language as Locale),
+            logoutWarning: true,
         },
         ...decoratorEnvProps,
         filePath: templatePath,
