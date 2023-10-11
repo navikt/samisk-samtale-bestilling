@@ -8,7 +8,7 @@
         "isolatedModules": true,
         "skipLibCheck": true,
         "lib": ["es2018"],
-        "moduleResolution": "node",
+        "moduleResolution": "NodeNext",
         "module": "NodeNext",
         "outDir": "./dist",
         "strict": true,
