@@ -11,6 +11,8 @@ import { setupErrorHandlers } from './utils/errorHandlers';
 
 const { APP_PORT, VITE_APP_BASEPATH, ENV } = process.env;
 
+console.log('env:', APP_PORT, VITE_APP_BASEPATH, ENV);
+
 const isLocal = ENV === 'localhost';
 
 const app = express();
