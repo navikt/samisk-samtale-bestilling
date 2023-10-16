@@ -12,8 +12,13 @@ type ResponseCacheEntry = {
     statusCode: number;
 };
 
-export const createCacheMiddleware = ({ cacheOnErrors = false, ttlSec, maxSize }: CacheMiddlewareOptions): RequestHandler => {
-    if (process.env.ENV === 'localhost') {
+export const createCacheMiddleware = (
+    {
+        cacheOnErrors = false,
+        ttlSec,
+        maxSize,
+    }: CacheMiddlewareOptions): RequestHandler => {
+    if (process.env.NODE_ENV === 'development') {
         return (req, res, next) => {
             next();
         };

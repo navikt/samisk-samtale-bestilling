@@ -5,7 +5,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
     process.env = { ...process.env, ...loadEnv(mode, process.cwd(), '') };
-    process.env.ENV = process.env.ENV || 'production';
+    process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
     return {
         plugins: [preact(), ...(process.env.ANALYZE ? [visualizer({ gzipSize: true, open: true, sourcemap: true })] : [])],
@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => {
             modules: {
                 // Create stable (but verbose!) classnames in dev mode, in order
                 // to support HMR
-                ...(process.env.ENV === 'development' && {
+                ...(process.env.NODE_ENV === 'development' && {
                     generateScopedName: '[path][name]__[local]',
                 }),
             },
