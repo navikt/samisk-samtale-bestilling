@@ -9,22 +9,12 @@ import { SamiskSamtaleApp } from './components/SamiskSamtaleApp';
 import { Locale } from '../common/localization/localeUtils';
 import { LocaleProvider } from './utils/useLocale';
 
-const parseAppContext = () => {
-    try {
-        const contextElement = document.getElementById('app');
-        return contextElement ? JSON.parse(contextElement.innerText) : {};
-    } catch (e) {
-        console.error(`Failed to parse app context - ${e}`);
-        return {};
-    }
-};
-
 const AppWithContext = ({ locale }: { locale: Locale }) => {
     return (
         <React.StrictMode>
             <LocaleProvider value={locale}>
                 <BrowserRouter basename={import.meta.env.BASE_URL}>
-                    <SamiskSamtaleApp appContext={parseAppContext()} />
+                    <SamiskSamtaleApp />
                 </BrowserRouter>
             </LocaleProvider>
         </React.StrictMode>
@@ -39,10 +29,8 @@ const renderOrHydrate = () => {
     // to hydrate. Also, hydration causes glitches with our HMR workaround
     // below, used in dev mode.
     if (rootElement.hasChildNodes() && import.meta.env.PROD) {
-        console.log('Hydrating!');
         ReactDOM.hydrateRoot(rootElement, <AppWithContext locale={locale} />);
     } else {
-        console.log('Rendering!');
         const root = ReactDOM.createRoot(rootElement);
         root.render(<AppWithContext locale={locale} />);
     }

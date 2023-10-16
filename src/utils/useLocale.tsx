@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 import { Locale, defaultLocale } from '../../common/localization/localeUtils';
 
 const Context = createContext<Locale>(defaultLocale);

@@ -1,0 +1,65 @@
+name: Build and deploy
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      app_origin:
+        required: true
+        type: string
+    secrets:
+      NAIS_DEPLOY_APIKEY:
+        required: true
+      READER_TOKEN:
+        required: true
+      NAIS_WORKLOAD_IDENTITY_PROVIDER:
+        required: true
+
+jobs:
+  build-and-deploy:
+    name: Build docker image and deploy to nais k8s
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    permissions:
+      contents: "read"
+      id-token: "write"
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          registry-url: 'https://npm.pkg.github.com'
+          cache: 'npm'
+      - name: Define app environmment
+        run: |
+          cat > .env <<EOF
+          ENV=${{ inputs.environment }}
+          API_URL=http://tilbakemeldingsmottak-api.teamserviceklage
+          VITE_APP_BASEPATH=/person/bestilling-av-samisk-samtale
+          VITE_APP_ORIGIN=${{ inputs.app_origin }}
+          APP_PORT=3006
+          VITE_KONTAKTINFO_API_URL=${{ inputs.app_origin }}/person/personopplysninger-api/kontaktinformasjon
+          EOF
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+      - name: Build application
+        run: npm run build
+      - name: Build and push docker image
+        uses: nais/docker-build-push@v0
+        id: docker-push
+        with:
+          team: personbruker
+          project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+          identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          image_suffix: ${{ inputs.environment }}
+      - uses: nais/deploy/actions/deploy@master
+        env:
+          CLUSTER: ${{ inputs.environment }}-gcp
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: .nais/config.yaml
+          VAR: image=${{ steps.docker-push.outputs.image }},app_origin=${{ inputs.app_origin }}
