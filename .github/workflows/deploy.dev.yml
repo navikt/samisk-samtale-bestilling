@@ -6,11 +6,11 @@ jobs:
         runs-on: ubuntu-latest
         environment: dev-gcp:personbruker
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - name: Setup node.js
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
-                  node-version: '18'
+                  node-version: '20'
                   registry-url: 'https://npm.pkg.github.com'
                   cache: 'npm'
             - name: Define build environment
@@ -34,6 +34,13 @@ jobs:
                   DECORATOR_FALLBACK_URL=https://dekoratoren.ekstern.dev.nav.no
                   VITE_KONTAKTINFO_API_URL=https://www.intern.dev.nav.no/person/personopplysninger-api/kontaktinformasjon
                   EOF
+            - name: NPM cache
+              uses: actions/cache@v3
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-node-
             - name: Install dependencies
               run: npm ci
               env:

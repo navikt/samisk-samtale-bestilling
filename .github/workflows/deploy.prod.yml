@@ -8,14 +8,14 @@ jobs:
         runs-on: ubuntu-latest
         environment: prod-gcp:personbruker
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - name: Abort if branch is not master
               if: github.event.release.target_commitish != 'master'
               run: echo "Release is not on master, aborting"; exit 1;
             - name: Setup node.js
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
-                  node-version: '18'
+                  node-version: '20'
                   registry-url: 'https://npm.pkg.github.com'
                   cache: 'npm'
             - name: Define build environment
@@ -29,8 +29,6 @@ jobs:
                   echo "IMAGE_VERSION=${IMAGE_VERSION_RAW,,}" >> $GITHUB_ENV
                   echo "GITHUB_TOKEN=$(echo ${GITHUB_TOKEN})" >> $GITHUB_ENV
             - name: Define app environmment
-              env:
-                  API_CLIENT_ID: ${{ secrets.API_CLIENT_ID }}
               run: |
                   cat > .env <<EOF
                   ENV=prod
@@ -42,7 +40,7 @@ jobs:
                   VITE_KONTAKTINFO_API_URL=https://www.nav.no/person/personopplysninger-api/kontaktinformasjon
                   EOF
             - name: NPM cache
-              uses: actions/cache@v2
+              uses: actions/cache@v3
               with:
                   path: ~/.npm
                   key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
