@@ -29,10 +29,8 @@ const renderOrHydrate = () => {
     // to hydrate. Also, hydration causes glitches with our HMR workaround
     // below, used in dev mode.
     if (rootElement.hasChildNodes() && import.meta.env.PROD) {
-        console.log('Hydrating!');
         ReactDOM.hydrateRoot(rootElement, <AppWithContext locale={locale} />);
     } else {
-        console.log('Rendering!');
         const root = ReactDOM.createRoot(rootElement);
         root.render(<AppWithContext locale={locale} />);
     }
