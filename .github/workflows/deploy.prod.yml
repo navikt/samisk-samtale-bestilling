@@ -1,12 +1,11 @@
 name: Deploy to prod
 on:
-    release:
-        types: [released]
+  release:
+    types: [ released ]
 
 jobs:
-  deploy:
+  build-and-deploy:
     uses: ./.github/workflows/build-and-deploy.yml
-    environment: prod-gcp:personbruker
     permissions:
       contents: "read"
       id-token: "write"
