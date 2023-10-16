@@ -1,13 +1,13 @@
 # Frontend for bestilling av samisk samtale på telefon
 
-![Deploy-to-prod](https://github.com/navikt/samisk-samtale-bestilling/workflows/Deploy-to-prod/badge.svg) <br>
-![Deploy-to-dev](https://github.com/navikt/samisk-samtale-bestilling/workflows/Deploy-to-dev/badge.svg) <br>
+![Deploy-to-prod](https://github.com/navikt/samisk-samtale-bestilling/workflows/Deploy%20to%20prod/badge.svg) <br>
+![Deploy-to-dev](https://github.com/navikt/samisk-samtale-bestilling/workflows/Deploy%20to%20dev/badge.svg) <br>
 
 ## Lokal kjøring
 
 Kjører lokalt på [http://localhost:3006](http://localhost:3006)
 
-Dekoratøren kan startes lokalt med `docker-compose up`
+Dekoratøren kan startes lokalt med `npm run decorator-local`
 
 #### Development mode:
 
@@ -15,13 +15,12 @@ Kjør `npm run dev`
 
 #### Production mode:
 
-Kopier først innhold fra .env.development til .env.local
-
-Kjør så `npm run start-clean`
+Kjør `npm run build && npm run start-local`
 
 ## Deploy til dev-miljø
 
-[Actions](https://github.com/navikt/nav-office-search/actions) -> Velg workflow -> Run workflow -> Velg branch -> Run workflow
+Med workflow_dispatch trigger: <br>
+[Deploy to dev](https://github.com/navikt/samisk-samtale-bestilling/actions/workflows/deploy.dev.yml) -> Run workflow -> Velg branch -> Run workflow
 
 ## Prodsetting
 
