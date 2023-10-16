@@ -1,67 +1,18 @@
-name: Deploy-to-dev
-on: workflow_dispatch
+name: Deploy to dev
+on:
+  workflow_dispatch
 
 jobs:
     deploy:
-        runs-on: ubuntu-latest
+        uses: ./.github/workflows/build-and-deploy.yml
         environment: dev-gcp:personbruker
-        steps:
-            - uses: actions/checkout@v3
-            - name: Setup node.js
-              uses: actions/setup-node@v3
-              with:
-                  node-version: '20'
-                  registry-url: 'https://npm.pkg.github.com'
-                  cache: 'npm'
-            - name: Define build environment
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  IMAGE_VERSION_RAW=$(echo ${GITHUB_WORKFLOW})-$(echo ${GITHUB_SHA})
-                  echo "CI=true" >> $GITHUB_ENV
-                  echo "IMAGE_REGISTRY=ghcr.io/$(echo ${GITHUB_REPOSITORY})" >> $GITHUB_ENV
-                  echo "IMAGE_NAME=$(echo ${GITHUB_REPOSITORY##*/})" >> $GITHUB_ENV
-                  echo "IMAGE_VERSION=${IMAGE_VERSION_RAW,,}" >> $GITHUB_ENV
-                  echo "GITHUB_TOKEN=$(echo ${GITHUB_TOKEN})" >> $GITHUB_ENV
-            - name: Define app environmment
-              run: |
-                  cat > .env <<EOF
-                  ENV=dev
-                  API_URL=http://tilbakemeldingsmottak-api.teamserviceklage
-                  VITE_APP_BASEPATH=/person/bestilling-av-samisk-samtale
-                  VITE_APP_ORIGIN=https://www.intern.dev.nav.no
-                  APP_PORT=3006
-                  DECORATOR_FALLBACK_URL=https://dekoratoren.ekstern.dev.nav.no
-                  VITE_KONTAKTINFO_API_URL=https://www.intern.dev.nav.no/person/personopplysninger-api/kontaktinformasjon
-                  EOF
-            - name: NPM cache
-              uses: actions/cache@v3
-              with:
-                  path: ~/.npm
-                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-node-
-            - name: Install dependencies
-              run: npm ci
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
-            - name: Build application
-              run: npm run build
-            - name: Docker build and push
-              run: |
-                  echo $GITHUB_TOKEN | docker login $IMAGE_REGISTRY -u ${GITHUB_REPOSITORY} --password-stdin
-                  docker build -t $IMAGE_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION .
-                  docker push $IMAGE_REGISTRY/$IMAGE_NAME:$IMAGE_VERSION
-            - name: Generate nais variables
-              run: |
-                  cat > .nais/vars.yaml <<EOF
-                  namespace: personbruker
-                  image: $IMAGE_REGISTRY/$IMAGE_NAME
-                  version: $IMAGE_VERSION
-                  EOF
-            - uses: nais/deploy/actions/deploy@master
-              env:
-                  CLUSTER: dev-gcp
-                  APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-                  RESOURCE: .nais/config.dev.yaml
-                  VARS: .nais/vars.yaml
+        permissions:
+          contents: "read"
+          id-token: "write"
+        with:
+          environment: dev
+          app_origin: "https://www.intern.dev.nav.no"
+        secrets:
+          READER_TOKEN: ${{ secrets.READER_TOKEN }}
+          NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          NAIS_DEPLOY_APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
