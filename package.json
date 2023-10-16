@@ -13,7 +13,7 @@
         "lint": "eslint",
         "start-local": "cp .env.local-prod .env && npm run start --workspace server",
         "decorator-local": "docker compose up",
-        "dev-prepare": "node preact-compat-symlinks.js && cp .env.development ./server/dist/.env",
+        "dev-prepare": "node preact-compat-symlinks.js && cp .env.development .env",
         "dev": "npm run dev-prepare && npm run dev --workspace server"
     },
     "workspaces": [
