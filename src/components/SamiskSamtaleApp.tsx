@@ -5,7 +5,7 @@ import { LocaleString } from './LocaleString';
 
 export const SamiskSamtaleApp = () => {
     return (
-        <div role={'main'} className={style.appContainer}>
+        <main id="maincontent" className={style.appContainer}>
             <Heading size={'xlarge'} className={style.title}>
                 <LocaleString id={'tittel'} />
             </Heading>
@@ -15,6 +15,6 @@ export const SamiskSamtaleApp = () => {
                 </BodyLong>
             </GuidePanel>
             <SamiskSamtaleOrderForm />
-        </div>
+        </main>
     );
 };
