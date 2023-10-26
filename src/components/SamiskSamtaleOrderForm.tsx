@@ -89,6 +89,7 @@ export const SamiskSamtaleOrderForm = () => {
             <div className={style.fields}>
                 <TextField
                     label={<LocaleString id={'fornavn'} />}
+                    autocomplete="given-name"
                     error={errorState.fornavn && <LocaleString id={'feilmeldingFornavn'} />}
                     value={inputState.fornavn || ''}
                     onChange={(e) => {
@@ -104,6 +105,7 @@ export const SamiskSamtaleOrderForm = () => {
                 />
                 <TextField
                     label={<LocaleString id={'etternavn'} />}
+                    autocomplete="family-name"
                     error={errorState.etternavn && <LocaleString id={'feilmeldingEtternavn'} />}
                     value={inputState.etternavn || ''}
                     onChange={(e) => {
@@ -119,6 +121,7 @@ export const SamiskSamtaleOrderForm = () => {
                 />
                 <TextField
                     label={<LocaleString id={'telefonnummer'} />}
+                    autocomplete="tel"
                     value={inputState.telefonnummer || ''}
                     error={errorState.telefonnummer && <LocaleString id={'feilmeldingTelefonnummer'} />}
                     onChange={(e) => {
