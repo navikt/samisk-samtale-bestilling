@@ -1,4 +1,4 @@
-import { BodyLong, GuidePanel, Heading } from '@navikt/ds-react';
+import { GuidePanel, Heading } from '@navikt/ds-react';
 import { SamiskSamtaleOrderForm } from './SamiskSamtaleOrderForm';
 import { LocaleString } from './LocaleString';
 
@@ -11,9 +11,7 @@ export const SamiskSamtaleApp = () => {
                 <LocaleString id={'tittel'} />
             </Heading>
             <GuidePanel poster={true} className={style.ingressPanel}>
-                <BodyLong className={style.ingress}>
-                    <LocaleString id={'ingress'} />
-                </BodyLong>
+                <LocaleString id={'ingress'} />
             </GuidePanel>
             <SamiskSamtaleOrderForm />
         </div>
