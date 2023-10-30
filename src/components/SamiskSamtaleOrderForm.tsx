@@ -81,7 +81,7 @@ export const SamiskSamtaleOrderForm = () => {
     };
 
     return submitAcked ? (
-        <Alert variant={'success'} className={style.submitInfo}>
+        <Alert role="status" variant="success" className={style.submitInfo}>
             {'Meldingen din er sendt'}
         </Alert>
     ) : (
@@ -174,7 +174,7 @@ export const SamiskSamtaleOrderForm = () => {
                 {isWaiting && <Loader />}
                 {<LocaleString id={'knapp'} />}
             </Button>
-            {fetchError && <Alert variant={'error'} className={style.error}>{`Feil ved innsending: ${fetchError}`}</Alert>}
+            {fetchError && <Alert role="alert" variant="error" className={style.error}>{`Feil ved innsending: ${fetchError}`}</Alert>}
         </Panel>
     );
 };
