@@ -19,7 +19,7 @@ type ErrorState = {
     tidsrom?: boolean;
 };
 
-const isValidPhoneNumber = (phoneNumber?: string) => !!phoneNumber && /^\+?[0-9]{8,}$/.test(phoneNumber);
+const isValidPhoneNumber = (phoneNumber?: string) => !!phoneNumber && /^\+?\d{8,}$/.test(phoneNumber);
 
 const hasErrors = (errorState: ErrorState) => errorState.fornavn || errorState.etternavn || errorState.telefonnummer || errorState.tidsrom;
 
