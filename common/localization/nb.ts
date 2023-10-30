@@ -21,5 +21,5 @@ export const localeModuleNb: {
     feilmeldingFornavn: 'Skriv fornavnet ditt',
     feilmeldingEtternavn: 'Skriv etternavnet ditt',
     feilmeldingTelefonnummer: 'Skriv telefonnummeret ditt',
-    feilmeldingTidsrom: 'Skriv telefonnummeret ditt ',
+    feilmeldingTidsrom: 'Velg tidspunkt for samtale',
 };
