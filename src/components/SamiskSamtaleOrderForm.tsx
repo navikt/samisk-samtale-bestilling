@@ -19,7 +19,7 @@ type ErrorState = {
     tidsrom?: boolean;
 };
 
-const isValidPhoneNumber = (phoneNumber?: string) => !!phoneNumber && /^\+?[0-9 ]+$/.test(phoneNumber);
+const isValidPhoneNumber = (phoneNumber?: string) => !!phoneNumber && /^\+?\d{8,}$/.test(phoneNumber);
 
 const hasErrors = (errorState: ErrorState) => errorState.fornavn || errorState.etternavn || errorState.telefonnummer || errorState.tidsrom;
 
@@ -81,7 +81,7 @@ export const SamiskSamtaleOrderForm = () => {
     };
 
     return submitAcked ? (
-        <Alert variant={'success'} className={style.submitInfo}>
+        <Alert role="status" variant="success" className={style.submitInfo}>
             {'Meldingen din er sendt'}
         </Alert>
     ) : (
@@ -174,7 +174,7 @@ export const SamiskSamtaleOrderForm = () => {
                 {isWaiting && <Loader />}
                 {<LocaleString id={'knapp'} />}
             </Button>
-            {fetchError && <Alert variant={'error'} className={style.error}>{`Feil ved innsending: ${fetchError}`}</Alert>}
+            {fetchError && <Alert role="alert" variant="error" className={style.error}>{`Feil ved innsending: ${fetchError}`}</Alert>}
         </Panel>
     );
 };

@@ -1,20 +1,19 @@
-import { BodyLong, GuidePanel, Heading } from '@navikt/ds-react';
+import { GuidePanel, Heading } from '@navikt/ds-react';
 import { SamiskSamtaleOrderForm } from './SamiskSamtaleOrderForm';
-import style from './SamiskSamtaleApp.module.css';
 import { LocaleString } from './LocaleString';
+
+import style from './SamiskSamtaleApp.module.css';
 
 export const SamiskSamtaleApp = () => {
     return (
-        <main id="maincontent" className={style.appContainer}>
+        <div className={style.appContainer}>
             <Heading size={'xlarge'} className={style.title}>
                 <LocaleString id={'tittel'} />
             </Heading>
             <GuidePanel poster={true} className={style.ingressPanel}>
-                <BodyLong className={style.ingress}>
-                    <LocaleString id={'ingress'} />
-                </BodyLong>
+                <LocaleString id={'ingress'} />
             </GuidePanel>
             <SamiskSamtaleOrderForm />
-        </main>
+        </div>
     );
 };

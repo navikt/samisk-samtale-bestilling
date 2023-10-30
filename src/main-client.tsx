@@ -22,7 +22,7 @@ const AppWithContext = ({ locale }: { locale: Locale }) => {
 };
 
 const renderOrHydrate = () => {
-    const rootElement = document.getElementById('app') as HTMLElement;
+    const rootElement = document.getElementById('maincontent') as HTMLElement;
     const locale = document.documentElement.lang as Locale;
 
     // We should only attempt to hydrate if the root element has child elements
