@@ -5,14 +5,30 @@ const decoratorEnv = process.env.ENV;
 const decoratorLocalPort = 8100;
 const localUrl = `${process.env.DECORATOR_LOCAL_URL}`;
 
-export const decoratorEnvProps =
-    decoratorEnv === 'localhost'
-        ? {
-              env: decoratorEnv,
-              port: decoratorLocalPort,
-              localUrl,
-          }
-        : { env: decoratorEnv };
+const getDecoratorEnv = () => {
+    if (decoratorEnv === 'localhost') {
+        return {
+            env: 'localhost' as const,
+            localUrl: localUrl,
+            port: decoratorLocalPort,
+        };
+    }
+
+    if (decoratorEnv === 'dev-next') {
+        return {
+            env: 'prod' as const,
+            localUrl: 'https://decorator-next.ekstern.dev.nav.no/'
+        };
+    }
+
+    return {
+        env: decoratorEnv,
+    };
+};
+
+
+export const decoratorEnvProps = getDecoratorEnv();
+
 const paramsDefault: DecoratorParams = {
     context: 'privatperson',
     language: 'se',

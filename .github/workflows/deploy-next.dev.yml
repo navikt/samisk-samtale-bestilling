@@ -1,0 +1,17 @@
+name: Deploy to dev
+on:
+  workflow_dispatch
+
+jobs:
+  build-and-deploy:
+    uses: ./.github/workflows/build-and-deploy.yml
+    permissions:
+      contents: "read"
+      id-token: "write"
+    with:
+      environment: dev-next
+      app_origin: "https://www.intern.dev.nav.no"
+    secrets:
+      READER_TOKEN: ${{ secrets.READER_TOKEN }}
+      NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+      NAIS_DEPLOY_APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
