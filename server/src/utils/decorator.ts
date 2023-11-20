@@ -2,8 +2,9 @@ import { injectDecoratorServerSide, DecoratorParams } from '@navikt/nav-dekorato
 import { Locale, localeString } from '../../../common/localization/localeUtils';
 
 const decoratorEnv = process.env.ENV;
-const decoratorLocalPort = 8100;
+const decoratorLocalPort = 8089;
 const localUrl = `${process.env.DECORATOR_LOCAL_URL}`;
+console.log(localUrl);
 
 export const decoratorEnvProps =
     decoratorEnv === 'localhost'
@@ -13,6 +14,7 @@ export const decoratorEnvProps =
               localUrl,
           }
         : { env: decoratorEnv };
+
 const paramsDefault: DecoratorParams = {
     context: 'privatperson',
     language: 'se',
