@@ -4,7 +4,6 @@ import { Locale, localeString } from '../../../common/localization/localeUtils';
 const decoratorEnv = process.env.ENV;
 const decoratorLocalPort = 8089;
 const localUrl = `${process.env.DECORATOR_LOCAL_URL}`;
-console.log(localUrl);
 
 export const decoratorEnvProps =
     decoratorEnv === 'localhost'
@@ -13,7 +12,10 @@ export const decoratorEnvProps =
               port: decoratorLocalPort,
               localUrl,
           }
-        : { env: decoratorEnv };
+        : {
+            env: decoratorEnv,
+            localUrl,
+        };
 
 const paramsDefault: DecoratorParams = {
     context: 'privatperson',
