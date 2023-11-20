@@ -12,7 +12,6 @@ jobs:
     with:
       environment: prod
       app_origin: "https://www.nav.no"
-      decorator_url: "http://www.nav.no/dekoratoren"
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}

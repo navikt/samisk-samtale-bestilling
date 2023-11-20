@@ -8,6 +8,9 @@ on:
       app_origin:
         required: true
         type: string
+      decorator_url:
+        required: false
+        type: string
     secrets:
       NAIS_DEPLOY_APIKEY:
         required: true
