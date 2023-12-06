@@ -8,9 +8,10 @@ const localUrl = `${process.env.DECORATOR_LOCAL_URL}`;
 export const decoratorEnvProps =
     decoratorEnv === 'localhost'
         ? {
-              env: decoratorEnv,
-              port: decoratorLocalPort,
-              localUrl,
+              env: 'localhost' as const,
+              localUrl: "http://localhost:8089",
+              port: 8089,
+              // localUrl,
           }
         : { env: decoratorEnv };
 const paramsDefault: DecoratorParams = {

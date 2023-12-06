@@ -10,7 +10,7 @@ jobs:
       contents: "read"
       id-token: "write"
     with:
-      environment: prod
+      environment: devNext
       app_origin: "https://www.nav.no"
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}

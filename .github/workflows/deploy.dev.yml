@@ -9,7 +9,7 @@ jobs:
       contents: "read"
       id-token: "write"
     with:
-      environment: dev
+      environment: devNext
       app_origin: "https://www.intern.dev.nav.no"
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
