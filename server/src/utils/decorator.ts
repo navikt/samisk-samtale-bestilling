@@ -1,8 +1,7 @@
 import { injectDecoratorServerSide, DecoratorParams } from '@navikt/nav-dekoratoren-moduler/ssr';
 import { Locale, localeString } from '../../../common/localization/localeUtils';
 
-
-const decoratorEnv = process.env.ENV === 'dev' ? 'devNext' as const : process.env.ENV;
+const decoratorEnv = process.env.DECORATOR_ENV;
 const localUrl = `${process.env.DECORATOR_LOCAL_URL}`;
 
 export const decoratorEnvProps =
