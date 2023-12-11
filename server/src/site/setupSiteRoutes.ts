@@ -39,7 +39,8 @@ export const setupSiteRoutes = async (router: Router) => {
         render = devRender(vite);
     }
 
-    router.use('*', createCacheMiddleware({ ttlSec: 600, maxSize: 100 }), await createCspMiddleware());
+    // router.use('*', createCacheMiddleware({ ttlSec: 600, maxSize: 100 }), await createCspMiddleware());
+    router.use('*', await createCspMiddleware());
 
     router.get('/', async (req, res) => {
         const html = await render('se', req.originalUrl);
