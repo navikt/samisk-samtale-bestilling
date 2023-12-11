@@ -11,6 +11,7 @@ export const decoratorEnvProps =
               localUrl,
           }
         : { env: decoratorEnv };
+
 const paramsDefault: DecoratorParams = {
     context: 'privatperson',
     language: 'se',
