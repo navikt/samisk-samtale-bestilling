@@ -1,7 +1,6 @@
-name: Deploy to prod
+name: Deploy to dev ekstern
 on:
-  release:
-    types: [ released ]
+  workflow_dispatch
 
 jobs:
   build-and-deploy:
@@ -10,9 +9,9 @@ jobs:
       contents: "read"
       id-token: "write"
     with:
-      environment: prod
-      decorator_environment: prodNext
-      app_origin: "https://www.nav.no"
+      environment: dev
+      decorator_environment: devNext
+      app_origin: "https://www.ekstern.dev.nav.no"
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}

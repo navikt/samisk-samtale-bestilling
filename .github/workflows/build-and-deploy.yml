@@ -12,8 +12,6 @@ on:
         required: true
         type: string
     secrets:
-      NAIS_DEPLOY_APIKEY:
-        required: true
       READER_TOKEN:
         required: true
       NAIS_WORKLOAD_IDENTITY_PROVIDER:
@@ -64,6 +62,5 @@ jobs:
       - uses: nais/deploy/actions/deploy@master
         env:
           CLUSTER: ${{ inputs.environment }}-gcp
-          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           RESOURCE: .nais/config.yaml
           VAR: image=${{ steps.docker-push.outputs.image }},app_origin=${{ inputs.app_origin }}
