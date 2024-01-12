@@ -1,4 +1,4 @@
-import { GuidePanel, Heading } from '@navikt/ds-react';
+import { Alert, GuidePanel, Heading } from '@navikt/ds-react';
 import { SamiskSamtaleOrderForm } from './SamiskSamtaleOrderForm';
 import { LocaleString } from './LocaleString';
 
@@ -21,6 +21,9 @@ export const SamiskSamtaleApp = () => {
             <Heading size={'xlarge'} className={style.title}>
                 <LocaleString id={'tittel'} />
             </Heading>
+            <Alert role="alert" variant="info" className={style.alert}>
+                <LocaleString id={'varselboksTekst'} />
+            </Alert>
             <GuidePanel poster={true} className={style.ingressPanel}>
                 <LocaleString id={'ingress'} />
             </GuidePanel>

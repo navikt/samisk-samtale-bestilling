@@ -18,7 +18,8 @@ export type LocaleStringId =
     | 'feilmeldingFornavn'
     | 'feilmeldingEtternavn'
     | 'feilmeldingTelefonnummer'
-    | 'feilmeldingTidsrom';
+    | 'feilmeldingTidsrom'
+    | 'varselboksTekst';
 
 export const localeModules: { [key in Locale]: LocaleModule } = {
     nb: localeModuleNb,
