@@ -26,6 +26,7 @@ export default defineConfig(({ mode }) => {
                 '@navikt/ds-icons',
                 '@navikt/aksel-icons',
                 '@navikt/ds-css',
+                /@radix-ui\/*/,
                 'react-router',
                 'react-router-dom',
             ],
