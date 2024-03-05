@@ -8,11 +8,7 @@ export default defineConfig(({ mode }) => {
     process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
     return {
-        plugins: [preact(), ...(process.env.ANALYZE ? [visualizer({
-            gzipSize: true,
-            open: true,
-            sourcemap: true,
-        })] : [])],
+        plugins: [preact(), ...(process.env.ANALYZE ? [visualizer({open: true})] : [])],
         esbuild: {
             legalComments: 'none',
         },
