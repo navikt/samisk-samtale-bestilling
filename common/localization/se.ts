@@ -22,5 +22,7 @@ export const localeModuleSe: LocaleModule = {
     feilmeldingEtternavn: 'Čále goarggu',
     feilmeldingTelefonnummer: 'Čále telefon-nummara',
     feilmeldingTidsrom: 'Vállje áiggi goas heive',
-    varselboksTekst: 'Háliidat go riŋget midjiide telefovnnas 90 29 81 18? Cuoŋománu 1. b. rádjái geahččalat mii njuolggotelefovnna go váldá oktavuođa davvisámegillii NAV:in. Sáhtát ain diŋgot ságastallama, geahča vuolábealde.',
+    varselboksTekst:
+        `Háliidat go riŋget midjiide dan telefovnnas, 90 29 81 18?<br>
+        Mii geahččalit njuolggotelefovnna go váldá oktavuođa NAV’ain davvi sámegillii. Sáhtát aŋkke ain diŋgot ságastallama, geahča vuolábealde.`,
 };
