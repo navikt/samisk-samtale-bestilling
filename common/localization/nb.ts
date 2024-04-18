@@ -22,5 +22,7 @@ export const localeModuleNb: {
     feilmeldingEtternavn: 'Skriv etternavnet ditt',
     feilmeldingTelefonnummer: 'Skriv telefonnummeret ditt',
     feilmeldingTidsrom: 'Velg tidspunkt for samtale',
-    varselboksTekst: 'Vil du ringe oss på telefon 90 29 81 18? Fram til 1. april tester vi ut direktetelefon for henvendelser på nord-samisk. Du kan fortsatt bestille en samtale, se under.',
+    varselboksTekst:
+        `Vil du ringe oss på telefon 90 29 81 18? Vi tester ut direktetelefon for henvendelser på nord-samisk.
+        Du kan fortsatt bestille en samtale, se under.`,
 };
