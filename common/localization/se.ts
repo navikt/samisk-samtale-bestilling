@@ -23,6 +23,6 @@ export const localeModuleSe: LocaleModule = {
     feilmeldingTelefonnummer: 'Čále telefon-nummara',
     feilmeldingTidsrom: 'Vállje áiggi goas heive',
     varselboksTekst:
-        `Háliidat go riŋget midjiide dan telefovnnas, 90 29 81 18? Mii geahččalit njuolggotelefovnna go váldá oktavuođa NAV’ain davvi sámegillii.
-        Sáhtát aŋkke ain diŋgot ságastallama, geahča vuolábealde`,
+        `Háliidat go riŋget midjiide dan telefovnnas, 90 29 81 18?<br>
+        Mii geahččalit njuolggotelefovnna go váldá oktavuođa NAV’ain davvi sámegillii. Sáhtát aŋkke ain diŋgot ságastallama, geahča vuolábealde`,
 };
