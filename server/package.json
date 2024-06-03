@@ -12,7 +12,7 @@
         "csp-header": "5.2.1",
         "dotenv": "16.4.5",
         "express": "4.19.2",
-        "lru-cache": "10.2.0",
+        "lru-cache": "10.2.2",
         "node-cache": "5.1.2",
         "react": "npm:@preact/compat",
         "react-dom": "npm:@preact/compat"
@@ -20,9 +20,9 @@
     "devDependencies": {
         "@types/compression": "1.7.5",
         "@types/express": "4.17.21",
-        "@types/node": "20.12.7",
+        "@types/node": "20.14.0",
         "concurrently": "8.2.2",
-        "nodemon": "3.1.0"
+        "nodemon": "3.1.2"
     },
     "nodemonConfig": {
         "delay": 500
