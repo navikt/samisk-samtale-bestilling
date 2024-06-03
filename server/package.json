@@ -20,7 +20,7 @@
     "devDependencies": {
         "@types/compression": "1.7.5",
         "@types/express": "4.17.21",
-        "@types/node": "20.12.13",
+        "@types/node": "20.14.0",
         "concurrently": "8.2.2",
         "nodemon": "3.1.2"
     },
