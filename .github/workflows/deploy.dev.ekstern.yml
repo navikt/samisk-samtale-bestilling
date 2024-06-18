@@ -10,7 +10,7 @@ jobs:
       id-token: "write"
     with:
       environment: dev
-      decorator_environment: devNext
+      decorator_environment: dev
       app_origin: "https://www.ekstern.dev.nav.no"
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
