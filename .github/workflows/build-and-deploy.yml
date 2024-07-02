@@ -8,9 +8,6 @@ on:
       app_origin:
         required: true
         type: string
-      decorator_environment:
-        required: true
-        type: string
     secrets:
       READER_TOKEN:
         required: true
@@ -38,7 +35,6 @@ jobs:
         run: |
           cat > .env <<EOF
           ENV=${{ inputs.environment }}
-          DECORATOR_ENV=${{ inputs.decorator_environment }}
           API_URL=http://tilbakemeldingsmottak-api.teamserviceklage
           VITE_APP_BASEPATH=/person/bestilling-av-samisk-samtale
           VITE_APP_ORIGIN=${{ inputs.app_origin }}

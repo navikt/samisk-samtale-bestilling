@@ -27,8 +27,6 @@ spec:
           namespace: teamserviceklage
         - application: nav-dekoratoren
           namespace: personbruker
-        - application: decorator-next
-          namespace: personbruker
   azure:
     application:
       enabled: true
