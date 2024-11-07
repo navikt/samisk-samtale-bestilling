@@ -3,19 +3,19 @@ import { LocaleStringId } from './localeUtils';
 export const localeModuleNb: {
     [key in LocaleStringId]: string | ((...args: string[]) => string);
 } = {
-    tittel: 'Bestille en telefonsamtale med NAV på nordsamisk',
+    tittel: 'Bestille en telefonsamtale med Nav på nordsamisk',
     fornavn: 'Fornavn',
     etternavn: 'Etternavn',
     telefonnummer: 'Telefon',
     tidsrom: 'Ønsket tidspunkt for samtale',
     ingress:
         `<p class="navds-body-long navds-typo--spacing">
-            Her kan du bestille en telefonsamtale med NAV på nordsamisk.
+            Her kan du bestille en telefonsamtale med Nav på nordsamisk.
             Vi hjelper deg med status i saken din og veileder deg om rettigheter og plikter. 
             For å finne informasjon om dine saker og utbetalinger, kan du logge inn på&nbsp;<a href="https://www.nav.no/minside">nav.no</a>.
         </p>
         <p class="navds-body-long">
-            Du kan også ringe NAV på&nbsp;<a href="tel:+4755553333">55 55 33 33</a>&nbsp;og be om å bli kontaktet av en samisk veileder.
+            Du kan også ringe Nav på&nbsp;<a href="tel:+4755553333">55 55 33 33</a>&nbsp;og be om å bli kontaktet av en samisk veileder.
         </p>`,
     knapp: 'Send bestilling',
     feilmeldingFornavn: 'Skriv fornavnet ditt',
