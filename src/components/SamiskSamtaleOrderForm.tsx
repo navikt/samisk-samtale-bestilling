@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import style from './SamiskSamtaleOrderForm.module.css';
-import { Alert, Button, Checkbox, CheckboxGroup, Loader, Panel, TextField } from '@navikt/ds-react';
+import { Alert, Box, Button, Checkbox, CheckboxGroup, Loader, TextField } from '@navikt/ds-react';
 import { fetchFormSubmit, fetchKontaktInfo, SubmitData } from '../utils/fetch';
 import { LocaleString } from './LocaleString';
 
@@ -85,7 +85,7 @@ export const SamiskSamtaleOrderForm = () => {
             {'Meldingen din er sendt'}
         </Alert>
     ) : (
-        <Panel className={style.panel}>
+        <Box className={style.panel}>
             <div className={style.fields}>
                 <TextField
                     label={<LocaleString id={'fornavn'} />}
@@ -175,6 +175,6 @@ export const SamiskSamtaleOrderForm = () => {
                 {<LocaleString id={'knapp'} />}
             </Button>
             {fetchError && <Alert role="alert" variant="error" className={style.error}>{`Feil ved innsending: ${fetchError}`}</Alert>}
-        </Panel>
+        </Box>
     );
 };
