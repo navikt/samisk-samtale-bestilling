@@ -1,5 +1,5 @@
 import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom/server';
+import { StaticRouter } from 'react-router';
 import { SamiskSamtaleApp } from './components/SamiskSamtaleApp';
 import { LocaleProvider } from './utils/useLocale';
 import { Locale } from '../common/localization/localeUtils';

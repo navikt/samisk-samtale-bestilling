@@ -2,11 +2,9 @@ import express, { Router } from 'express';
 import path from 'path';
 import { createServer } from 'vite';
 import { HtmlRenderer, devRender, prodRender } from './ssr/htmlRenderer';
-import { createCacheMiddleware } from '../utils/cacheMiddleware';
 import { createCspMiddleware } from '../utils/cspMiddleware';
 
 const assetsDir = path.resolve(process.cwd(), 'dist', 'client', 'assets');
-
 const isProd = process.env.NODE_ENV !== 'development';
 
 export const setupSiteRoutes = async (router: Router) => {
@@ -22,7 +20,6 @@ export const setupSiteRoutes = async (router: Router) => {
                 index: 'false',
             })
         );
-
         render = prodRender;
     } else {
         console.log('Configuring site endpoints for development mode');
@@ -33,15 +30,11 @@ export const setupSiteRoutes = async (router: Router) => {
             root: '../',
             base: process.env.VITE_APP_BASEPATH,
         });
-
         router.use(vite.middlewares);
-
         render = devRender(vite);
     }
 
-    // router.use('*', createCacheMiddleware({ ttlSec: 600, maxSize: 100 }), await createCspMiddleware());
     router.use('*', await createCspMiddleware());
-
     router.get('/', async (req, res) => {
         const html = await render('se', req.originalUrl);
         return res.status(200).send(html);
