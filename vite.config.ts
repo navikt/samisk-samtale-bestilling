@@ -24,7 +24,6 @@ export default defineConfig(({ mode }) => {
                 '@navikt/ds-css',
                 /@radix-ui\/*/,
                 'react-router',
-                'react-router-dom',
             ],
         },
         base: process.env.VITE_APP_BASEPATH,

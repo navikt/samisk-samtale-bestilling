@@ -4,7 +4,7 @@ import './global.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 import { SamiskSamtaleApp } from './components/SamiskSamtaleApp';
 import { Locale } from '../common/localization/localeUtils';
 import { LocaleProvider } from './utils/useLocale';
