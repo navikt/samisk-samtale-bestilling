@@ -55,7 +55,7 @@ jobs:
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
           image_suffix: ${{ inputs.environment }}
-      - uses: nais/deploy/actions/deploy@master
+      - uses: nais/deploy/actions/deploy@main
         env:
           CLUSTER: ${{ inputs.environment }}-gcp
           RESOURCE: .nais/config.yaml
