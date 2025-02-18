@@ -16,6 +16,7 @@ jobs:
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+
   release:
     needs: build-and-deploy
     runs-on: ubuntu-latest
@@ -27,7 +28,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -36,7 +36,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           target_commitish: main
-          tag_name: release/prod@${{ github.ref_name }}
+          tag_name: release/prod@${{ github.IMAGE_TAG }} # Gir taggen et unikt navn så den lager en ny release
           name: Release ${{ github.ref_name }}
           generate_release_notes: true
         env:
