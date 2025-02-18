@@ -1,7 +1,10 @@
-name: Deploy to prod
+name: Build and deploy to prod and create a new release
 on:
-  release:
-    types: [ released ]
+  push:
+    branches:
+      - 'main'
+    tags:
+      - "v*.*.*"
 
 jobs:
   build-and-deploy:
@@ -15,3 +18,27 @@ jobs:
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Get previous tag
+        id: previoustag
+        uses: 'WyriHaximus/github-action-get-previous-tag@v1'
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          target_commitish: main
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
