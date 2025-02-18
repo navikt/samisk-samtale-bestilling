@@ -45,6 +45,6 @@ jobs:
           draft: false
           prerelease: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.AUTOMATIC_RELEASE }} # This is a PAT with repo or Variables permission
       - name: print release
         run: echo ${{ steps.create_release.outputs.release }}
