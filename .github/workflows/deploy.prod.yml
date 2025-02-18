@@ -1,8 +1,6 @@
 name: Build and deploy to prod and create a new release
 on:
   push:
-    tags:
-      - "v*.*.*"
     branches:
       - 'main'
 
@@ -10,35 +8,31 @@ jobs:
   build-and-deploy:
     uses: ./.github/workflows/build-and-deploy.yml
     permissions:
-      contents: "read"
-      id-token: "write"
+      contents: read
+      id-token: write
     with:
       environment: prod
       app_origin: "https://www.nav.no"
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
-
   release:
     needs: build-and-deploy
     runs-on: ubuntu-latest
     permissions:
-      contents: "write"
-      id-token: "write"
+      contents: write
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-      - name: Get previous tag
-        id: previoustag
-        uses: 'WyriHaximus/github-action-get-previous-tag@v1'
-
-      - name: Create release
+          node-version: 20
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           target_commitish: main
@@ -46,20 +40,4 @@ jobs:
           name: Release ${{ github.ref_name }}
           generate_release_notes: true
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }} # This is a PAT with repo or Variables permission
-          ACTIONS_STEP_DEBUG: true
-
-      - name: print release
-        run: echo ${{ steps.create_release.outputs.release }}
-
-        #  release-prod:
-        #    name: Create prod release
-        #    needs: build-and-deploy
-        #    runs-on: ubuntu-latest
-        #    steps:
-        #      - name: Create release
-        #        uses: softprops/action-gh-release@v2
-        #        with:
-        #          name: Release to prod
-        #          target_commitish: main
-        #          tag_name: release/prod@${{ github.ref_name }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }} # This is a PAT with repo permissions
