@@ -33,13 +33,11 @@ jobs:
       - name: Get previous tag
         id: previoustag
         uses: 'WyriHaximus/github-action-get-previous-tag@v1'
-      - name: Print previous tag
-        run: echo ${{ steps.previoustag.outputs.tag }}
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
           target_commitish: main
-          tag_name: ${{ github.ref_name }}
+          tag_name: release/prod@${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           generate_release_notes: true
           draft: false
