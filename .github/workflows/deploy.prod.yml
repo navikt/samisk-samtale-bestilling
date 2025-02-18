@@ -25,12 +25,6 @@ jobs:
     permissions:
       contents: "read"
       id-token: "write"
-    with:
-      environment: prod
-      app_origin: "https://www.nav.no"
-    secrets:
-      READER_TOKEN: ${{ secrets.READER_TOKEN }}
-      NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
     steps:
 #      - name: Checkout repository
 #        uses: actions/checkout@v4
