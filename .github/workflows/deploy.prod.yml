@@ -19,25 +19,19 @@ jobs:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
-
-  release-prod:
-    name: Create prod release
+  release:
     needs: build-and-deploy
     runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write"
+    with:
+      environment: prod
+      app_origin: "https://www.nav.no"
+    secrets:
+      READER_TOKEN: ${{ secrets.READER_TOKEN }}
+      NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
     steps:
-      - name: Create release
-        uses: softprops/action-gh-release@v2
-        with:
-          name: Release to prod
-          target_commitish: main
-          tag_name: release/prod@${{ github.ref_name }}
-          prerelease: false
-
-
-
-#  release:
-#    runs-on: ubuntu-latest
-#    steps:
 #      - name: Checkout repository
 #        uses: actions/checkout@v4
 #        with:
@@ -46,23 +40,32 @@ jobs:
 #        uses: actions/setup-node@v4
 #        with:
 #          node-version: '20'
-#      - name: Get previous tag
-#        id: previoustag
-#        uses: 'WyriHaximus/github-action-get-previous-tag@v1'
-#
-#
-#
-#      - name: Create release
-#        uses: softprops/action-gh-release@v2
-#        with:
-#          target_commitish: main
-#          tag_name: release/prod@${{ github.ref_name }}
-#          name: Release ${{ github.ref_name }}
-#          generate_release_notes: true
-#          draft: false
-#          prerelease: false
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }} # This is a PAT with repo or Variables permission
-#          ACTIONS_STEP_DEBUG: true
-#      - name: print release
-#        run: echo ${{ steps.create_release.outputs.release }}
+      - name: Get previous tag
+        id: previoustag
+        uses: 'WyriHaximus/github-action-get-previous-tag@v1'
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          target_commitish: main
+          tag_name: release/prod@${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }} # This is a PAT with repo or Variables permission
+          ACTIONS_STEP_DEBUG: true
+
+      - name: print release
+        run: echo ${{ steps.create_release.outputs.release }}
+
+        #  release-prod:
+        #    name: Create prod release
+        #    needs: build-and-deploy
+        #    runs-on: ubuntu-latest
+        #    steps:
+        #      - name: Create release
+        #        uses: softprops/action-gh-release@v2
+        #        with:
+        #          name: Release to prod
+        #          target_commitish: main
+        #          tag_name: release/prod@${{ github.ref_name }}
