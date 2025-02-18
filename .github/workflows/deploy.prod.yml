@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: 20
       - name: Generate unique tag name
-        run: echo "TAG_NAME=release/prod@$(date +%s)" >> $GITHUB_ENV
+        run: echo "TAG_NAME=$(date +%s)" >> $GITHUB_ENV
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
