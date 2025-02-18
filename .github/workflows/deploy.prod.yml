@@ -32,11 +32,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Generate unique tag name
+        run: echo "TAG_NAME=release/prod@$(date +%s)" >> $GITHUB_ENV
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           target_commitish: main
-          tag_name: release/prod@${{ github.IMAGE_TAG }} # Gir taggen et unikt navn så den lager en ny release
+          tag_name: release/prod@${{ env.TAG_NAME }} # Generates a unique tag using timestamp
           name: Release ${{ github.ref_name }}
           generate_release_notes: true
         env:
