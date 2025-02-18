@@ -34,24 +34,17 @@ jobs:
         id: previoustag
         uses: 'WyriHaximus/github-action-get-previous-tag@v1'
 
-#      - name: Create release
-#        uses: softprops/action-gh-release@v2
-#        with:
-#          target_commitish: main
-#          tag_name: release/prod@${{ github.ref_name }}
-#          name: Release ${{ github.ref_name }}
-#          generate_release_notes: true
-#          draft: false
-#          prerelease: false
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }} # This is a PAT with repo or Variables permission
-#      - name: print release
-#        run: echo ${{ steps.create_release.outputs.release }}
-
-      - name: Create GitHub Release
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          target_commitish: main
+          tag_name: release/prod@${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }} # This is a PAT with repo or Variables permission
           ACTIONS_STEP_DEBUG: true
-        run: |
-          gh release create v$(date +%Y.%m.%d) -t "Release $(date +%Y.%m.%d)" -n "Automated release"
-            
+      - name: print release
+        run: echo ${{ steps.create_release.outputs.release }}
