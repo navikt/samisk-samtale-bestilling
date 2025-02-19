@@ -1,45 +1,45 @@
 name: Build and deploy to prod and create a new release
 on:
-  push:
-    branches:
-      - 'main'
+    push:
+        branches:
+            - 'main'
 
 jobs:
-  build-and-deploy:
-    uses: ./.github/workflows/build-and-deploy.yml
-    permissions:
-      contents: read
-      id-token: write
-    with:
-      environment: prod
-      app_origin: "https://www.nav.no"
-    secrets:
-      READER_TOKEN: ${{ secrets.READER_TOKEN }}
-      NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+    build-and-deploy:
+        uses: ./.github/workflows/build-and-deploy.yml
+        permissions:
+            contents: read
+            id-token: write
+        with:
+            environment: prod
+            app_origin: 'https://www.nav.no'
+        secrets:
+            READER_TOKEN: ${{ secrets.READER_TOKEN }}
+            NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
-  release:
-    needs: build-and-deploy
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      id-token: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Generate unique tag name
-        run: echo "TAG_NAME=$(date +%s)" >> $GITHUB_ENV
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          target_commitish: main
-          tag_name: release/prod@${{ env.TAG_NAME }} # Generates a unique tag using timestamp
-          name: Release ${{ github.ref_name }}
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }} # This is a PAT with repo permissions
+    release:
+        needs: build-and-deploy
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+            id-token: write
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+            - name: Generate unique tag name
+              run: echo "TAG_NAME=$(date +%s)" >> $GITHUB_ENV
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v2
+              with:
+                  target_commitish: main
+                  tag_name: release/prod@${{ env.TAG_NAME }} # Generates a unique tag using timestamp
+                  name: Release ${{ github.ref_name }}
+                  generate_release_notes: true
+              env:
+                  GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }} # This is a PAT with repo permissions
