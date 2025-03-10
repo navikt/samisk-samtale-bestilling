@@ -15,6 +15,10 @@ spec:
   readiness:
     path: /person/bestilling-av-samisk-samtale/api/internal/isReady
     initialDelay: 10
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: nodejs
   ingresses:
     - {{app_origin}}/person/bestilling-av-samisk-samtale
   env:
