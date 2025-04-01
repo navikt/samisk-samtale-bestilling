@@ -1,15 +1,24 @@
-FROM node:20-alpine
+# Build stage
+FROM node:20-alpine AS builder
 
-# Create app directory
 WORKDIR /app
 
-COPY package*.json .env /app/
-COPY node_modules /app/node_modules/
+COPY package*.json .env ./
+COPY server/package*.json ./server/
 
-COPY server/package*.json /app/server/
-COPY server/dist  /app/server/dist/
-COPY server/node_modules /app/server/node_modules/
+# Install dependencies
+RUN npm ci --omit=dev && \
+    cd server && npm ci --omit=dev && \
+    cd ..
 
-# Start app
+COPY . .
+
+# Final stage
+FROM gcr.io/distroless/nodejs20
+
+WORKDIR /app
+
+COPY --from=builder /app .
+
 EXPOSE 3006
 CMD ["npm", "run", "start"]
