@@ -1,17 +1,18 @@
 import dotenv from 'dotenv';
 
-dotenv.config({ path: '../.env' });
-
 import express from 'express';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import { setupSiteRoutes } from './site/setupSiteRoutes.js';
 import { setupApiRoutes } from './api/setupApiRoutes';
 import { setupErrorHandlers } from './utils/errorHandlers';
+import path from 'path';
+
+console.log('Starting server...');
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
 const { APP_PORT, VITE_APP_BASEPATH, ENV } = process.env;
-
-console.log('env:', APP_PORT, VITE_APP_BASEPATH, ENV);
+console.log(`environment: APP_PORT: ${APP_PORT}, VITE_APP_BASEPATH: ${VITE_APP_BASEPATH}, ENV: ${ENV}`);
 
 const isLocal = ENV === 'localhost';
 
@@ -30,6 +31,7 @@ if (isLocal && VITE_APP_BASEPATH && VITE_APP_BASEPATH !== '/') {
     app.get('/', (req, res) => res.redirect(VITE_APP_BASEPATH));
 }
 
+console.log('Setting up routes...');
 setupApiRoutes(apiRouter)
     .then(() => setupSiteRoutes(siteRouter))
     .then(() => setupErrorHandlers(app))

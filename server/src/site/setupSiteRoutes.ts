@@ -4,7 +4,7 @@ import { createServer } from 'vite';
 import { HtmlRenderer, devRender, prodRender } from './ssr/htmlRenderer';
 import { createCspMiddleware } from '../utils/cspMiddleware';
 
-const assetsDir = path.resolve(process.cwd(), 'dist', 'client', 'assets');
+const assetsDir = path.resolve(process.cwd(), 'server', 'dist', 'client', 'assets');
 const isProd = process.env.NODE_ENV !== 'development';
 
 export const setupSiteRoutes = async (router: Router) => {

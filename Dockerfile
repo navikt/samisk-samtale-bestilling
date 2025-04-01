@@ -1,24 +1,18 @@
-# Build stage
-FROM node:20-alpine AS builder
+FROM gcr.io/distroless/nodejs20-debian12
+# FROM node:20-alpine
 
 WORKDIR /app
 
-COPY package*.json .env ./
-COPY server/package*.json ./server/
+COPY package*.json .env /app/
+COPY .env /app/server/dist/server/src/.env
+COPY node_modules /app/node_modules/
 
-# Install dependencies
-RUN npm ci --omit=dev && \
-    cd server && npm ci --omit=dev && \
-    cd ..
+COPY server/package*.json /app/server/
+COPY server/dist /app/server/dist/
+COPY server/node_modules /app/server/node_modules/
 
-COPY . .
 
-# Final stage
-FROM gcr.io/distroless/nodejs20
-
-WORKDIR /app
-
-COPY --from=builder /app .
-
+# Start app
+ENV NODE_ENV=production
 EXPOSE 3006
-CMD ["npm", "run", "start"]
+CMD ["./server/dist/server/src/server.js"]
