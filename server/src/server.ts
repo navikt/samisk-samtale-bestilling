@@ -47,6 +47,12 @@ setupApiRoutes(apiRouter)
         const shutdown = () => {
             console.log('Server shutting down');
 
+            // Set a timeout to force close the server after 2 seconds
+            setTimeout(() => {
+                console.log('Force closing server after timeout');
+                process.exit(0);
+            }, 2000);
+
             server.close(() => {
                 console.log('Shutdown complete!');
                 process.exit(0);

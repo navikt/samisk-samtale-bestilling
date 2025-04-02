@@ -16,7 +16,7 @@ const myDirectives = {
     'script-src-elem': [SELF],
     'style-src': [SELF],
     'style-src-elem': [SELF],
-    'img-src': ['\'self\' data:'],
+    'img-src': ["'self' data:"],
     ...(process.env.NODE_ENV === 'development' && {
         'connect-src': HMR_SERVERS,
     }),
@@ -26,8 +26,12 @@ const cache = new Cache({ deleteOnExpire: false, stdTTL: 600 });
 const cacheKey = 'csp';
 
 const buildAndCache = async () => {
-    const csp = await buildCspHeader(myDirectives, decoratorEnvProps);
-    cache.set(cacheKey, csp);
+    try {
+        const csp = await buildCspHeader(myDirectives, decoratorEnvProps);
+        cache.set(cacheKey, csp);
+    } catch (e) {
+        console.error('Failed to build CSP header', e);
+    }
 };
 
 cache.on('expired', buildAndCache);
@@ -39,6 +43,7 @@ export const createCspMiddleware = async (): Promise<RequestHandler> => {
         const csp = cache.get<string>(cacheKey);
         if (!csp) {
             console.error('CSP header value not available!');
+            res.setHeader('Content-Security-Policy', '');
             return next();
         }
 
