@@ -37,7 +37,7 @@ const buildAndCache = async () => {
 cache.on('expired', buildAndCache);
 
 export const createCspMiddleware = async (): Promise<RequestHandler> => {
-    await buildAndCache();
+    // await buildAndCache();
 
     return (req, res, next) => {
         const csp = cache.get<string>(cacheKey);
