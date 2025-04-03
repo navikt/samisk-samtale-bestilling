@@ -16,7 +16,7 @@ const myDirectives = {
     'script-src-elem': [SELF],
     'style-src': [SELF],
     'style-src-elem': [SELF],
-    'img-src': ['\'self\' data:'],
+    'img-src': ["'self' data:"],
     ...(process.env.NODE_ENV === 'development' && {
         'connect-src': HMR_SERVERS,
     }),

@@ -12,9 +12,11 @@ spec:
   liveness:
     path: /person/bestilling-av-samisk-samtale/api/internal/isAlive
     initialDelay: 10
+    timeout: 5
   readiness:
     path: /person/bestilling-av-samisk-samtale/api/internal/isReady
     initialDelay: 10
+    timeout: 5
   observability:
     autoInstrumentation:
       enabled: true
@@ -26,6 +28,8 @@ spec:
       value: /tmp/npm-cache
   accessPolicy:
     outbound:
+      external:
+        - host: www.nav.no
       rules:
         - application: tilbakemeldingsmottak-api
           namespace: teamserviceklage

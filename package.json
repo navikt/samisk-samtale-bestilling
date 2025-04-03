@@ -9,7 +9,6 @@
         "build:ssr": "vite build --outDir ./server/src/_ssr-dist --ssr src/main-server.tsx",
         "build:server": "npm run build --workspace server",
         "analyze-bundle": "ANALYZE=true npm run build:client",
-        "start": "npm run start --workspace server",
         "lint": "eslint",
         "start-local": "cp .env.local-prod .env && npm run start --workspace server",
         "decorator-local": "docker compose up",
