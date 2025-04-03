@@ -39,7 +39,6 @@ export const createCspMiddleware = async (): Promise<RequestHandler> => {
         const csp = cache.get<string>(cacheKey);
         if (!csp) {
             console.error('CSP header value not available!');
-            res.setHeader('Content-Security-Policy', '');
             return next();
         }
 
