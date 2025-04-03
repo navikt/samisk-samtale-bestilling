@@ -8,11 +8,9 @@ import { setupApiRoutes } from './api/setupApiRoutes';
 import { setupErrorHandlers } from './utils/errorHandlers';
 import path from 'path';
 
-console.log('Starting server...');
 dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
 const { APP_PORT, VITE_APP_BASEPATH, ENV } = process.env;
-console.log(`environment: APP_PORT: ${APP_PORT}, VITE_APP_BASEPATH: ${VITE_APP_BASEPATH}, ENV: ${ENV}`);
 
 const isLocal = ENV === 'localhost';
 
@@ -31,7 +29,7 @@ if (isLocal && VITE_APP_BASEPATH && VITE_APP_BASEPATH !== '/') {
     app.get('/', (req, res) => res.redirect(VITE_APP_BASEPATH));
 }
 
-console.log('Setting up routes...');
+console.log(`Starting server with environment: APP_PORT: ${APP_PORT}, VITE_APP_BASEPATH: ${VITE_APP_BASEPATH}, ENV: ${ENV}`);
 setupApiRoutes(apiRouter)
     .then(() => setupSiteRoutes(siteRouter))
     .then(() => setupErrorHandlers(app))
@@ -47,7 +45,6 @@ setupApiRoutes(apiRouter)
         const shutdown = () => {
             console.log('Server shutting down');
 
-            // Set a timeout to force close the server after 2 seconds
             setTimeout(() => {
                 console.log('Force closing server after timeout');
                 process.exit(0);

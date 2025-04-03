@@ -26,18 +26,14 @@ const cache = new Cache({ deleteOnExpire: false, stdTTL: 600 });
 const cacheKey = 'csp';
 
 const buildAndCache = async () => {
-    try {
-        const csp = await buildCspHeader(myDirectives, decoratorEnvProps);
-        cache.set(cacheKey, csp);
-    } catch (e) {
-        console.error('Failed to build CSP header', e);
-    }
+    const csp = await buildCspHeader(myDirectives, decoratorEnvProps);
+    cache.set(cacheKey, csp);
 };
 
 cache.on('expired', buildAndCache);
 
 export const createCspMiddleware = async (): Promise<RequestHandler> => {
-    // await buildAndCache();
+    await buildAndCache();
 
     return (req, res, next) => {
         const csp = cache.get<string>(cacheKey);

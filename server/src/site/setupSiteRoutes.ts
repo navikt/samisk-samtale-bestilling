@@ -10,13 +10,6 @@ const isProd = process.env.NODE_ENV !== 'development';
 export const setupSiteRoutes = async (router: Router) => {
     let render: HtmlRenderer;
 
-    fetch('https://nav.no')
-        .then((res) => res.text())
-        .then(console.log)
-        .catch((e) => {
-            console.log(`Could not fetch nav.no ${e}`);
-        });
-
     if (isProd) {
         console.log(`Configuring site endpoints for production mode - Using assets dir ${assetsDir}`);
 
