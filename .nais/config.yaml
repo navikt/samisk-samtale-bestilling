@@ -28,6 +28,8 @@ spec:
       value: /tmp/npm-cache
   accessPolicy:
     outbound:
+      external:
+        - host: www.nav.no
       rules:
         - application: tilbakemeldingsmottak-api
           namespace: teamserviceklage
