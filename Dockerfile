@@ -22,3 +22,5 @@ WORKDIR /app
 
 # Start app
 EXPOSE 3006
+
+CMD ["npm", "run", "start"]
