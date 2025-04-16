@@ -55,6 +55,7 @@ jobs:
                   project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
                   identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
                   image_suffix: ${{ inputs.environment }}
+                  build_secrets: NODE_AUTH_TOKEN=${{ secrets.READER_TOKEN }}
             - uses: nais/deploy/actions/deploy@master
               env:
                   CLUSTER: ${{ inputs.environment }}-gcp

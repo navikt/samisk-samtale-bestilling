@@ -6,6 +6,10 @@ WORKDIR /app
 COPY package*.json .env ./
 
 # Install app dependencies only (not dev deps)
+RUN --mount=type=secret,id=NODE_AUTH_TOKEN \
+    npm config set //npm.pkg.github.com/:_authToken=$(cat /run/secrets/NODE_AUTH_TOKEN)
+RUN npm config set @navikt:registry=https://npm.pkg.github.com
+
 RUN npm ci --omit=dev
 
 COPY server/package*.json /app/server/
