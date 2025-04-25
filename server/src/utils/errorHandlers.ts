@@ -39,7 +39,6 @@ export const setupErrorHandlers = async (expressApp: Express) => {
 
         // TODO: Html for server errors
         res.status(statusCode).end();
-        return;
     };
 
     // Using a path pattern without wildcard to catch all routes

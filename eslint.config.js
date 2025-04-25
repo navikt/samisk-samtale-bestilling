@@ -1,5 +1,4 @@
 // eslint.config.js - ESLint 9 Flat Config
-import eslint from 'eslint';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import reactPlugin from 'eslint-plugin-react';
