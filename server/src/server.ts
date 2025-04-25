@@ -16,7 +16,7 @@ console.log('env:', APP_PORT, VITE_APP_BASEPATH, ENV);
 const isLocal = ENV === 'localhost';
 
 const app = express();
-app.use('*', compression());
+app.use(compression()); // Removed '*' wildcard which was causing the error
 app.use(bodyParser.json());
 
 const siteRouter = express.Router();

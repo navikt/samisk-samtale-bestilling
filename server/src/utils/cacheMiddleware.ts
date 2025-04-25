@@ -12,12 +12,7 @@ type ResponseCacheEntry = {
     statusCode: number;
 };
 
-export const createCacheMiddleware = (
-    {
-        cacheOnErrors = false,
-        ttlSec,
-        maxSize,
-    }: CacheMiddlewareOptions): RequestHandler => {
+export const createCacheMiddleware = ({ cacheOnErrors = false, ttlSec, maxSize }: CacheMiddlewareOptions): RequestHandler => {
     if (process.env.NODE_ENV === 'development') {
         return (req, res, next) => {
             next();
@@ -35,7 +30,7 @@ export const createCacheMiddleware = (
         const cachedRes = cache.get(originalUrl);
         if (cachedRes) {
             const { sentData, statusCode } = cachedRes;
-            return res.status(statusCode).send(sentData);
+            res.status(statusCode).send(sentData);
         }
 
         const originalSend = res.send;

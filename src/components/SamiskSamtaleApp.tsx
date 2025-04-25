@@ -8,12 +8,14 @@ import { initializeFaro } from '@grafana/faro-web-sdk';
 
 export const SamiskSamtaleApp = () => {
     useEffect(() => {
-        initializeFaro({
-            url: 'https://telemetry.nav.no/collect',
-            app: {
-                name: 'samisk-samtale-bestilling',
-            },
-        });
+        if (import.meta.env.MODE !== 'development') {
+            initializeFaro({
+                url: 'https://telemetry.nav.no/collect',
+                app: {
+                    name: 'samisk-samtale-bestilling',
+                },
+            });
+        }
     }, []);
 
     return (

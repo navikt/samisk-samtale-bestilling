@@ -39,7 +39,6 @@ export const SamiskSamtaleOrderForm = () => {
                 });
             }
         });
-        /* eslint-disable-next-line */
     }, []);
 
     const submitForm = () => {
