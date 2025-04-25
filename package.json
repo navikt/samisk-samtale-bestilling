@@ -32,7 +32,7 @@
         "jsdom": "25.0.1",
         "node-cache": "5.1.2",
         "preact-render-to-string": "6.5.12",
-        "react-router": "7.1.1"
+        "react-router": "7.5.2"
     },
     "devDependencies": {
         "@babel/preset-react": "7.26.3",
