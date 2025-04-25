@@ -17,3 +17,12 @@ RUN --mount=type=secret,id=NODE_AUTH_TOKEN sh -c \
 EXPOSE 3006
 
 CMD ["npm", "run", "start"]
+
+# Use a non-root user to run the application
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+
+# Change ownership of the app directory to the new user
+RUN chown -R appuser:appuser /app
+
+# Switch to the non-root user as the last step
+USER appuser
