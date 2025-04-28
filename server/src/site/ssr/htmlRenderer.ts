@@ -20,8 +20,8 @@ const processTemplate = async (locale: Locale, templateHtml: string, appHtml: st
 export const prodRender: HtmlRenderer = async (locale, url, context) => {
     try {
         const template = await buildHtmlTemplate(locale);
-        const appHtml = render(url, locale);
-        return processTemplate(locale, template, appHtml, context);
+        const { html } = render(url, locale);
+        return processTemplate(locale, template, html, context);
     } catch (e) {
         console.error(`Rendering failed ${e}`);
         return '';
@@ -34,8 +34,16 @@ export const devRender =
         console.log(`Rendering for development with locale ${locale}`);
         try {
             const template = await buildHtmlTemplate(locale);
-            const { render } = await vite.ssrLoadModule('/src/main-server.tsx');
-            const appHtml = render(url, locale);
+            // Import the SSR module with proper handling for both named and default exports
+            const mainServer = await vite.ssrLoadModule('/src/main-server.tsx');
+            // Use either the named export or from the default export
+            const renderFn = mainServer.render;
+
+            if (!renderFn) {
+                throw new Error('Could not find render function in SSR module');
+            }
+
+            const appHtml = renderFn(url, locale);
             const html = await vite.transformIndexHtml(url, template);
             return processTemplate(locale, html, appHtml, context);
         } catch (e) {

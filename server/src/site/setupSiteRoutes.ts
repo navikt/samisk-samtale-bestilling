@@ -34,13 +34,15 @@ export const setupSiteRoutes = async (router: Router) => {
         render = devRender(vite);
     }
 
-    router.use('*', await createCspMiddleware());
-    router.get('/', async (req, res) => {
-        const html = await render('se', req.originalUrl);
-        return res.status(200).send(html);
+    router.use(await createCspMiddleware());
+    router.get('/', (req, res, next) => {
+        render('se', req.originalUrl)
+            .then((html) => res.status(200).send(html))
+            .catch(next);
     });
-    router.get('/nb', async (req, res) => {
-        const html = await render('nb', req.originalUrl);
-        return res.status(200).send(html);
+    router.get('/nb', (req, res, next) => {
+        render('nb', req.originalUrl)
+            .then((html) => res.status(200).send(html))
+            .catch(next);
     });
 };

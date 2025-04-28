@@ -16,7 +16,7 @@ const createNotFoundHandler = async (): Promise<RequestHandler> => {
             return 'Not found';
         });
 
-    return (req, res, _) => {
+    return (req, res) => {
         res.status(404).send(notFoundHtml);
     };
 };
@@ -38,10 +38,13 @@ export const setupErrorHandlers = async (expressApp: Express) => {
         console.error(`Server error on ${path}: ${statusCode} ${msg}`);
 
         // TODO: Html for server errors
-        return res.status(statusCode).end();
+        res.status(statusCode).end();
     };
 
-    expressApp.use('*', notFoundHandler);
+    // Using a path pattern without wildcard to catch all routes
+    expressApp.use((req, res, next) => {
+        return notFoundHandler(req, res, next);
+    });
 
     expressApp.use(serverErrorHandler);
 };
