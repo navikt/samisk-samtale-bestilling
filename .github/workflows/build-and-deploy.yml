@@ -39,7 +39,7 @@ jobs:
                   VITE_APP_BASEPATH=/person/bestilling-av-samisk-samtale
                   VITE_APP_ORIGIN=${{ inputs.app_origin }}
                   APP_PORT=3006
-                  VITE_KONTAKTINFO_API_URL=${{ inputs.app_origin }}/person/personopplysninger-api/kontaktinformasjon
+                  VITE_KONTAKTINFO_API_URL=${{ inputs.app_origin }}/tms-personopplysninger-api/kontaktinformasjon
                   EOF
             - name: Install dependencies
               run: npm ci
