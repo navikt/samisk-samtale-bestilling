@@ -4,7 +4,7 @@ kind: Application
 metadata:
   name: samisk-samtale-bestilling
   labels:
-    team: nav.no
+    team: navno
 spec:
   image: {{image}}
   port: 3006
