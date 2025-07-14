@@ -3,9 +3,8 @@ apiVersion: nais.io/v1alpha1
 kind: Application
 metadata:
   name: samisk-samtale-bestilling
-  namespace: personbruker
   labels:
-    team: personbruker
+    team: nav.no
 spec:
   image: {{image}}
   port: 3006
