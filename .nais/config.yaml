@@ -20,7 +20,7 @@ spec:
       enabled: true
       runtime: nodejs
   ingresses:
-    - samisk-samtale-bestilling.intern.nav.no
+    - https://www.samisk-samtale-bestilling.intern.nav.no
   env:
     - name: NPM_CONFIG_CACHE
       value: /tmp/npm-cache
