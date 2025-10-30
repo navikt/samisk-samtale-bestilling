@@ -1,4 +1,4 @@
-FROM node:24-slim
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:22-slim
 
 # Create app directory
 WORKDIR /app
