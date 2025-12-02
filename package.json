@@ -32,7 +32,7 @@
         "node-cache": "5.1.2",
         "preact-render-to-string": "6.6.3",
         "react-router": "7.9.5",
-        "vite": "7.1.11"
+        "vite": "7.2.4"
     },
     "devDependencies": {
         "@babel/preset-react": "7.28.5",
