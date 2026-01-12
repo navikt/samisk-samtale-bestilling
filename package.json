@@ -28,7 +28,7 @@
         "body-parser": "2.2.2",
         "classnames": "2.5.1",
         "html-react-parser": "5.2.11",
-        "jsdom": "27.3.0",
+        "jsdom": "27.4.0",
         "node-cache": "5.1.2",
         "preact-render-to-string": "6.6.4",
         "react-router": "7.12.0",
