@@ -5,17 +5,17 @@
     "type": "module",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
-        "build": "rm -fr dist && npm-run-all build:*",
+        "build": "rm -fr dist && pnpm run build:client && pnpm run build:ssr && pnpm run build:server",
         "build:client": "vite build --outDir ./server/dist/client",
         "build:ssr": "vite build --outDir ./server/src/_ssr-dist --ssr src/main-server.tsx",
-        "build:server": "npm run build --workspace server",
-        "analyze-bundle": "ANALYZE=true npm run build:client",
-        "start": "npm run start --workspace server",
+        "build:server": "pnpm --filter server run build",
+        "analyze-bundle": "ANALYZE=true pnpm run build:client",
+        "start": "pnpm --filter server run start",
         "lint": "eslint",
-        "start-local": "cp .env.local-prod .env && npm run start --workspace server",
+        "start-local": "cp .env.local-prod .env && pnpm --filter server run start",
         "decorator-local": "docker compose up",
         "dev-prepare": "node preact-compat-symlinks.js && cp .env.development .env",
-        "dev": "npm run dev-prepare && npm run dev --workspace server"
+        "dev": "pnpm run dev-prepare && pnpm --filter server run dev"
     },
     "workspaces": [
         "server"
@@ -48,7 +48,6 @@
         "eslint-plugin-jsx-a11y": "6.10.2",
         "eslint-plugin-react": "7.37.5",
         "globals": "16.5.0",
-        "npm-run-all": "4.1.5",
         "prettier": "3.7.4",
         "rollup-plugin-visualizer": "6.0.5",
         "typescript": "5.9.3"

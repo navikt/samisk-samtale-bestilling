@@ -9,6 +9,12 @@ export default defineConfig(({ mode }) => {
 
     return {
         plugins: [preact(), ...(process.env.ANALYZE ? [visualizer({open: true})] : [])],
+        resolve: {
+            alias: {
+                'react': 'preact/compat',
+                'react-dom': 'preact/compat',
+            },
+        },
         esbuild: {
             legalComments: 'none',
         },
