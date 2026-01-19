@@ -4,6 +4,7 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "preinstall": "npx only-allow pnpm",
         "build": "rm -fr dist && npm-run-all build:*",
         "build:client": "vite build --outDir ./server/dist/client",
         "build:ssr": "vite build --outDir ./server/src/_ssr-dist --ssr src/main-server.tsx",
