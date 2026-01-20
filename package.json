@@ -8,14 +8,14 @@
         "build": "rm -fr dist && pnpm run build:client && pnpm run build:ssr && pnpm run build:server",
         "build:client": "vite build --outDir ./server/dist/client",
         "build:ssr": "vite build --outDir ./server/src/_ssr-dist --ssr src/main-server.tsx",
-        "build:server": "pnpm --filter server run build",
+        "build:server": "pnpm --filter samisk-samtale-bestilling-server run build",
         "analyze-bundle": "ANALYZE=true pnpm run build:client",
-        "start": "pnpm --filter server run start",
+        "start": "pnpm --filter samisk-samtale-bestilling-server run start",
         "lint": "eslint",
-        "start-local": "cp .env.local-prod .env && pnpm --filter server run start",
+        "start-local": "cp .env.local-prod .env && pnpm --filter samisk-samtale-bestilling-server run start",
         "decorator-local": "docker compose up",
         "dev-prepare": "node preact-compat-symlinks.js && cp .env.development .env",
-        "dev": "pnpm run dev-prepare && pnpm --filter server run dev"
+        "dev": "pnpm run dev-prepare && pnpm --filter samisk-samtale-bestilling-server run dev"
     },
     "workspaces": [
         "server"
@@ -31,6 +31,7 @@
         "html-react-parser": "5.2.11",
         "jsdom": "27.3.0",
         "node-cache": "5.1.2",
+        "preact": "10.28.2",
         "preact-render-to-string": "6.6.4",
         "react-router": "7.12.0",
         "vite": "7.3.1"
