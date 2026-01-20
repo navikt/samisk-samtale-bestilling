@@ -1,35 +1,27 @@
 # syntax=docker/dockerfile:1.6
 FROM node:24-slim
 
-# Install pnpm (pin it inside the image; GitHub Actions pnpm does not affect Docker build layers)
+ENV NODE_ENV=production
+
+# Install pnpm (pin it, don’t trust whatever the base image feels like today)
 RUN corepack enable \
  && corepack prepare pnpm@10 --activate \
  && pnpm --version
 
-# Create app directory
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .env ./
-COPY server/package.json /app/server/
-COPY server/dist /app/server/dist/
+# 1) Copy only manifests first (better cache + deterministic install)
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY server/package.json ./server/package.json
 
-# Set up pnpm configuration once
 RUN --mount=type=secret,id=NODE_AUTH_TOKEN sh -c \
-  'pnpm --version && \
-  pnpm config set //npm.pkg.github.com/:_authToken=$(cat /run/secrets/NODE_AUTH_TOKEN) && \
-  pnpm config set @navikt:registry=https://npm.pkg.github.com && \
-  pnpm install --frozen-lockfile --prod'
+'pnpm config set //npm.pkg.github.com/:_authToken=$(cat /run/secrets/NODE_AUTH_TOKEN) && \
+ pnpm config set @navikt:registry=https://npm.pkg.github.com && \
+ pnpm install --frozen-lockfile --prod'
 
-# Start app
+COPY server/dist ./server/dist
+
 EXPOSE 3006
 
-CMD ["pnpm", "run", "start"]
 
-# Use a non-root user to run the application
-RUN groupadd -r appuser && useradd -r -g appuser appuser
-
-# Change ownership of the app directory to the new user
-RUN chown -R appuser:appuser /app
-
-# Switch to the non-root user as the last step
-USER appuser
+CMD ["node", "server/dist/server/src/server.js"]
