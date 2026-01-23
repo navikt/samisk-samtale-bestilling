@@ -9,6 +9,8 @@ updates:
       time: "09:00"
       timezone: "Europe/Oslo"
     open-pull-requests-limit: 10
+    pull-request-branch-name:
+      separator: "-"
     cooldown:
       semver-major-days: 14
       semver-minor-days: 7
@@ -23,6 +25,8 @@ updates:
       day: "monday"
       time: "09:00"
       timezone: "Europe/Oslo"
+    pull-request-branch-name:
+      separator: "-"
     open-pull-requests-limit: 10
     groups:
       actions:
