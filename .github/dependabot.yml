@@ -24,10 +24,6 @@ updates:
       time: "09:00"
       timezone: "Europe/Oslo"
     open-pull-requests-limit: 10
-    cooldown:
-      semver-major-days: 14
-      semver-minor-days: 7
-      semver-patch-days: 7
     groups:
       actions:
         patterns: ["*"]
