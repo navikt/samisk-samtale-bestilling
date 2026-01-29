@@ -20,5 +20,5 @@ jobs:
                   webhook-type: incoming-webhook
                   payload: |
                       {
-                        "text": "En ny sikkerhets-oppdatering er klar i <${{ github.event.pull_request.html_url || github.event.repository.html_url }}|${{ github.repository }}>."
+                        "text": "🔒 En ny sikkerhets-oppdatering er klar i <${{ github.event.pull_request.html_url || github.event.repository.html_url }}|${{ github.repository }}>."
                       }
