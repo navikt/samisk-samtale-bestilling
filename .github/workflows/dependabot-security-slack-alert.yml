@@ -5,6 +5,9 @@ on:
         types: [opened, labeled]
     workflow_dispatch:
 
+permissions:
+    contents: read
+
 jobs:
     notify-slack:
         runs-on: ubuntu-latest
