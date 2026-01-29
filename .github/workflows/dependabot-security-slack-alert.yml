@@ -1,0 +1,27 @@
+name: Dependabot Security Slack Alert
+
+on:
+    pull_request:
+        types: [opened, labeled]
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    notify-slack:
+        runs-on: ubuntu-latest
+        if: |
+            github.event_name == 'workflow_dispatch' ||
+            (github.actor == 'dependabot[bot]' &&
+            contains(github.event.pull_request.labels.*.name, 'security'))
+        steps:
+            - name: Send Slack notification
+              uses: slackapi/slack-github-action@v2.1.1
+              with:
+                  webhook: ${{ secrets.CODE_REVIEWS_SLACK_WEBHOOK }}
+                  webhook-type: incoming-webhook
+                  payload: |
+                      {
+                        "text": "🔒 En ny sikkerhets-oppdatering er klar i <${{ github.event.pull_request.html_url || github.event.repository.html_url }}|${{ github.repository }}>."
+                      }
