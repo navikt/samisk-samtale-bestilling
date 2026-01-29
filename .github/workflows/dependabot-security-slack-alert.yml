@@ -17,7 +17,7 @@ jobs:
             contains(github.event.pull_request.labels.*.name, 'security'))
         steps:
             - name: Send Slack notification
-              uses: slackapi/slack-github-action@v2
+              uses: slackapi/slack-github-action@v2.1.1
               with:
                   webhook: ${{ secrets.CODE_REVIEWS_SLACK_WEBHOOK }}
                   webhook-type: incoming-webhook
