@@ -80,7 +80,7 @@ export const SamiskSamtaleOrderForm = () => {
     };
 
     return submitAcked ? (
-        <Alert role="status" variant="success" className={style.submitInfo}>
+        <Alert role="alert" variant="success" className={style.submitInfo}>
             {'Meldingen din er sendt'}
         </Alert>
     ) : (
