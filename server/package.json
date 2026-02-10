@@ -4,8 +4,8 @@
     "private": true,
     "scripts": {
         "build": "tsc",
-        "start": "node ./dist/server/src/server.js",
-        "dev": "npm run build && concurrently \"tsc -w\" \"nodemon -w ./dist/server ./dist/server/src/server.js\""
+        "start": "ode -r dotenv/config ./dist/server/src/server.js dotenv_config_path=../.env",
+        "dev": "npm run build && concurrently \"tsc -w\" \"nodemon -r dotenv/config -w ./dist/server ./dist/server/src/server.js dotenv_config_path=../.env\""
     },
     "dependencies": {
         "compression": "1.8.1",
