@@ -13,5 +13,5 @@ ENV NODE_ENV=production
 
 # Start app
 EXPOSE 3006
-
-CMD ["npm", "run", "start"]
+ENTRYPOINT ["node"]
+CMD ["server/dist/server/src/server.js"]
