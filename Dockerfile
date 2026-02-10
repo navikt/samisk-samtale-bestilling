@@ -11,6 +11,8 @@ COPY server/node_modules* /app/server/node_modules/
 
 ENV NODE_ENV=production
 
+RUN echo "Current user is:" && whoami
+
 # Start app
 EXPOSE 3006
 ENTRYPOINT ["node"]
