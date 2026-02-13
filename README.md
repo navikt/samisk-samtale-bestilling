@@ -16,7 +16,7 @@ Applikasjonen er en full-stack Node.js-løsning med server-side rendering (SSR) 
 
 ### Struktur
 
-Applikasjonen bruker en monorepo-struktur med npm workspaces:
+Applikasjonen bruker en monorepo-struktur med pnpm workspaces:
 
 - `src/` - Frontend-kode (Preact-komponenter, utilities, entry points)
 - `server/` - Backend-kode (Express-server, API-ruter, SSR-logikk)

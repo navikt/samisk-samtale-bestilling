@@ -9,13 +9,13 @@ git clone https://github.com/navikt/samisk-samtale-bestilling.git
 Installer nødvendige pakker:
 
 ```
-npm install
+pnpm install
 ```
 
 Start applikasjonen lokalt:
 
 ```
-npm run dev
+pnpm run dev
 ```
 
 ## Deploy

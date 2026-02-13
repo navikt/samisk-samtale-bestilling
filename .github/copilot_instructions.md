@@ -14,7 +14,7 @@ A web application for ordering telephone consultations with Nav in Sami language
 - **Backend**: Express.js
 - **Language**: TypeScript
 - **Build Tool**: Vite
-- **Architecture Pattern**: Server-Side Rendering (SSR) with client-side hydration, monorepo structure with npm workspaces
+- **Architecture Pattern**: Server-Side Rendering (SSR) with client-side hydration, monorepo structure with pnpm workspaces
 
 ### Key Components
 
@@ -209,6 +209,15 @@ const [errorState, setErrorState] = useState<ErrorState>({});
 3. **build:server** - TypeScript compiles Express server to `server/dist`
 4. **Docker image** - Multi-stage build with Node 24-slim base image
 
+### Package Manager
+
+This project uses **pnpm** as its package manager, enforced via Corepack and the `packageManager` field in `package.json`. A `preinstall` script blocks accidental use of `npm install`.
+
+- Always use `pnpm install`, `pnpm run <script>`, etc.
+- Never use `npm install` — it will be blocked with an error.
+- Workspace dependencies are managed via `pnpm-workspace.yaml`.
+- The CI workflow and Dockerfile also use pnpm.
+
 ## Naming Conventions
 
 - Use **camelCase** for variables and function names
@@ -231,8 +240,8 @@ Before submitting PR:
 - [ ] **Localization**: New user-facing text added to both `se.ts` and `nb.ts`
 - [ ] **Accessibility**: Changes maintain or improve accessibility
 - [ ] **Testing**: Manually tested in both Sami and Norwegian versions
-- [ ] **Build**: `npm run build` completes successfully
-- [ ] **Lint**: `npm run lint` passes without errors
+- [ ] **Build**: `pnpm run build` completes successfully
+- [ ] **Lint**: `pnpm run lint` passes without errors
 
 ## References
 
