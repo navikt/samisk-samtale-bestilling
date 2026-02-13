@@ -1,22 +1,26 @@
 FROM node:24-slim
 
+# Enable corepack for pnpm support
+RUN corepack enable
+
 # Create app directory
 WORKDIR /app
 
-COPY package*.json .env ./
-COPY server/package*.json /app/server/
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc .env ./
+COPY server/package.json /app/server/
 COPY server/dist /app/server/dist/
 
-# Set up npm configuration once
-RUN --mount=type=secret,id=NODE_AUTH_TOKEN sh -c \
-  'npm config set //npm.pkg.github.com/:_authToken=$(cat /run/secrets/NODE_AUTH_TOKEN) && \
-  npm config set @navikt:registry=https://npm.pkg.github.com && \
-  npm ci --ignore-scripts --omit=dev \'
+# Set up registry authentication and install production dependencies
+RUN --mount=type=secret,id=NODE_AUTH_TOKEN \
+  NODE_AUTH_TOKEN=$(cat /run/secrets/NODE_AUTH_TOKEN) \
+  pnpm install --frozen-lockfile --prod --ignore-scripts
 
 # Start app
 EXPOSE 3006
 
-CMD ["npm", "run", "start"]
+WORKDIR /app/server
+
+CMD ["node", "dist/server/src/server.js"]
 
 # Use a non-root user to run the application
 RUN groupadd -r appuser && useradd -r -g appuser appuser

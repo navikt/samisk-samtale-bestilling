@@ -37,7 +37,7 @@ const fetchAccessToken = async (
         });
 
     
-        const responseJson = await response.json();
+        const responseJson: TokenResponse = await response.json() as TokenResponse;
 
         if (!response.ok) {
             console.log(`Failed to fetch access token:${JSON.stringify(responseJson)}}`);
