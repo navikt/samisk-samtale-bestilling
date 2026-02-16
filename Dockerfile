@@ -15,18 +15,12 @@ RUN --mount=type=secret,id=NODE_AUTH_TOKEN \
   NODE_AUTH_TOKEN=$(cat /run/secrets/NODE_AUTH_TOKEN) \
   pnpm install --frozen-lockfile --prod --ignore-scripts
 
-# Start app
-EXPOSE 3006
+# Use a non-root user to run the application
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+RUN chown -R appuser:appuser /app
+USER appuser
 
+EXPOSE 3006
 WORKDIR /app/server
 
 CMD ["node", "dist/server/src/server.js"]
-
-# Use a non-root user to run the application
-RUN groupadd -r appuser && useradd -r -g appuser appuser
-
-# Change ownership of the app directory to the new user
-RUN chown -R appuser:appuser /app
-
-# Switch to the non-root user as the last step
-USER appuser
