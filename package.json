@@ -20,14 +20,14 @@
         "server"
     ],
     "dependencies": {
-        "@grafana/faro-web-sdk": "2.2.2",
+        "@grafana/faro-web-sdk": "2.2.3",
         "@navikt/ds-css": "7.40.0",
         "@navikt/ds-react": "7.40.0",
-        "@navikt/nav-dekoratoren-moduler": "3.6.1",
+        "@navikt/nav-dekoratoren-moduler": "3.6.2",
         "@preact/compat": "18.3.1",
         "body-parser": "2.2.2",
         "classnames": "2.5.1",
-        "html-react-parser": "5.2.15",
+        "html-react-parser": "5.2.17",
         "jsdom": "27.4.0",
         "node-cache": "5.1.2",
         "preact-render-to-string": "6.6.5",
@@ -37,8 +37,8 @@
     "devDependencies": {
         "@babel/preset-react": "7.28.5",
         "@preact/preset-vite": "2.10.3",
-        "@types/node": "25.2.0",
-        "@types/react": "19.2.10",
+        "@types/node": "25.2.2",
+        "@types/react": "19.2.13",
         "@types/react-dom": "19.2.3",
         "@typescript-eslint/eslint-plugin": "8.54.0",
         "@typescript-eslint/parser": "8.54.0",
