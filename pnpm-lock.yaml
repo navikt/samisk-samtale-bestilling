@@ -23,9 +23,6 @@ importers:
       '@preact/compat':
         specifier: 18.3.1
         version: 18.3.1(preact@10.28.2)
-      body-parser:
-        specifier: 2.2.2
-        version: 2.2.2
       classnames:
         specifier: 2.5.1
         version: 2.5.1
@@ -102,6 +99,9 @@ importers:
 
   server:
     dependencies:
+      '@navikt/nav-dekoratoren-moduler':
+        specifier: 3.6.1
+        version: 3.6.1(@preact/compat@18.3.1(preact@10.28.2))(csp-header@6.3.0)(html-react-parser@5.2.12(@preact/compat@18.3.1(preact@10.28.2))(@types/react@19.2.9))(jsdom@27.4.0)
       compression:
         specifier: 1.8.1
         version: 1.8.1
@@ -592,9 +592,6 @@ packages:
       html-react-parser: '>=5.x'
       jsdom: '>=16.x'
       react: '>=17.x'
-    peerDependenciesMeta:
-      react:
-        optional: true
 
   '@opentelemetry/api-logs@0.211.0':
     resolution: {integrity: sha512-swFdZq8MCdmdR22jTVGQDhwqDzcI4M10nhjXkLr1EsIzXgZBqm4ZlmmcWsg3TSNf+3mzgOiqveXmBLZuDi2Lgg==}
@@ -3010,13 +3007,20 @@ snapshots:
 
   '@navikt/ds-tokens@7.40.0': {}
 
+  '@navikt/nav-dekoratoren-moduler@3.6.1(@preact/compat@18.3.1(preact@10.28.2))(csp-header@6.3.0)(html-react-parser@5.2.12(@preact/compat@18.3.1(preact@10.28.2))(@types/react@19.2.9))(jsdom@27.4.0)':
+    dependencies:
+      csp-header: 6.3.0
+      html-react-parser: 5.2.12(@preact/compat@18.3.1(preact@10.28.2))(@types/react@19.2.9)
+      js-cookie: 3.0.5
+      jsdom: 27.4.0
+      react: '@preact/compat@18.3.1(preact@10.28.2)'
+
   '@navikt/nav-dekoratoren-moduler@3.6.1(csp-header@6.3.0)(html-react-parser@5.2.12(@types/react@19.2.9)(react@19.2.3))(jsdom@27.4.0)(react@19.2.3)':
     dependencies:
       csp-header: 6.3.0
       html-react-parser: 5.2.12(@types/react@19.2.9)(react@19.2.3)
       js-cookie: 3.0.5
       jsdom: 27.4.0
-    optionalDependencies:
       react: 19.2.3
 
   '@opentelemetry/api-logs@0.211.0':
@@ -4183,6 +4187,16 @@ snapshots:
       '@exodus/bytes': 1.9.0
     transitivePeerDependencies:
       - '@noble/hashes'
+
+  html-react-parser@5.2.12(@preact/compat@18.3.1(preact@10.28.2))(@types/react@19.2.9):
+    dependencies:
+      domhandler: 5.0.3
+      html-dom-parser: 5.1.4
+      react: '@preact/compat@18.3.1(preact@10.28.2)'
+      react-property: 2.0.2
+      style-to-js: 1.1.21
+    optionalDependencies:
+      '@types/react': 19.2.9
 
   html-react-parser@5.2.12(@types/react@19.2.9)(react@19.2.3):
     dependencies:
