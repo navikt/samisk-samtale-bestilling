@@ -22,7 +22,10 @@ RUN groupadd -r appuser && useradd -r -g appuser appuser
 RUN chown -R appuser:appuser /app
 USER appuser
 
+ENV NODE_ENV=production
+
 EXPOSE 3006
 WORKDIR /app/server
 
-CMD ["node", "dist/server/src/server.js"]
+ENTRYPOINT ["node"]
+CMD ["dist/server/src/server.js"]
