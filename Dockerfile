@@ -6,7 +6,7 @@ RUN corepack enable
 # Create app directory
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc .env ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc .env /app/
 COPY server/package.json /app/server/
 COPY server/dist /app/server/dist/
 COPY server/node_modules* /app/server/node_modules/
