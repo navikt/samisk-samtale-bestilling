@@ -1,6 +1,18 @@
 # Komme i gang
 
-Hent repoet fra github
+## Installere pnpm
+
+Dette prosjektet bruker **pnpm** som package manager. Node.js kommer med Corepack som automatisk bruker riktig pnpm-versjon:
+
+```bash
+corepack enable
+```
+
+Corepack leser `packageManager`-feltet i `package.json` og installerer riktig versjon automatisk.
+
+**Merk:** Når Corepack er aktivert, vil `npm`-kommandoer ikke fungere.
+
+## Hent repoet fra github og start lokalt
 
 ```
 git clone https://github.com/navikt/samisk-samtale-bestilling.git
