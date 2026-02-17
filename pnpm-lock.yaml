@@ -35,6 +35,9 @@ importers:
       node-cache:
         specifier: 5.1.2
         version: 5.1.2
+      only-allow:
+        specifier: 1.2.2
+        version: 1.2.2
       preact:
         specifier: 10.28.2
         version: 10.28.2
@@ -84,9 +87,6 @@ importers:
       globals:
         specifier: 16.5.0
         version: 16.5.0
-      only-allow:
-        specifier: 1.2.2
-        version: 1.2.2
       prettier:
         specifier: 3.8.1
         version: 3.8.1
@@ -592,6 +592,9 @@ packages:
       html-react-parser: '>=5.x'
       jsdom: '>=16.x'
       react: '>=17.x'
+    peerDependenciesMeta:
+      react:
+        optional: true
 
   '@opentelemetry/api-logs@0.211.0':
     resolution: {integrity: sha512-swFdZq8MCdmdR22jTVGQDhwqDzcI4M10nhjXkLr1EsIzXgZBqm4ZlmmcWsg3TSNf+3mzgOiqveXmBLZuDi2Lgg==}
@@ -3013,6 +3016,7 @@ snapshots:
       html-react-parser: 5.2.12(@preact/compat@18.3.1(preact@10.28.2))(@types/react@19.2.9)
       js-cookie: 3.0.5
       jsdom: 27.4.0
+    optionalDependencies:
       react: '@preact/compat@18.3.1(preact@10.28.2)'
 
   '@navikt/nav-dekoratoren-moduler@3.6.1(csp-header@6.3.0)(html-react-parser@5.2.12(@types/react@19.2.9)(react@19.2.3))(jsdom@27.4.0)(react@19.2.3)':
@@ -3021,6 +3025,7 @@ snapshots:
       html-react-parser: 5.2.12(@types/react@19.2.9)(react@19.2.3)
       js-cookie: 3.0.5
       jsdom: 27.4.0
+    optionalDependencies:
       react: 19.2.3
 
   '@opentelemetry/api-logs@0.211.0':
