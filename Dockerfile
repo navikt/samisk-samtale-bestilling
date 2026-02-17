@@ -13,7 +13,7 @@ COPY server/dist /app/server/dist/
 # Set up registry authentication and install production dependencies
 RUN --mount=type=secret,id=NODE_AUTH_TOKEN \
   NODE_AUTH_TOKEN=$(cat /run/secrets/NODE_AUTH_TOKEN) \
-  pnpm install --frozen-lockfile --prod --ignore-scripts
+  pnpm install --frozen-lockfile --prod
 
 # Use a non-root user to run the application
 RUN groupadd -r appuser && useradd -r -g appuser appuser
