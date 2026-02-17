@@ -23,6 +23,7 @@
         "@navikt/ds-css": "7.40.0",
         "@navikt/ds-react": "7.40.0",
         "@navikt/nav-dekoratoren-moduler": "3.6.1",
+        "preact": "10.28.2",
         "@preact/compat": "18.3.1",
         "body-parser": "2.2.2",
         "classnames": "2.5.1",
