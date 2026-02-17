@@ -1,4 +1,4 @@
-FROM node:24-slim
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:24-slim
 
 # Enable corepack for pnpm support
 RUN corepack enable
@@ -9,6 +9,8 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc .env ./
 COPY server/package.json /app/server/
 COPY server/dist /app/server/dist/
+COPY server/node_modules* /app/server/node_modules/
+COPY node_modules /app/node_modules
 
 # Set up registry authentication and install production dependencies
 RUN --mount=type=secret,id=NODE_AUTH_TOKEN \
