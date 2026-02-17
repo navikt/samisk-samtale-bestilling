@@ -2,7 +2,6 @@ import 'dotenv/config';
 
 import express from 'express';
 import compression from 'compression';
-import bodyParser from 'body-parser';
 import { setupSiteRoutes } from './site/setupSiteRoutes.js';
 import { setupApiRoutes } from './api/setupApiRoutes';
 import { setupErrorHandlers } from './utils/errorHandlers';
@@ -15,7 +14,7 @@ const isLocal = ENV === 'localhost';
 
 const app = express();
 app.use(compression()); // Removed '*' wildcard which was causing the error
-app.use(bodyParser.json());
+app.use(express.json());
 
 const siteRouter = express.Router();
 const apiRouter = express.Router();

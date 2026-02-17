@@ -25,12 +25,14 @@ jobs:
         steps:
             - name: Checkout repository
               uses: actions/checkout@v6
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
             - name: Setup node.js
               uses: actions/setup-node@v6
               with:
                   node-version: 24
                   registry-url: 'https://npm.pkg.github.com'
-                  cache: 'npm'
+                  cache: 'pnpm'
             - name: Define app environmment
               run: |
                   cat > .env <<EOF
@@ -42,11 +44,17 @@ jobs:
                   VITE_KONTAKTINFO_API_URL=${{ inputs.app_origin }}/tms-personopplysninger-api/kontaktinformasjon
                   EOF
             - name: Install dependencies
-              run: npm ci --ignore-scripts
+              run: pnpm install --frozen-lockfile
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
             - name: Build application
-              run: npm run build
+              run: pnpm run build
+            - name: Install production dependencies only
+              run: |
+                  rm -rf node_modules server/node_modules
+                  pnpm install --frozen-lockfile --prod
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
             - name: Build and push docker image
               uses: nais/docker-build-push@v0
               id: docker-push

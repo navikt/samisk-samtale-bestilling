@@ -3,29 +3,27 @@
     "version": "2.0.14",
     "private": true,
     "type": "module",
+    "packageManager": "pnpm@10.29.3",
     "scripts": {
-        "build": "rm -fr dist && npm-run-all build:*",
+        "build": "rm -fr dist && pnpm run --sequential '/^build:.*/' ",
         "build:client": "vite build --outDir ./server/dist/client",
         "build:ssr": "vite build --outDir ./server/src/_ssr-dist --ssr src/main-server.tsx",
-        "build:server": "npm run build --workspace server",
-        "analyze-bundle": "ANALYZE=true npm run build:client",
-        "start": "npm run start --workspace server",
+        "build:server": "pnpm run --filter ./server build",
+        "analyze-bundle": "ANALYZE=true pnpm run build:client",
+        "start": "pnpm run --filter ./server start",
         "lint": "eslint",
-        "start-local": "cp .env.local-prod .env && npm run start --workspace server",
+        "start-local": "cp .env.local-prod .env && pnpm run --filter ./server start",
         "decorator-local": "docker compose up",
         "dev-prepare": "node preact-compat-symlinks.js && cp .env.development .env",
-        "dev": "npm run dev-prepare && npm run dev --workspace server"
+        "dev": "pnpm run dev-prepare && pnpm run --filter ./server dev"
     },
-    "workspaces": [
-        "server"
-    ],
     "dependencies": {
         "@grafana/faro-web-sdk": "2.2.2",
         "@navikt/ds-css": "7.40.0",
         "@navikt/ds-react": "7.40.0",
         "@navikt/nav-dekoratoren-moduler": "3.6.1",
+        "preact": "10.28.2",
         "@preact/compat": "18.3.1",
-        "body-parser": "2.2.2",
         "classnames": "2.5.1",
         "html-react-parser": "5.2.15",
         "jsdom": "27.4.0",
@@ -47,7 +45,6 @@
         "eslint-plugin-jsx-a11y": "6.10.2",
         "eslint-plugin-react": "7.37.5",
         "globals": "16.5.0",
-        "npm-run-all": "4.1.5",
         "prettier": "3.8.1",
         "rollup-plugin-visualizer": "6.0.5",
         "typescript": "5.9.3"
@@ -62,6 +59,12 @@
             "last 1 chrome version",
             "last 1 firefox version",
             "last 1 safari version"
+        ]
+    },
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "esbuild",
+            "protobufjs"
         ]
     }
 }
