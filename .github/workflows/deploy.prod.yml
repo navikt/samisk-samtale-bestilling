@@ -14,7 +14,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v6
 
-      - uses: ./.github/actions/build-and-deploy
+      - name: Build and deploy to prod
+        uses: ./.github/actions/build-and-deploy
         with:
           environment: prod
           app_origin: 'https://www.nav.no'
