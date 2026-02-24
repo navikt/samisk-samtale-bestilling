@@ -2,14 +2,20 @@ name: Deploy to dev
 on: workflow_dispatch
 
 jobs:
-    build-and-deploy:
-        uses: ./.github/workflows/build-and-deploy.yml
-        permissions:
-            contents: read
-            id-token: write
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+
+      - name: Build and deploy to dev
+        uses: ./.github/actions/build-and-deploy
         with:
-            environment: dev
-            app_origin: 'https://www.ansatt.dev.nav.no'
-        secrets:
-            READER_TOKEN: ${{ secrets.READER_TOKEN }}
-            NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+          environment: dev
+          app_origin: 'https://www.ansatt.dev.nav.no'
+        env:
+          READER_TOKEN: ${{ secrets.READER_TOKEN }}
+          NAIS_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
