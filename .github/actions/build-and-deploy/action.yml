@@ -1,0 +1,81 @@
+name: Build, push and deploy
+description: Build app with pnpm, build+push Docker image, then deploy to NAIS
+
+inputs:
+  environment:
+    required: true
+    description: Environment name (also used for image suffix and cluster)
+  app_origin:
+    required: true
+    description: App origin used in .env and deploy VAR
+
+outputs:
+  image:
+    description: Built image reference
+    value: ${{ steps.docker-push.outputs.image }}
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+
+    - name: Setup node.js
+      uses: actions/setup-node@v6
+      with:
+        node-version: 24
+        registry-url: https://npm.pkg.github.com
+        cache: pnpm
+
+    - name: Define app environment
+      shell: bash
+      env:
+        ENVIRONMENT: ${{ inputs.environment }}
+        APP_ORIGIN: ${{ inputs.app_origin }}
+      run: |
+        cat > .env <<EOF
+        ENV=$ENVIRONMENT
+        API_URL=http://tilbakemeldingsmottak-api.teamserviceklage
+        VITE_APP_BASEPATH=/person/bestilling-av-samisk-samtale
+        VITE_APP_ORIGIN=$APP_ORIGIN
+        APP_PORT=3006
+        VITE_KONTAKTINFO_API_URL=$APP_ORIGIN/tms-personopplysninger-api/kontaktinformasjon
+        EOF
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
+      env:
+        NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
+
+    - name: Build application
+      shell: bash
+      run: pnpm run build
+
+    - name: Install production dependencies only
+      shell: bash
+      run: |
+        rm -rf node_modules server/node_modules
+        pnpm install --frozen-lockfile --prod
+      env:
+        NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
+
+    - name: Build and push docker image
+      uses: nais/docker-build-push@v0
+      id: docker-push
+      with:
+        team: navno
+        project_id: ${{ env.NAIS_MANAGEMENT_PROJECT_ID }}
+        identity_provider: ${{ env.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
+        image_suffix: ${{ inputs.environment }}
+        build_secrets: NODE_AUTH_TOKEN=${{ env.NODE_AUTH_TOKEN }}
+
+    - name: Deploy to nais
+      uses: nais/deploy/actions/deploy@v2
+      env:
+        CLUSTER: ${{ inputs.environment }}-gcp
+        RESOURCE: .nais/config.yaml
+        VAR: image=${{ steps.docker-push.outputs.image }},app_origin=${{ inputs.app_origin }}
