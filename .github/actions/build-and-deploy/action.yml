@@ -1,10 +1,9 @@
-name: Build, push and deploy
-description: Build app with pnpm, build+push Docker image, then deploy to NAIS
+name: Build and deploy
 
 inputs:
   environment:
     required: true
-    description: Environment name (also used for image suffix and cluster)
+    description: Environment name
   app_origin:
     required: true
     description: App origin used in .env and deploy VAR
@@ -17,9 +16,6 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@v6
-
     - name: Setup pnpm
       uses: pnpm/action-setup@v4
 
