@@ -8,12 +8,12 @@
         "dev": "pnpm run build && concurrently \"tsc -w\" \"nodemon -r dotenv/config -w ./dist/server ./dist/server/src/server.js dotenv_config_path=../.env\""
     },
     "dependencies": {
-        "@navikt/nav-dekoratoren-moduler": "3.6.1",
+        "@navikt/nav-dekoratoren-moduler": "3.6.2",
         "compression": "1.8.1",
         "csp-header": "6.3.0",
-        "dotenv": "17.2.3",
+        "dotenv": "17.3.1",
         "express": "5.2.1",
-        "lru-cache": "11.2.5",
+        "lru-cache": "11.2.6",
         "node-cache": "5.1.2",
         "react": "npm:@preact/compat",
         "react-dom": "npm:@preact/compat"
@@ -21,9 +21,9 @@
     "devDependencies": {
         "@types/compression": "1.8.1",
         "@types/express": "5.0.6",
-        "@types/node": "25.2.0",
+        "@types/node": "25.3.0",
         "concurrently": "9.2.1",
-        "nodemon": "3.1.11"
+        "nodemon": "3.1.14"
     },
     "nodemonConfig": {
         "delay": 500
