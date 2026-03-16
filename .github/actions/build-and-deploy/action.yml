@@ -1,4 +1,5 @@
 name: Build and deploy
+description: Build the application, push the docker image and deploy to nais
 
 inputs:
   environment:
