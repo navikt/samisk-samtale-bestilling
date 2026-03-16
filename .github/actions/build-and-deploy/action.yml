@@ -46,7 +46,7 @@ runs:
       shell: bash
       run: pnpm install --frozen-lockfile
       env:
-        NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
+        NODE_AUTH_TOKEN: ${{ env.READER_TOKEN }}
 
     - name: Build application
       shell: bash
@@ -58,7 +58,7 @@ runs:
         rm -rf node_modules server/node_modules
         pnpm install --frozen-lockfile --prod
       env:
-        NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
+        NODE_AUTH_TOKEN: ${{ env.READER_TOKEN }}
 
     - name: Build and push docker image
       uses: nais/docker-build-push@v0
@@ -68,7 +68,7 @@ runs:
         project_id: ${{ env.NAIS_MANAGEMENT_PROJECT_ID }}
         identity_provider: ${{ env.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
         image_suffix: ${{ inputs.environment }}
-        build_secrets: NODE_AUTH_TOKEN=${{ env.NODE_AUTH_TOKEN }}
+        build_secrets: NODE_AUTH_TOKEN=${{ env.READER_TOKEN }}
 
     - name: Deploy to nais
       uses: nais/deploy/actions/deploy@v2
