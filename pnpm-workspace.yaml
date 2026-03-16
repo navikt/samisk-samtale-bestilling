@@ -1,2 +1,5 @@
 packages:
     - 'server'
+minimumReleaseAge: 4320
+minimumReleaseAgeExclude:
+    - '@navikt/*'

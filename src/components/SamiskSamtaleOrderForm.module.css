@@ -1,11 +1,11 @@
 .panel {
     width: 100%;
     padding: 2rem;
-    background-color: var(--a-gray-100);
+    background-color: var(--ax-bg-neutral-soft);
 }
 .fields {
     display: grid;
-    gap: var(--a-spacing-6);
+    gap: var(--ax-space-24);
 }
 
 .submitInfo {
