@@ -19,7 +19,7 @@ importers:
         version: 7.40.0(@types/react@19.2.14)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@navikt/nav-dekoratoren-moduler':
         specifier: 3.7.1
-        version: 3.7.1(html-react-parser@5.2.17(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
+        version: 3.7.1(html-react-parser@6.0.1(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)
       '@preact/compat':
         specifier: 18.3.2
         version: 18.3.2(preact@10.29.0)
@@ -27,8 +27,8 @@ importers:
         specifier: 2.5.1
         version: 2.5.1
       html-react-parser:
-        specifier: 5.2.17
-        version: 5.2.17(@types/react@19.2.14)(react@19.2.3)
+        specifier: 6.0.1
+        version: 6.0.1(@types/react@19.2.14)(react@19.2.3)
       jsdom:
         specifier: 27.4.0
         version: 27.4.0
@@ -98,7 +98,7 @@ importers:
     dependencies:
       '@navikt/nav-dekoratoren-moduler':
         specifier: 3.7.0
-        version: 3.7.0(@preact/compat@18.3.2(preact@10.29.0))(html-react-parser@5.2.17(@preact/compat@18.3.2(preact@10.29.0))(@types/react@19.2.14))
+        version: 3.7.0(@preact/compat@18.3.2(preact@10.29.0))(html-react-parser@6.0.1(@preact/compat@18.3.2(preact@10.29.0))(@types/react@19.2.14))
       compression:
         specifier: 1.8.1
         version: 1.8.1
@@ -574,6 +574,9 @@ packages:
       '@types/react': ^17.0.30 || ^18 || ^19
       react: ^17 || ^18 || ^19
       react-dom: ^17 || ^18 || ^19
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
 
   '@navikt/ds-tokens@7.40.0':
     resolution: {integrity: sha512-zBaBKLS5R2OZyXI4UUPOmiB15L/u/aJPHiyoccJDtmqrv5wRkc1oM6UCjzKK0D4gLZHBoxp7YBT0sR9Mp4DXFQ==, tarball: https://npm.pkg.github.com/download/@navikt/ds-tokens/7.40.0/36f981e12d4d90f18155615b7666b737039a3ff0}
@@ -591,6 +594,9 @@ packages:
     peerDependencies:
       html-react-parser: '>=5.x'
       react: '>=17.x'
+    peerDependenciesMeta:
+      react:
+        optional: true
 
   '@opentelemetry/api-logs@0.213.0':
     resolution: {integrity: sha512-zRM5/Qj6G84Ej3F1yt33xBVY/3tnMxtL1fiDIxYbDWYaZ/eudVw3/PBiZ8G7JwUxXxjW8gU4g6LnOyfGKYHYgw==}
@@ -1278,15 +1284,31 @@ packages:
   dom-serializer@2.0.0:
     resolution: {integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==}
 
+  dom-serializer@3.1.1:
+    resolution: {integrity: sha512-4MEa38/QexBob6gFNwu+EGdWvhJ1OKuNwdYY3Y3NyeWDQfnGeDYQUDfIRzWu5B5gsv03so2Uxd28YC6zrsx3Lw==}
+    engines: {node: '>=20.19.0'}
+
   domelementtype@2.3.0:
     resolution: {integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==}
+
+  domelementtype@3.0.0:
+    resolution: {integrity: sha512-umCQid3jKbDmVjx8jGaW7uUykm4DEUeyV21hPxNMo2nV955DhUThwqyOIDtreepP31hl84X7G5U9ZfsWvIB3Pg==}
+    engines: {node: '>=20.19.0'}
 
   domhandler@5.0.3:
     resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
     engines: {node: '>= 4'}
 
+  domhandler@6.0.1:
+    resolution: {integrity: sha512-gYzvtM72ZtxQO0T048kd6HWSbbGCNOUwcnfQ01cqIJ4X2IYKFFHZ5mKvrQETcFXxsRObZulDaKmy//R7TPtsBg==}
+    engines: {node: '>=20.19.0'}
+
   domutils@3.2.2:
     resolution: {integrity: sha512-6kZKyUajlDuqlHKVX1w7gyslj9MPIXzIFiz/rGu35uC1wMi+kMhQwGhl4lt9unC9Vb9INnY9Z3/ZA3+FhASLaw==}
+
+  domutils@4.0.2:
+    resolution: {integrity: sha512-qI4JLRKnSzqFqr7hAlS5xQDusBCjKSEG4t4+7aNrIQMHBcsC2TGEhuyABJdYkgSewL57PNLYEiibY2iPKhKpaA==}
+    engines: {node: '>=20.19.0'}
 
   dotenv@17.3.1:
     resolution: {integrity: sha512-IO8C/dzEb6O3F9/twg6ZLXz164a2fhTnEWb95H23Dm4OuN+92NmEAlTrupP9VW6Jm3sO26tQlqyvyi4CsnY9GA==}
@@ -1320,9 +1342,9 @@ packages:
     resolution: {integrity: sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g==}
     engines: {node: '>=0.12'}
 
-  entities@7.0.1:
-    resolution: {integrity: sha512-TWrgLOFUQTH994YUyl1yT4uyavY5nNB5muff+RtWaqNVCAK408b5ZnnbNAUEWLTCpum9w6arT70i1XdQ4UeOPA==}
-    engines: {node: '>=0.12'}
+  entities@8.0.0:
+    resolution: {integrity: sha512-zwfzJecQ/Uej6tusMqwAqU/6KL2XaB2VZ2Jg54Je6ahNBGNH6Ek6g3jjNCF0fG9EWQKGZNddNjU5F1ZQn/sBnA==}
+    engines: {node: '>=20.19.0'}
 
   es-abstract@1.24.1:
     resolution: {integrity: sha512-zHXBLhP+QehSSbsS9Pt23Gg964240DPd6QCf8WpkqEXxQ7fhdZzYsocOr5u7apWonsS5EjZDmTF+/slGMyasvw==}
@@ -1598,15 +1620,15 @@ packages:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
     hasBin: true
 
-  html-dom-parser@5.1.8:
-    resolution: {integrity: sha512-MCIUng//mF2qTtGHXJWr6OLfHWmg3Pm8ezpfiltF83tizPWY17JxT4dRLE8lykJ5bChJELoY3onQKPbufJHxYA==}
+  html-dom-parser@7.0.1:
+    resolution: {integrity: sha512-loRBDTCY/05/jAC63J1X9ID+xjRucmpLkIcQO0IRbOubBo5ucnpUpyXXob9UMXOskMZlu7KPsDP/2KOMelzJNA==}
 
   html-encoding-sniffer@6.0.0:
     resolution: {integrity: sha512-CV9TW3Y3f8/wT0BRFc1/KAVQ3TUHiXmaAb6VW9vtiMFf7SLoMd1PdAc4W3KFOFETBJUb90KatHqlsZMWV+R9Gg==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
 
-  html-react-parser@5.2.17:
-    resolution: {integrity: sha512-m+K/7Moq1jodAB4VL0RXSOmtwLUYoAsikZhwd+hGQe5Vtw2dbWfpFd60poxojMU0Tsh9w59mN1QLEcoHz0Dx9w==}
+  html-react-parser@6.0.1:
+    resolution: {integrity: sha512-tIie2HSIk2Ct1tdupjd/DhBjskxN/NL5J4ncbUnk2smBr5UIfpPpitUo0imGfBM0BlOL7ac8RcqEwne1jXTcsQ==}
     peerDependencies:
       '@types/react': 0.14 || 15 || 16 || 17 || 18 || 19
       react: 0.14 || 15 || 16 || 17 || 18 || 19
@@ -1614,8 +1636,9 @@ packages:
       '@types/react':
         optional: true
 
-  htmlparser2@10.1.0:
-    resolution: {integrity: sha512-VTZkM9GWRAtEpveh7MSF6SjjrpNVNNVJfFup7xTY3UpFtm67foy9HDVXneLtFVt4pMz5kZtgNcvCniNFb1hlEQ==}
+  htmlparser2@12.0.0:
+    resolution: {integrity: sha512-Tz7u1i95/g2x2jz81+x0FBVhBhY5aRTvD3tXXdFaljuNdzDLJ8UGNRrTcj2cgQvAg3iW/h77Fz15nLW0L0CrZw==}
+    engines: {node: '>=20.19.0'}
 
   http-errors@2.0.1:
     resolution: {integrity: sha512-4FbRdAX+bSdmo4AUFuS0WNiPz8NgFt+r8ThgNWmlrjQjt1Q7ZR9+zTlce2859x4KSXrwIsaeTqDoKQmtP8pLmQ==}
@@ -3018,27 +3041,29 @@ snapshots:
       '@floating-ui/react-dom': 2.1.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@navikt/aksel-icons': 7.40.0
       '@navikt/ds-tokens': 7.40.0
-      '@types/react': 19.2.14
       clsx: 2.1.0
       date-fns: 4.1.0
       react: 19.2.3
       react-day-picker: 9.7.0(react@19.2.3)
       react-dom: 19.2.3(react@19.2.3)
+    optionalDependencies:
+      '@types/react': 19.2.14
 
   '@navikt/ds-tokens@7.40.0': {}
 
-  '@navikt/nav-dekoratoren-moduler@3.7.0(@preact/compat@18.3.2(preact@10.29.0))(html-react-parser@5.2.17(@preact/compat@18.3.2(preact@10.29.0))(@types/react@19.2.14))':
+  '@navikt/nav-dekoratoren-moduler@3.7.0(@preact/compat@18.3.2(preact@10.29.0))(html-react-parser@6.0.1(@preact/compat@18.3.2(preact@10.29.0))(@types/react@19.2.14))':
     dependencies:
       csp-header: 6.3.1
-      html-react-parser: 5.2.17(@preact/compat@18.3.2(preact@10.29.0))(@types/react@19.2.14)
+      html-react-parser: 6.0.1(@preact/compat@18.3.2(preact@10.29.0))(@types/react@19.2.14)
       js-cookie: 3.0.5
       react: '@preact/compat@18.3.2(preact@10.29.0)'
 
-  '@navikt/nav-dekoratoren-moduler@3.7.1(html-react-parser@5.2.17(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)':
+  '@navikt/nav-dekoratoren-moduler@3.7.1(html-react-parser@6.0.1(@types/react@19.2.14)(react@19.2.3))(react@19.2.3)':
     dependencies:
       csp-header: 6.3.1
-      html-react-parser: 5.2.17(@types/react@19.2.14)(react@19.2.3)
+      html-react-parser: 6.0.1(@types/react@19.2.14)(react@19.2.3)
       js-cookie: 3.0.5
+    optionalDependencies:
       react: 19.2.3
 
   '@opentelemetry/api-logs@0.213.0':
@@ -3749,17 +3774,35 @@ snapshots:
       domhandler: 5.0.3
       entities: 4.5.0
 
+  dom-serializer@3.1.1:
+    dependencies:
+      domelementtype: 3.0.0
+      domhandler: 6.0.1
+      entities: 8.0.0
+
   domelementtype@2.3.0: {}
+
+  domelementtype@3.0.0: {}
 
   domhandler@5.0.3:
     dependencies:
       domelementtype: 2.3.0
+
+  domhandler@6.0.1:
+    dependencies:
+      domelementtype: 3.0.0
 
   domutils@3.2.2:
     dependencies:
       dom-serializer: 2.0.0
       domelementtype: 2.3.0
       domhandler: 5.0.3
+
+  domutils@4.0.2:
+    dependencies:
+      dom-serializer: 3.1.1
+      domelementtype: 3.0.0
+      domhandler: 6.0.1
 
   dotenv@17.3.1: {}
 
@@ -3783,7 +3826,7 @@ snapshots:
 
   entities@6.0.1: {}
 
-  entities@7.0.1: {}
+  entities@8.0.0: {}
 
   es-abstract@1.24.1:
     dependencies:
@@ -4211,10 +4254,10 @@ snapshots:
 
   he@1.2.0: {}
 
-  html-dom-parser@5.1.8:
+  html-dom-parser@7.0.1:
     dependencies:
-      domhandler: 5.0.3
-      htmlparser2: 10.1.0
+      domhandler: 6.0.1
+      htmlparser2: 12.0.0
 
   html-encoding-sniffer@6.0.0:
     dependencies:
@@ -4222,32 +4265,32 @@ snapshots:
     transitivePeerDependencies:
       - '@noble/hashes'
 
-  html-react-parser@5.2.17(@preact/compat@18.3.2(preact@10.29.0))(@types/react@19.2.14):
+  html-react-parser@6.0.1(@preact/compat@18.3.2(preact@10.29.0))(@types/react@19.2.14):
     dependencies:
-      domhandler: 5.0.3
-      html-dom-parser: 5.1.8
+      domhandler: 6.0.1
+      html-dom-parser: 7.0.1
       react: '@preact/compat@18.3.2(preact@10.29.0)'
       react-property: 2.0.2
       style-to-js: 1.1.21
     optionalDependencies:
       '@types/react': 19.2.14
 
-  html-react-parser@5.2.17(@types/react@19.2.14)(react@19.2.3):
+  html-react-parser@6.0.1(@types/react@19.2.14)(react@19.2.3):
     dependencies:
-      domhandler: 5.0.3
-      html-dom-parser: 5.1.8
+      domhandler: 6.0.1
+      html-dom-parser: 7.0.1
       react: 19.2.3
       react-property: 2.0.2
       style-to-js: 1.1.21
     optionalDependencies:
       '@types/react': 19.2.14
 
-  htmlparser2@10.1.0:
+  htmlparser2@12.0.0:
     dependencies:
-      domelementtype: 2.3.0
-      domhandler: 5.0.3
-      domutils: 3.2.2
-      entities: 7.0.1
+      domelementtype: 3.0.0
+      domhandler: 6.0.1
+      domutils: 4.0.2
+      entities: 8.0.0
 
   http-errors@2.0.1:
     dependencies:
