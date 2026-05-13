@@ -1,2 +1,6 @@
 packages:
-    - 'server'
+  - 'server'
+minimumReleaseAge: 10080
+allowBuilds:
+  esbuild: true
+  protobufjs: true

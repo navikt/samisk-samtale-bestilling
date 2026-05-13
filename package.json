@@ -3,7 +3,7 @@
     "version": "2.0.14",
     "private": true,
     "type": "module",
-    "packageManager": "pnpm@10.29.3",
+    "packageManager": "pnpm@11.1.1+sha512.d1fdf5f73c617b64fa1a56a81c3c8dfe0e966e33a6010aa256b517ae77be21d93e05affc0de1a83b0e4f29d569f68b446ae8f068cd7247c0bb3df0fb4d7bdf9a",
     "scripts": {
         "build": "rm -fr dist && pnpm run --sequential '/^build:.*/' ",
         "build:client": "vite build --outDir ./server/dist/client",
@@ -59,12 +59,6 @@
             "last 1 chrome version",
             "last 1 firefox version",
             "last 1 safari version"
-        ]
-    },
-    "pnpm": {
-        "onlyBuiltDependencies": [
-            "esbuild",
-            "protobufjs"
         ]
     }
 }
