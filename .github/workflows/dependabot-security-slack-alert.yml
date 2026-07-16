@@ -2,21 +2,25 @@ name: Dependabot Security Slack Alert
 
 on:
   pull_request:
-    types: [ opened, labeled ]
+    types: [ opened, reopened ]
   workflow_dispatch:
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   notify-slack:
     runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'workflow_dispatch' ||
-      (github.actor == 'dependabot[bot]' &&
-      contains(github.event.pull_request.labels.*.name, 'security'))
+    if: github.event_name == 'workflow_dispatch' || github.actor == 'dependabot[bot]'
     steps:
+      - name: Fetch Dependabot metadata
+        id: metadata
+        if: github.event_name == 'pull_request'
+        uses: dependabot/fetch-metadata@v2
+
       - name: Send Slack notification
+        if: github.event_name == 'workflow_dispatch' || steps.metadata.outputs.ghsa-id != ''
         uses: slackapi/slack-github-action@v3.0.3
         with:
           webhook: ${{ secrets.CODE_REVIEWS_SLACK_WEBHOOK }}
