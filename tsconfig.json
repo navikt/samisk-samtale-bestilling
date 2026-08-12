@@ -1,28 +1,19 @@
 {
     "compilerOptions": {
         "target": "es2022",
-        "useDefineForClassFields": true,
-        "lib": [
-            "DOM",
-            "ESNext"
-        ],
+        "lib": ["es2023"],
         "types": ["node"],
-        "allowJs": false,
-        "skipLibCheck": true,
-        "allowSyntheticDefaultImports": true,
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
         "strict": true,
+        "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "module": "ESNext",
-        "moduleResolution": "bundler",
-        "resolveJsonModule": true,
         "isolatedModules": true,
-        "noEmit": true,
-        "jsx": "react-jsx"
+        "resolveJsonModule": true,
+        "jsx": "react-jsx",
+        "jsxImportSource": "hono/jsx",
+        "rootDir": "src",
+        "outDir": "dist"
     },
-    "include": ["src", "common"],
-    "references": [
-        {
-            "path": "./tsconfig.node.json"
-        }
-    ]
+    "include": ["src"]
 }

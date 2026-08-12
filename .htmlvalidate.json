@@ -1,0 +1,21 @@
+{
+    "extends": ["html-validate:recommended", "html-validate:document"],
+    "rules": {
+        "input-missing-label": "error",
+        "empty-heading": "error",
+        "empty-title": "error",
+        "prefer-native-element": "error",
+        "aria-label-misuse": "error",
+        "no-autoplay": "error",
+        "wcag/h30": "error",
+        "wcag/h32": "error",
+        "wcag/h36": "error",
+        "wcag/h37": "error",
+        "wcag/h63": "error",
+        "wcag/h67": "error",
+        "wcag/h71": "error",
+        "attribute-boolean-style": ["error", { "style": "empty" }],
+        "form-dup-name": ["error", { "shared": ["radio", "checkbox"] }],
+        "require-sri": "off"
+    }
+}

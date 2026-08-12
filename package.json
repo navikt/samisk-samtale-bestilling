@@ -1,64 +1,35 @@
 {
     "name": "samisk-samtale-bestilling",
-    "version": "2.0.14",
+    "version": "3.0.0",
     "private": true,
     "type": "module",
-    "packageManager": "pnpm@11.1.1+sha512.d1fdf5f73c617b64fa1a56a81c3c8dfe0e966e33a6010aa256b517ae77be21d93e05affc0de1a83b0e4f29d569f68b446ae8f068cd7247c0bb3df0fb4d7bdf9a",
     "scripts": {
-        "build": "rm -fr dist && pnpm run --sequential '/^build:.*/' ",
-        "build:client": "vite build --outDir ./server/dist/client",
-        "build:ssr": "vite build --outDir ./server/src/_ssr-dist --ssr src/main-server.tsx",
-        "build:server": "pnpm run --filter ./server build",
-        "analyze-bundle": "ANALYZE=true pnpm run build:client",
-        "start": "pnpm run --filter ./server start",
-        "lint": "eslint",
-        "start-local": "cp .env.local-prod .env && pnpm run --filter ./server start",
-        "decorator-local": "docker compose up",
-        "dev-prepare": "node preact-compat-symlinks.js && cp .env.development .env",
-        "dev": "pnpm run dev-prepare && pnpm run --filter ./server dev"
+        "build": "rm -rf dist && tsc -p tsconfig.json",
+        "start": "node --env-file-if-exists=.env dist/server.js",
+        "start-local": "cp .env.local-prod .env && pnpm run build && pnpm run start",
+        "dev": "cp .env.development .env && tsx watch --env-file=.env dev/dev-server.ts",
+        "mock": "tsx dev/mock-upstream.ts",
+        "test": "vitest run",
+        "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.client.json",
+        "lint": "oxlint",
+        "format": "oxfmt src dev tests static vitest.config.ts"
     },
     "dependencies": {
-        "@grafana/faro-web-sdk": "2.9.0",
-        "@navikt/ds-css": "8.16.1",
-        "@navikt/ds-react": "8.16.1",
+        "@hono/node-server": "^1.14.0",
         "@navikt/nav-dekoratoren-moduler": "4.2.2",
-        "@preact/compat": "18.3.2",
-        "classnames": "2.5.1",
+        "csp-header": "6.3.1",
+        "hono": "^4.7.0",
         "html-react-parser": "6.1.5",
-        "jsdom": "30.0.1",
-        "node-cache": "5.1.2",
-        "preact": "10.29.8",
-        "preact-render-to-string": "6.7.0",
-        "react-router": "7.18.0",
-        "vite": "7.3.5"
+        "react": "19.2.4"
     },
     "devDependencies": {
-        "@babel/preset-react": "7.29.7",
-        "@preact/preset-vite": "2.10.6",
         "@types/node": "26.1.2",
-        "@types/react": "19.2.18",
-        "@types/react-dom": "19.2.4",
-        "@typescript-eslint/eslint-plugin": "8.65.0",
-        "@typescript-eslint/parser": "8.65.0",
-        "eslint": "10.8.0",
-        "eslint-config-prettier": "10.1.8",
-        "eslint-plugin-jsx-a11y": "6.10.2",
-        "eslint-plugin-react": "7.37.5",
-        "globals": "17.8.0",
-        "prettier": "3.9.6",
-        "rollup-plugin-visualizer": "7.0.1",
-        "typescript": "6.0.3"
+        "html-validate": "^9.5.0",
+        "oxfmt": "^0.62.0",
+        "oxlint": "^1.77.0",
+        "tsx": "^4.19.0",
+        "typescript": "6.0.3",
+        "vitest": "^3.1.0"
     },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    }
+    "packageManager": "pnpm@11.1.1+sha512.d1fdf5f73c617b64fa1a56a81c3c8dfe0e966e33a6010aa256b517ae77be21d93e05affc0de1a83b0e4f29d569f68b446ae8f068cd7247c0bb3df0fb4d7bdf9a"
 }

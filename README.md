@@ -5,50 +5,81 @@
 
 ## Arkitektur
 
-Applikasjonen er en full-stack Node.js-løsning med server-side rendering (SSR) og klient-side hydrering.
+Applikasjonen er en liten server-rendret Node.js-app: HTML rendres på serveren, og et lite
+vanilla JS-skript legger på progressiv forbedring. Ingen klient-rammeverk, ingen bundler,
+ingen hydrering.
 
 ### Teknisk stack
 
-- **Frontend**: Preact
-- **Backend**: Express.js
-- **Språk**: TypeScript
-- **Byggverktøy**: Vite
+- **Server**: [Hono](https://hono.dev/) på Node (`@hono/node-server`)
+- **Templating**: `hono/jsx` (JSX-til-streng på serveren, ingen klient-runtime)
+- **Styling**: [Aksel](https://aksel.nav.no/) via versjonspinnet `ds-css` fra NAV-CDN (ren CSS, statisk `aksel-*`-markup)
+- **Klient-JS**: én håndskrevet fil, [static/enhance.js](static/enhance.js) (serveres som den er)
+- **Validering av HTML**: [html-validate](https://html-validate.org/) i testene - hver
+  side-tilstand valideres mot HTML-spesifikasjonen (innholdsmodell, nesting) pluss
+  tilgjengelighetsregler (labels, headinger, ARIA, WCAG)
+- **Test**: Vitest
+- **Språk**: TypeScript (bygges med `tsc`, kjøres med vanilla `node`)
 
 ### Struktur
 
-Applikasjonen bruker en monorepo-struktur med pnpm workspaces:
-
-- `src/` - Frontend-kode (Preact-komponenter, utilities, entry points)
-- `server/` - Backend-kode (Express-server, API-ruter, SSR-logikk)
-- `common/` - Delt kode mellom frontend og backend (lokalisering)
+```
+src/
+├── server.ts       oppstart, graceful shutdown
+├── app.ts          createApp(deps) - ruter og middleware, testbar uten listen()
+├── config.ts       typet env-validering ved oppstart
+├── decorator.ts    NAV-dekoratøren via fetchDecoratorHtml (fire HTML-fragmenter)
+├── csp.ts          CSP-header via buildCspHeader (dekoratør-kompatibel)
+├── auth/           Azure AD client credentials-token (m2m)
+├── submit/         validering (server-side) + innsending til tilbakemeldingsmottak-api
+├── localization/   tekster for se/nb
+└── views/          JSX-views med statisk aksel-markup
+static/             app.css + enhance.js (committes; Aksel-CSS lastes fra cdn.nav.no)
+tests/              vitest + html-validate
+dev/                lokal utvikling: mock av upstream-tjenestene (bygges/shippes aldri)
+```
 
 ### Flyt
 
-1. **Server-side rendering (SSR)**: Ved første sidehenting rendres Preact-applikasjonen på serveren
-2. **Decorator-injeksjon**: NAV-dekoratøren (header/footer) injiseres i HTML-malen
-3. **Klient-side hydrering**: Når siden lastes i nettleseren, tar Preact over for å gjøre siden interaktiv
-4. **Form-innsending**: Skjemadata sendes via backend-proxy til tilbakemeldingsmottak-api med Azure AD-autentisering (Se API-endepunkter)
+1. **GET**: Serveren henter dekoratør-fragmentene (cachet), rendrer hele siden med `hono/jsx`
+   og returnerer ferdig HTML. Ingen hydrering.
+2. **POST (uten JS)**: Vanlig skjema-POST. Ved valideringsfeil re-rendres siden med
+   feilmeldinger og bevarte verdier (400). Ved suksess: 303-redirect til `?sendt=1`
+   (Post/Redirect/Get) som viser kvitteringen.
+3. **POST (med JS)**: `enhance.js` sender samme skjema med `Accept: application/json`,
+   viser lasteindikator og bytter skjemaet mot kvitteringen uten sidelast.
+4. **Innsending**: Serveren validerer (alle stier), henter Azure AD-token
+   (client credentials, cachet) og poster til tilbakemeldingsmottak-api.
 
 ### Endepunkter
 
-Applikasjonen eksponerer følgende endepunkter:
-
-#### API-endepunkter
-
-| Endepunkt               | Metode | Beskrivelse                                                     |
-| ----------------------- | ------ | --------------------------------------------------------------- |
-| `/api/internal/isAlive` | GET    | Health check-endepunkt for å verifisere at applikasjonen kjører |
-| `/api/internal/isReady` | GET    | Readiness probe for Kubernetes - sjekker om appen er klar       |
-| `/api/proxy`            | POST   | Proxy for skjemainnsending til tilbakemeldingsmottak-api        |
-
-#### Side-endepunkter
-
-| Endepunkt | Språk             | Beskrivelse                         |
-| --------- | ----------------- | ----------------------------------- |
-| `/`       | Nordsamisk (se)   | Hovedside for bestilling av samtale |
-| `/nb`     | Norsk bokmål (nb) | Norsk versjon av bestillingssiden   |
+| Endepunkt               | Metode | Beskrivelse                                                  |
+| ----------------------- | ------ | ------------------------------------------------------------ |
+| `/`                     | GET    | Hovedside, nordsamisk (`?sendt=1` viser kvittering)          |
+| `/nb`                   | GET    | Norsk bokmål                                                 |
+| `/` og `/nb`            | POST   | Skjemainnsending (HTML eller JSON etter `Accept`-header)     |
+| `/api/internal/isAlive` | GET    | Liveness-probe (referert i `.nais/config.yaml`)              |
+| `/api/internal/isReady` | GET    | Readiness-probe (referert i `.nais/config.yaml`)             |
+| `/api/proxy`            | POST   | Legacy-alias for gammel klient-JS - fjernes etter en release |
+| `/static/*`             | GET    | Statiske filer (app.css, enhance.js)                         |
 
 Alle endepunkter serveres under basepath `/person/bestilling-av-samisk-samtale`.
+
+### Vedlikeholdsnotater
+
+- **Aksel-CSS er pinnet eksakt i CDN-url-en** i [src/views/Layout.tsx](src/views/Layout.tsx)
+  (`cdn.nav.no/aksel/@navikt/ds-css/<versjon>/index.min.css` - CDN-en har ikke semver).
+  Markupen i `src/views/` gjenskaper det ds-react rendret (verifisert mot produksjonens
+  SSR-output), så en oppgradering kan endre klassenavn/tokens: bytt versjon i url-en og
+  re-verifiser visuelt. Dependabot ser ikke denne avhengigheten i det hele tatt.
+- **`react` og `html-react-parser`** er kun installert fordi
+  `@navikt/nav-dekoratoren-moduler/ssr` require-er dem ved lasting. Appen bruker dem ikke.
+- **Nordsamiske tekster**: `kvitteringTekst` og `feilmeldingInnsending` i
+  [src/localization/se.ts](src/localization/se.ts) har norsk fallback og trenger
+  menneskelig oversettelse (markert med TODO).
+- **Faro/RUM ble fjernet** i omskrivingen (krevde bundler eller tredjeparts-CDN).
+  Server-observability går fortsatt via Nais autoInstrumentation. Trengs RUM igjen:
+  én liten esbuild-kommando kan bygge `static/telemetry.js`.
 
 ## Ingress i dev
 
