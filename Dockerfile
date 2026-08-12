@@ -1,16 +1,14 @@
 FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:24-slim
 
 WORKDIR /app
-
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc .env /app/
-COPY node_modules /app/node_modules/
-COPY server/dist /app/server/dist/
-COPY server/package.json /app/server/
-COPY server/node_modules /app/server/node_modules/
-
 ENV NODE_ENV=production
+
+# package.json is needed because "type": "module" makes dist/*.js load as ESM
+COPY package.json .env ./
+COPY node_modules ./node_modules/
+COPY static ./static/
+COPY dist ./dist/
 
 EXPOSE 3006
 
-ENTRYPOINT ["node"]
-CMD ["server/dist/server/src/server.js"]
+CMD ["node", "--env-file=.env", "dist/server.js"]

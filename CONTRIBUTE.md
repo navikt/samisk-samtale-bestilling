@@ -30,6 +30,47 @@ Start applikasjonen lokalt:
 pnpm run dev
 ```
 
+Dette kopierer `.env.development` til `.env` og starter to servere i én prosess med
+`tsx watch` (restarter ved kodeendringer):
+
+- **appen** på http://localhost:3006/person/bestilling-av-samisk-samtale (dekoratøren hentes fra
+  dev-miljøet - ingen docker-compose nødvendig)
+- **mock-upstream** på port 3999 ([dev/mock-upstream.ts](dev/mock-upstream.ts)) som svarer for
+  Azure AD-token, tilbakemeldingsmottak-api og kontaktinfo-api
+
+Hele flyten virker dermed lokalt: telefonfeltet forhåndsutfylles med mock-nummeret `99887766`,
+og innsending lykkes - mottatte bestillinger logges i terminalen. `dev/` bygges og shippes aldri.
+
+Endringer i `static/app.css` og `static/enhance.js` serveres direkte fra disk - bare last siden på
+nytt (statiske filer har `no-store` i utviklingsmodus). Vil du se feilstien, stopp mock-serveren
+eller send inn med ugyldige felter.
+
+Mocken kan også kjøres alene (f.eks. sammen med `pnpm run start-local`):
+
+```
+pnpm run mock
+```
+
+## Tester
+
+```
+pnpm test
+```
+
+Kjører Vitest-suiten, inkludert HTML-validering: hver side-tilstand (begge språk, skjema,
+valideringsfeil, innsendingsfeil, kvittering) rendres og valideres mot HTML-spesifikasjonen og
+tilgjengelighetsregler med [html-validate](https://html-validate.org/). Reglene er konfigurert
+i `.htmlvalidate.json`.
+
+## Bygg
+
+```
+pnpm run build
+```
+
+Bygger TypeScript til `dist/` med `tsc`. Aksel-CSS bygges ikke - den lastes versjonspinnet
+fra NAV-CDN (se `src/views/Layout.tsx`). Kjør produksjonsbygget lokalt med `pnpm run start-local`.
+
 ## Deploy
 
 Vi deployer med Github Actions. Denne applikasjonen kan deployes til prod og dev som skal være identiske miljøer med hensyn til testing.
