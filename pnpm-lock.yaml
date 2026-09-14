@@ -42,8 +42,8 @@ importers:
         specifier: 6.7.0
         version: 6.7.0(preact@10.29.8)
       react-router:
-        specifier: 7.18.0
-        version: 7.18.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: 7.18.2
+        version: 7.18.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       vite:
         specifier: 7.3.5
         version: 7.3.5(@types/node@26.1.2)
@@ -574,9 +574,6 @@ packages:
       '@types/react': ^17.0.30 || ^18 || ^19
       react: ^17 || ^18 || ^19
       react-dom: ^17 || ^18 || ^19
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
 
   '@navikt/ds-tokens@8.16.1':
     resolution: {integrity: sha512-PTLN5EWkfprObW3sJfRqcZvYOTMpG2l92VrMYeVX272hPlKn7an9eodZ6ggIMTEeNoQ+MuOhN0wEVk6Cbs77SA==, tarball: https://npm.pkg.github.com/download/@navikt/ds-tokens/8.16.1/f1ac550ff75679021d1c3a21997f33a9728a6a01}
@@ -587,9 +584,6 @@ packages:
     peerDependencies:
       html-react-parser: '>=5.x'
       react: '>=17.x'
-    peerDependenciesMeta:
-      react:
-        optional: true
 
   '@opentelemetry/api-logs@0.219.0':
     resolution: {integrity: sha512-FFx7YnaYJlIjqWW/AG/yAZ0L/NEY724PipXXXQLdtZPbLwBGbUMTGL1i/esI56TWfTUXxhLfpgrnWJCG8aUJyg==}
@@ -2082,8 +2076,8 @@ packages:
   react-property@2.0.2:
     resolution: {integrity: sha512-+PbtI3VuDV0l6CleQMsx2gtK0JZbZKbpdu5ynr+lbsuvtmgbNcS3VM0tuY2QjFNOcWxvXeHjDpy42RO+4U2rug==}
 
-  react-router@7.18.0:
-    resolution: {integrity: sha512-pTTGt8J+ji1NOmYnjzT+bAJy/1zD+Jp4ziO6cL7T3ZLvXKtusO7BpFqlRXitqpcPVqllsIXFHRMt+2/k3Xn6HQ==}
+  react-router@7.18.2:
+    resolution: {integrity: sha512-aUVMjFm3GAPTTZL7oYr5E7ETiqfQCHRLH+B+5afnICvf0r7kkK4eR6SMuwbSTJw/7t+12khT/Kahij49fqOCIg==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
@@ -2946,12 +2940,11 @@ snapshots:
       '@floating-ui/react-dom': 2.1.9(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@navikt/aksel-icons': 8.16.1
       '@navikt/ds-tokens': 8.16.1
+      '@types/react': 19.2.18
       date-fns: 4.1.0
       react: 19.2.3
       react-day-picker: 10.0.1(@types/react@19.2.18)(react@19.2.3)
       react-dom: 19.2.3(react@19.2.3)
-    optionalDependencies:
-      '@types/react': 19.2.18
 
   '@navikt/ds-tokens@8.16.1': {}
 
@@ -2961,7 +2954,6 @@ snapshots:
       csp-header: 6.3.1
       html-react-parser: 6.1.5(@preact/compat@18.3.2(preact@10.29.8))(@types/react@19.2.18)
       js-cookie: 3.0.7
-    optionalDependencies:
       react: '@preact/compat@18.3.2(preact@10.29.8)'
 
   '@navikt/nav-dekoratoren-moduler@4.2.2(html-react-parser@6.1.5(@types/react@19.2.18)(react@19.2.3))(react@19.2.3)':
@@ -2970,7 +2962,6 @@ snapshots:
       csp-header: 6.3.1
       html-react-parser: 6.1.5(@types/react@19.2.18)(react@19.2.3)
       js-cookie: 3.0.7
-    optionalDependencies:
       react: 19.2.3
 
   '@opentelemetry/api-logs@0.219.0':
@@ -4651,7 +4642,7 @@ snapshots:
 
   react-property@2.0.2: {}
 
-  react-router@7.18.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+  react-router@7.18.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
       cookie: 1.1.1
       react: 19.2.3
