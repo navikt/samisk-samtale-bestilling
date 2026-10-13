@@ -9,11 +9,11 @@
     },
     "dependencies": {
         "@navikt/nav-dekoratoren-moduler": "4.5.0",
-        "compression": "1.8.1",
-        "csp-header": "6.3.1",
+        "compression": "1.8.2",
+        "csp-header": "6.4.0",
         "dotenv": "17.4.2",
         "express": "5.2.1",
-        "lru-cache": "11.5.2",
+        "lru-cache": "11.5.3",
         "node-cache": "5.1.2",
         "react": "npm:@preact/compat",
         "react-dom": "npm:@preact/compat"
@@ -22,7 +22,7 @@
         "@types/compression": "1.8.1",
         "@types/express": "5.0.6",
         "@types/node": "25.9.5",
-        "concurrently": "10.0.4",
+        "concurrently": "10.0.5",
         "nodemon": "3.1.14"
     },
     "nodemonConfig": {
