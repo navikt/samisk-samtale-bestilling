@@ -11,7 +11,7 @@
         "@navikt/nav-dekoratoren-moduler": "4.5.0",
         "compression": "1.8.2",
         "csp-header": "6.4.0",
-        "dotenv": "17.4.2",
+        "dotenv": "18.0.4",
         "express": "5.2.1",
         "lru-cache": "11.5.3",
         "node-cache": "5.1.2",
