@@ -18,8 +18,8 @@ importers:
         specifier: 8.18.0
         version: 8.18.0(@types/react@19.3.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@navikt/nav-dekoratoren-moduler':
-        specifier: 4.5.0
-        version: 4.5.0(html-react-parser@6.1.8(@types/react@19.3.0)(react@19.2.3))(react@19.2.3)
+        specifier: 4.5.2-beta.0
+        version: 4.5.2-beta.0(html-react-parser@6.1.8(@types/react@19.3.0)(react@19.2.3))(react@19.2.3)
       '@preact/compat':
         specifier: 18.3.2
         version: 18.3.2(preact@10.29.8)
@@ -453,6 +453,13 @@ packages:
     peerDependenciesMeta:
       react:
         optional: true
+
+  '@navikt/nav-dekoratoren-moduler@4.5.2-beta.0':
+    resolution: {integrity: sha512-Tjb7qUtj//e2EPCn9py3/CLomVMH/dtRcXxQls2rjVQzR1pVCXQ2FT4tqnSWkXZ6OkwFYyQ2buW43fXVw08Tsg==, tarball: https://npm.pkg.github.com/download/@navikt/nav-dekoratoren-moduler/4.5.2-beta.0/a82f2e485f70079c9be1d5eee70e96f56c3f9e3b}
+    engines: {node: 24.x}
+    peerDependencies:
+      html-react-parser: '>=5.x'
+      react: '>=17.x'
 
   '@opentelemetry/api-logs@0.222.0':
     resolution: {integrity: sha512-9mb1If+IF6u0ZVXkHQ6ogEae5HwA6ajIVUgpSDQyRASxft6BSXHvBvPooRle3yFN/fKnCdSOnuu0OC3PLcF6+g==}
@@ -2852,13 +2859,12 @@ snapshots:
     optionalDependencies:
       react: '@preact/compat@18.3.2(preact@10.29.8)'
 
-  '@navikt/nav-dekoratoren-moduler@4.5.0(html-react-parser@6.1.8(@types/react@19.3.0)(react@19.2.3))(react@19.2.3)':
+  '@navikt/nav-dekoratoren-moduler@4.5.2-beta.0(html-react-parser@6.1.8(@types/react@19.3.0)(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@navikt/analytics-types': 0.0.9
       csp-header: 6.4.0
       html-react-parser: 6.1.8(@types/react@19.3.0)(react@19.2.3)
       js-cookie: 3.0.8
-    optionalDependencies:
       react: 19.2.3
 
   '@opentelemetry/api-logs@0.222.0':

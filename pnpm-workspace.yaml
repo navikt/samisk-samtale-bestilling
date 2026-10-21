@@ -4,3 +4,7 @@ minimumReleaseAge: 4320
 allowBuilds:
   esbuild: true
   protobufjs: true
+minimumReleaseAgeExclude:
+  - '@navikt/*'
+minimumReleaseAgeIgnoreMissingTime: true
+fullMetadata: true
