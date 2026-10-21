@@ -35,6 +35,8 @@ spec:
           namespace: teamserviceklage
         - application: nav-dekoratoren
           namespace: personbruker
+        - application: nav-dekoratoren-proxy
+          namespace: personbruker
   azure:
     application:
       enabled: true
