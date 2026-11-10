@@ -2,15 +2,13 @@
 
 ## Installere pnpm
 
-Dette prosjektet bruker **pnpm** som package manager. Node.js kommer med Corepack som automatisk bruker riktig pnpm-versjon:
+Dette prosjektet bruker **pnpm** som package manager. Node.js kommer ikke lenger med Corepack (fra Node 25), så installer pnpm selv, for eksempel slik:
 
 ```bash
-corepack enable
+npm install --global pnpm
 ```
 
-Corepack leser `packageManager`-feltet i `package.json` og installerer riktig versjon automatisk.
-
-**Merk:** Når Corepack er aktivert, vil `npm`-kommandoer ikke fungere.
+Se https://pnpm.io/installation for andre måter. pnpm leser `packageManager`-feltet i `package.json` og bytter automatisk til riktig versjon.
 
 ## Hent repoet fra github og start lokalt
 
